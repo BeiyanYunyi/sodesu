@@ -1,6 +1,6 @@
 import type { Component } from 'solid-js';
 
-export const LoadingIcon: Component<{ size: number }> = (prop) => (
+export const LoadingIcon: Component<{ size: number | string }> = (prop) => (
   <svg width={prop.size} height={prop.size} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
     <circle
       cx="50"
@@ -22,11 +22,11 @@ export const LoadingIcon: Component<{ size: number }> = (prop) => (
   </svg>
 );
 
-export const MarkdownIcon: Component = () => (
-  <svg width="16" height="16" aria-hidden="true">
+export const MarkdownIcon: Component<{ size: number | string }> = (prop) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={prop.size} height={prop.size} viewBox="0 0 24 24">
     <path
-      d="M14.85 3H1.15C.52 3 0 3.52 0 4.15v7.69C0 12.48.52 13 1.15 13h13.69c.64 0 1.15-.52 1.15-1.15v-7.7C16 3.52 15.48 3 14.85 3zM9 11H7V8L5.5 9.92 4 8v3H2V5h2l1.5 2L7 5h2v6zm2.99.5L9.5 8H11V5h2v3h1.5l-2.51 3.5z"
       fill="currentColor"
+      d="M20.56 18H3.44C2.65 18 2 17.37 2 16.59V7.41C2 6.63 2.65 6 3.44 6h17.12c.79 0 1.44.63 1.44 1.41v9.18c0 .78-.65 1.41-1.44 1.41M6.81 15.19v-3.66l1.92 2.35l1.92-2.35v3.66h1.93V8.81h-1.93l-1.92 2.35l-1.92-2.35H4.89v6.38h1.92M19.69 12h-1.92V8.81h-1.92V12h-1.93l2.89 3.28L19.69 12Z"
     />
   </svg>
 );

@@ -12,7 +12,7 @@ const UserMeta: Component = () => {
           const value = createMemo(() => userMeta()[kind]);
           return (
             <div class="flex flex-grow items-center">
-              <label for={`wl-${kind}`} class="py-3 px-2">
+              <label for={`wl-${kind}`} class="py-3 px-2 text-sColor">
                 {locale()[kind] +
                   (config().requiredMeta.includes(kind) || !config().requiredMeta.length
                     ? ''

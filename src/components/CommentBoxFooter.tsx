@@ -16,7 +16,7 @@ const CommentBoxFooter: Component = () => {
           href="https://guides.github.com/features/mastering-markdown/"
           class="w-6 h-6 m-[2px] p-0 border-none bg-transparent text-sTheme decoration-none break-word hover:text-sActive"
         >
-          <MarkdownIcon />
+          <MarkdownIcon size="24" />
         </a>
       </div>
       <div class="flex flex-grow-3 flex-shrink items-center justify-end">
@@ -39,7 +39,7 @@ const CommentBoxFooter: Component = () => {
             }}
           >
             <Show when={isSubmitting()} fallback={locale().submit}>
-              <LoadingIcon size={30} />
+              <LoadingIcon size="30" />
             </Show>
           </button>
         </Show>
