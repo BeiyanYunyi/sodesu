@@ -11,11 +11,11 @@ const App: Component = () => {
   const darkModeStyle = createMemo(() => getDarkStyle(config().dark));
   return (
     <div class="font-sans">
+      <h1 class="text-4xl text-center select-none">Hello Vite + Solid</h1>
       <Portal mount={document.head}>
         <style>{darkModeStyle()}</style>
       </Portal>
       <CommentBox />
-      <h1 class="text-4xl text-center select-none">Hello Vite + Solid</h1>
     </div>
   );
 };

@@ -7,7 +7,10 @@ const presetSodesu = (): Preset => ({
       'border-none outline-none transition-colors duration-300 focus:bg-sBgLight bg-none',
     sdsBtn: 'inline-block',
   },
-  rules: [['bb', { 'border-bottom': '2px dashed var(--sodesu-border-color)' }]],
+  rules: [
+    ['bb', { 'border-bottom': '2px dashed var(--sodesu-border-color)' }],
+    ['break-word', { 'word-break': 'break-word' }],
+  ],
   layers: {
     sodesu: -19, // 1 more then preset-typography
   },

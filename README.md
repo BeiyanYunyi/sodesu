@@ -1,4 +1,4 @@
-# 💬 Sodesu
+# 💬 Sodesu - そです
 
 [Waline](https://github.com/walinejs/waline) compatible comment system, made with [Solid.js](https://github.com/solidjs/solid) and [UnoCSS](https://github.com/unocss/unocss).
 
