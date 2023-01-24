@@ -1,0 +1,9 @@
+{
+  "formatter": { "indentStyle": "space", "lineWidth": 100 },
+  "javascript": { "formatter": { "quoteStyle": "single" } },
+  "linter": {
+    "rules": {
+      "recommended": true
+    }
+  }
+}
