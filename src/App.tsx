@@ -1,7 +1,5 @@
 import { Component, createEffect, createMemo, Index } from 'solid-js';
 import { Portal } from 'solid-js/web';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import 'virtual:uno.css';
 import CommentBox from './components/CommentBox';
 import CommentCard from './components/CommentCard';
 import commentListState, { refresh } from './controllers/commentListState';

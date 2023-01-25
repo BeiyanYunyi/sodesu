@@ -6,7 +6,8 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "tsc && rollup -c rollup.config.ts --configPlugin typescript"
+    "build": "tsc && rollup -c rollup.config.ts --configPlugin typescript",
+    "build:style": "unocss src/**/*.tsx --out-file dist/sodesu.css"
   },
   "main": "dist/cjs/my-lib.js",
   "module": "dist/esm/my-lib.js",
@@ -36,6 +37,7 @@
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
+    "@unocss/cli": "^0.49.0",
     "@unocss/reset": "^0.48.4",
     "eslint": "^8.32.0",
     "eslint-config-airbnb-base": "^15.0.0",

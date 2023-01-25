@@ -13,6 +13,7 @@ specifiers:
   '@types/node': ^18.11.18
   '@typescript-eslint/eslint-plugin': ^5.48.2
   '@typescript-eslint/parser': ^5.48.2
+  '@unocss/cli': ^0.49.0
   '@unocss/reset': ^0.48.4
   '@waline/client': ^2.14.7
   eslint: ^8.32.0
@@ -51,6 +52,7 @@ devDependencies:
   '@types/node': 18.11.18
   '@typescript-eslint/eslint-plugin': 5.48.2_caon6io6stgpr7lz2rtbhekxqy
   '@typescript-eslint/parser': 5.48.2_7uibuqfxkfaozanbtbziikiqje
+  '@unocss/cli': 0.49.0_rollup@3.10.1
   '@unocss/reset': 0.48.4
   eslint: 8.32.0
   eslint-config-airbnb-base: 15.0.0_ps7hf4l2dvbuxvtusmrfhmzsba
@@ -1168,6 +1170,28 @@ packages:
       - rollup
     dev: true
 
+  /@unocss/cli/0.49.0_rollup@3.10.1:
+    resolution: {integrity: sha512-NSDmAUEtdJQmsSP1qIxIDPlpQ6KNi8pIV52FGzzz5cM2KfmnuQe0f3c7ONZWyMY8Oi1DP8rFbdWoKFdOZUeKmQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dependencies:
+      '@ampproject/remapping': 2.2.0
+      '@rollup/pluginutils': 5.0.2_rollup@3.10.1
+      '@unocss/config': 0.49.0
+      '@unocss/core': 0.49.0
+      '@unocss/preset-uno': 0.49.0
+      cac: 6.7.14
+      chokidar: 3.5.3
+      colorette: 2.0.19
+      consola: 2.15.3
+      fast-glob: 3.2.12
+      magic-string: 0.27.0
+      pathe: 1.0.0
+      perfect-debounce: 0.1.3
+    transitivePeerDependencies:
+      - rollup
+    dev: true
+
   /@unocss/config/0.48.4:
     resolution: {integrity: sha512-RAMpENnOkftw4NMu5TcnkMHjSJBa57OgE6N1eXfOw3rd6a4sgNC0S4r+rLiPDmvrdvmNUSvWYnJmPo6Ih1phQw==}
     engines: {node: '>=14'}
@@ -1176,8 +1200,20 @@ packages:
       unconfig: 0.3.7
     dev: true
 
+  /@unocss/config/0.49.0:
+    resolution: {integrity: sha512-Trw5nFEPTa5SCUhdfPZW/31raxcL3hwlDC3UzlC6knC47NFnHLeVu15ow3bfu/xMhC637SSs0/NCMqqUjjlLEA==}
+    engines: {node: '>=14'}
+    dependencies:
+      '@unocss/core': 0.49.0
+      unconfig: 0.3.7
+    dev: true
+
   /@unocss/core/0.48.4:
     resolution: {integrity: sha512-ecoTzblwEIQGD4QhMo1U36rVwvTR9XW+gtJRhCnVyjy7L23AbGJu2xkRZSsH3k/v0gs0gx/SHNfyOqA52BNfoA==}
+    dev: true
+
+  /@unocss/core/0.49.0:
+    resolution: {integrity: sha512-rnA93tsfqMJ8isrmgh8w48oJZryWdtLQD2JpERwW95xi4WdWWIFozR9xMwvd6xOGOaBhbttak6xdsv4nmCFvIA==}
     dev: true
 
   /@unocss/inspector/0.48.4:
@@ -1209,6 +1245,12 @@ packages:
       '@unocss/core': 0.48.4
     dev: true
 
+  /@unocss/preset-mini/0.49.0:
+    resolution: {integrity: sha512-9e76LStJt98aYRm5ZPwOJOnWxf748EKzNh7U8p+f6El8CQLd5Xvez41j8+27FwWgD1/k44mUTVk4+LajF7SaNw==}
+    dependencies:
+      '@unocss/core': 0.49.0
+    dev: true
+
   /@unocss/preset-tagify/0.48.4:
     resolution: {integrity: sha512-M8Vr7JbDAXb/c83oCnIOlSEuCWSujiia7Fp5kgmKrXp25Bqb7rd9d6sD0uLcHsknc9hUkkBFGyPfuMmRo1VovA==}
     dependencies:
@@ -1229,6 +1271,14 @@ packages:
       '@unocss/preset-wind': 0.48.4
     dev: true
 
+  /@unocss/preset-uno/0.49.0:
+    resolution: {integrity: sha512-PZMVYmXYJCudsF0vrSCVTmRKS+OhPlkPDIRynmRRHqef7pWFg5/DAmHf1Q1A7PKohy7L6l4D0LNtf6NrFr2Tlg==}
+    dependencies:
+      '@unocss/core': 0.49.0
+      '@unocss/preset-mini': 0.49.0
+      '@unocss/preset-wind': 0.49.0
+    dev: true
+
   /@unocss/preset-web-fonts/0.48.4:
     resolution: {integrity: sha512-kycVq3rBcPCbwGPUmd+jaWQwJ0IRqp/RPTPmz8+DEItlSVaMaHBfuluHlJ3kjIYgRkWVnT2nEZtTEGEpUxwdRw==}
     dependencies:
@@ -1241,6 +1291,13 @@ packages:
     dependencies:
       '@unocss/core': 0.48.4
       '@unocss/preset-mini': 0.48.4
+    dev: true
+
+  /@unocss/preset-wind/0.49.0:
+    resolution: {integrity: sha512-k1It/yc4/5dJBnCYtVYXyLezqBpbjiXV3zWmOH+c6netluSOe69TXabj6FH2Mn/0Xiy6OwYL+S/Y5m1uUz9YTQ==}
+    dependencies:
+      '@unocss/core': 0.49.0
+      '@unocss/preset-mini': 0.49.0
     dev: true
 
   /@unocss/reset/0.48.4:

@@ -1,8 +1,8 @@
 import { createDateNow } from '@solid-primitives/date';
-import { WalineComment } from '@waline/client';
+import type { WalineComment } from '@waline/client';
 import { Component, createMemo, Index, Show } from 'solid-js';
 import configProvider from '../controllers/configProvider';
-import { getTimeAgo } from '../waline/utils';
+import { getTimeAgo } from '../waline/utils/date';
 import { isLinkHttp } from '../waline/utils/path';
 import CommentMeta from './CommentMeta';
 
