@@ -10,15 +10,16 @@ export const LoadingIcon: Component<{ size: number | string }> = (prop) => (
       stroke-width="4"
       r="40"
       stroke-dasharray="85 30"
-    />
-    <animateTransform
-      attributeName="transform"
-      type="rotate"
-      repeatCount="indefinite"
-      dur="1s"
-      values="0 50 50;360 50 50"
-      keyTimes="0;1"
-    />
+    >
+      <animateTransform
+        attributeName="transform"
+        type="rotate"
+        repeatCount="indefinite"
+        dur="1s"
+        values="0 50 50;360 50 50"
+        keyTimes="0;1"
+      />
+    </circle>
   </svg>
 );
 
