@@ -1,7 +1,7 @@
 import type { WalineInitOptions, WalineProps } from '@waline/client';
-import { getRoot } from '@waline/client/src/utils/getRoot.js';
-import { getConfig } from '@waline/client/src/utils/config.js';
 import { createMemo, createRoot, createSignal } from 'solid-js';
+import { getConfig } from '../waline/utils/config';
+import { getRoot } from '../waline/utils';
 
 const configProvider = createRoot(() => {
   const [props, setProps] = createSignal<WalineProps>({ serverURL: '', path: '' });

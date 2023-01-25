@@ -1,7 +1,7 @@
 import { WalineComment, WalineCommentData } from '@waline/client';
-import { addComment, updateComment } from '@waline/client/src/api/comment.js';
-import { getWordNumber } from '@waline/client/src/utils/wordCount';
 import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
+import { addComment, updateComment } from '@waline/client/dist/api';
+import { getWordNumber } from '../waline/utils/wordCount';
 import configProvider from './configProvider';
 
 const commentBoxState = createRoot(() => {
