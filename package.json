@@ -54,6 +54,7 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
+    "@solid-primitives/date": "^2.0.6",
     "@waline/client": "^2.14.7",
     "marked": "^4.2.12",
     "solid-js": "^1.6.9"

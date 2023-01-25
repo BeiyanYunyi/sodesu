@@ -12,7 +12,13 @@
     <div id="root"></div>
     <script type="module">
       import Sodesu from '/src/index.tsx';
-      Sodesu.init({ el: '#root', serverURL: 'https://bmhgu5.deta.dev/', dark: 'auto' });
+      Sodesu.init({
+        el: '#root',
+        serverURL: 'https://bmhgu5.deta.dev/',
+        dark: 'auto',
+        path:
+          window.location.pathname === '/' ? '/' : window.location.pathname.replace(/\/$/, '.html'),
+      });
     </script>
   </body>
 </html>

@@ -8,8 +8,19 @@ const presetSodesu = (): Preset => ({
     sdsBtn: 'inline-block',
   },
   rules: [
-    ['bb', { 'border-bottom': '2px dashed var(--sodesu-border-color)' }],
+    [/^bb-(\d*)$/, ([, d]) => ({ 'border-bottom': `${d}px dashed var(--sodesu-border-color)` })],
+    ['bb-none', { 'border-bottom': 'none' }],
     ['break-word', { 'word-break': 'break-word' }],
+    [
+      'sds-avatar',
+      {
+        'border-radius': 'var(--sodesu-avatar-radius)',
+        'box-shadow': 'var(--sodesu-box-shadow)',
+        width: 'var(--sodesu-avatar-real-size)',
+      },
+    ],
+    ['text-badge', { 'font-size': 'var(--sodesu-badge-font-size)' }],
+    ['text-info', { 'font-size': 'var(--sodesu-info-font-size)' }],
   ],
   layers: {
     sodesu: -19, // 1 more then preset-typography
@@ -39,19 +50,12 @@ const presetSodesu = (): Preset => ({
     {
       layer: 'sodesu',
       getCSS: () => `:root {
-    
     --sodesu-font-size: 1rem;
-  
-    
     --sodesu-white: #fff;
     --sodesu-light-grey: #999;
     --sodesu-dark-grey: #666;
-  
-    
     --sodesu-theme-color: #27ae60;
     --sodesu-active-color: #2ecc71;
-  
-    
     --sodesu-color: #444;
     --sodesu-bgcolor: #fff;
     --sodesu-bgcolor-light: #f8f8f8;
@@ -60,31 +64,26 @@ const presetSodesu = (): Preset => ({
     --sodesu-disable-bgcolor: #f8f8f8;
     --sodesu-disable-color: #000;
     --sodesu-code-bgcolor: #282c34;
-  
-    
     --sodesu-bq-color: #f0f0f0;
-  
-    
     --sodesu-avatar-size: 3.25rem;
+    --sodesu-avatar-radius: 50%;
     --sodesu-m-avatar-size: calc(var(--sodesu-avatar-size) * 9 / 13);
-  
-    
     --sodesu-badge-color: #3498db;
     --sodesu-badge-font-size: 0.75em;
-  
-    
     --sodesu-info-bgcolor: #f8f8f8;
     --sodesu-info-color: #999;
     --sodesu-info-font-size: 0.625em;
-  
     --sodesu-border: 1px solid var(--sodesu-border-color);
-    --sodesu-avatar-radius: 50%;
     --sodesu-box-shadow: none;
-  
-    /* --sodesu-border: none;
-    --sodesu-box-shadow: 0 12px 40px rgb(134 151 168 / 25%);
-    --sodesu-box-shadow: 0 12px 40px #0f0e0d;
-    */
+  }
+  .sds-comment {
+    --sodesu-avatar-real-size: var(--sodesu-avatar-size);
+  }
+  .sds-comment .sds-comment {
+    --sodesu-avatar-real-size: var(--sodesu-m-avatar-size);
+  }
+  .sds-comment:last-child .sds-comment-card {
+    border-bottom: none;
   }
   `,
     },
