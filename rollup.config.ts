@@ -1,10 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import type { RollupOptions } from 'rollup';
 import { babel } from '@rollup/plugin-babel';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
-import ts from 'typescript';
-import { resolve } from 'node:path';
 import terser from '@rollup/plugin-terser';
+import { resolve } from 'node:path';
+import type { RollupOptions } from 'rollup';
+import ts from 'typescript';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
