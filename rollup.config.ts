@@ -5,6 +5,7 @@ import terser from '@rollup/plugin-terser';
 import { resolve } from 'node:path';
 import type { RollupOptions } from 'rollup';
 import ts from 'typescript';
+import summary from 'rollup-plugin-summary';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
@@ -25,6 +26,7 @@ const solidConfig: RollupOptions = {
       browser: true,
       exportConditions: ['default', 'module', 'import'],
     }),
+    summary(),
     {
       name: 'ts',
       buildEnd() {

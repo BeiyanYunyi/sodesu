@@ -1,6 +1,8 @@
 import { createStorageSignal } from '@solid-primitives/storage';
 import { login, UserInfo } from '@waline/client/dist/api';
 import { createMemo, createRoot, onCleanup, onMount } from 'solid-js';
+// eslint-disable-next-line import/no-cycle
+import { refresh } from './commentListState';
 import configProvider from './configProvider';
 
 const userInfoState = createRoot(() => {
@@ -34,6 +36,14 @@ export const userLogin = async () => {
   // TODO: respect remember option
   const { remember, ...rest } = res;
   setUserInfo({ ...rest });
+};
+
+export const userLogout = async () => {
+  const { setUserInfo } = userInfoState;
+  setUserInfo(null);
+  localStorage.removeItem('WALINE_USER');
+  sessionStorage.removeItem('WALINE_USER');
+  refresh();
 };
 
 export const openProfile = async () => {

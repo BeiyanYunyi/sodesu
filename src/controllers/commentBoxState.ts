@@ -4,6 +4,7 @@ import { addComment, updateComment } from '@waline/client/dist/api';
 import { getWordNumber } from '../waline/utils/wordCount';
 import configProvider from './configProvider';
 import userInfoState from './userInfoState';
+import commentListState from './commentListState';
 
 const commentBoxState = createRoot(() => {
   const [edit, setEdit] = createSignal<WalineComment | null>(null);
@@ -85,12 +86,14 @@ export const submitComment = () => {
     replyUser,
     editorRef,
     setIsSubmitting,
+    setEdit,
     setContent,
     setPreviewText,
   } = commentBoxState;
   const { userMeta, inputRefs } = userMetaState;
   const { userInfo } = userInfoState;
   const { serverURL, lang, login, wordLimit, requiredMeta } = config();
+  const { setData } = commentListState;
   // let token = '' //preserved for Recaptcha
   const comment: WalineCommentData = {
     comment: content(),
@@ -154,6 +157,20 @@ export const submitComment = () => {
     .then((res) => {
       setIsSubmitting(false);
       if (res.errmsg) return alert(res.errmsg);
+      const resComment = res.data!;
+      if (edit()) {
+        setEdit((prev) => ({ ...prev!, comment: resComment.comment, orig: resComment.orig }));
+      } else if (resComment.rid) {
+        setData((data) =>
+          data.map((item) => {
+            if (item.objectId !== resComment.rid) return item;
+            const target = item;
+            if (!Array.isArray(item.children)) target.children = [];
+            target.children.push(resComment);
+            return target;
+          }),
+        );
+      } else setData((data) => [resComment, ...data]);
       setContent('');
       setPreviewText('');
       return null;

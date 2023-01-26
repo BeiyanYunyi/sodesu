@@ -21,6 +21,7 @@ const presetSodesu = (): Preset => ({
     ],
     ['text-badge', { 'font-size': 'var(--sds-badge-font-size)' }],
     ['text-info', { 'font-size': 'var(--sds-info-font-size)' }],
+    ['sds-comment', { '--sds-avatar-real-size': 'var(--sds-avatar-size)' }],
   ],
   layers: {
     sodesu: -19, // 1 more then preset-typography
@@ -75,9 +76,6 @@ const presetSodesu = (): Preset => ({
     --sds-info-font-size: 0.625em;
     --sds-border: 1px solid var(--sds-border-color);
     --sds-box-shadow: none;
-  }
-  .sds-comment {
-    --sds-avatar-real-size: var(--sds-avatar-size);
   }
   .sds-comment .sds-comment {
     --sds-avatar-real-size: var(--sds-m-avatar-size);

@@ -2,6 +2,7 @@ import type { WalineComment, WalineCommentSorting } from '@waline/client';
 import { getComment } from '@waline/client/dist/api';
 import { createRoot, createSignal } from 'solid-js';
 import configProvider from './configProvider';
+// eslint-disable-next-line import/no-cycle
 import userInfoState from './userInfoState';
 
 type SortKey = 'insertedAt_desc' | 'insertedAt_asc' | 'like_desc';

@@ -1,7 +1,7 @@
 import { Component, Show } from 'solid-js';
 import commentBoxState, { submitComment } from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
-import userInfoState, { userLogin } from '../controllers/userInfoState';
+import userInfoState, { userLogin, userLogout } from '../controllers/userInfoState';
 import { LoadingIcon, MarkdownIcon } from './Icons';
 
 const CommentBoxFooter: Component = () => {
@@ -22,7 +22,21 @@ const CommentBoxFooter: Component = () => {
         </a>
       </div>
       <div class="flex flex-grow-3 flex-shrink items-center justify-end">
-        <Show when={config().login !== 'disable' && !isLogin()}>
+        <Show
+          when={config().login !== 'disable' && !isLogin()}
+          fallback={
+            <button
+              type="button"
+              class="inline-block min-w-10 mb-0 py-2 px-4 bg-transparent text-sColor text-xs text-center select-none border cursor-pointer touch-manipulation border-solid border-sBorder rounded-lg transition duration-400 ms-3 hover:(border-sTheme text-sTheme)"
+              onClick={(e) => {
+                e.preventDefault();
+                userLogout();
+              }}
+            >
+              {locale().logout}
+            </button>
+          }
+        >
           <button
             type="button"
             class="inline-block min-w-10 mb-0 py-2 px-4 bg-transparent text-sColor text-xs text-center select-none border cursor-pointer touch-manipulation border-solid border-sBorder rounded-lg transition duration-400 ms-3 hover:(border-sTheme text-sTheme)"
