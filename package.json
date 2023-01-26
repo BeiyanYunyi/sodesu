@@ -1,6 +1,6 @@
 {
   "name": "sodesu-comment",
-  "version": "0.0.1",
+  "version": "0.0.1-alpha1",
   "description": "Comment system with SolidJS",
   "packageManager": "pnpm@7.26.0",
   "scripts": {
@@ -10,6 +10,16 @@
     "build:js": "tsc && rollup -c rollup.config.ts --configPlugin typescript",
     "build:style": "esr scripts/build.ts"
   },
+  "keywords": [
+    "valine",
+    "waline",
+    "comment",
+    "blog",
+    "solid"
+  ],
+  "repository": {
+    "url": "https://github.com/lixiang810/sodesu"
+  },
   "main": "dist/sodesu.aio.umd.js",
   "module": "dist/sodesu.solid.module.js",
   "types": "dist/sodesu.solid.module.d.ts",
@@ -18,12 +28,16 @@
   ],
   "exports": {
     ".": {
-      "solid": "./dist/sodesu.solid.module.js",
       "import": "./dist/sodesu.solid.module.js",
-      "browser": "./dist/sodesu.aio.umd.js",
-      "require": "./dist/sodesu.aio.umd.js",
-      "node": "./dist/sodesu.aio.umd.js",
+      "types": "./dist/sodesu.solid.module.d.ts",
       "style": "./dist/sodesu.css"
+    },
+    "./sodesu.css": "./dist/sodesu.css",
+    "./aio": {
+      "import": "./dist/sodesu.aio.module.js",
+      "types": "./dist/sodesu.aio.module.d.ts",
+      "browser": "./dist/sodesu.aio.umd.js",
+      "require": "./dist/sodesu.aio.umd.js"
     }
   },
   "license": "AGPL-3.0-or-later",
