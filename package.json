@@ -10,19 +10,20 @@
     "build:js": "tsc && rollup -c rollup.config.ts --configPlugin typescript",
     "build:style": "esr scripts/build.ts"
   },
-  "main": "dist/cjs/my-lib.js",
-  "module": "dist/esm/my-lib.js",
-  "types": "dist/types/my-lib.d.ts",
+  "main": "dist/sodesu.aio.umd.js",
+  "module": "dist/sodesu.solid.module.js",
+  "types": "dist/sodesu.solid.module.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "solid": "./dist/source/my-lib.jsx",
-      "import": "./dist/esm/my-lib.js",
-      "browser": "./dist/esm/my-lib.js",
-      "require": "./dist/cjs/my-lib.js",
-      "node": "./dist/cjs/my-lib.js"
+      "solid": "./dist/sodesu.solid.module.js",
+      "import": "./dist/sodesu.solid.module.js",
+      "browser": "./dist/sodesu.aio.umd.js",
+      "require": "./dist/sodesu.aio.umd.js",
+      "node": "./dist/sodesu.aio.umd.js",
+      "style": "./dist/sodesu.css"
     }
   },
   "license": "AGPL-3.0-or-later",
@@ -39,7 +40,6 @@
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.48.2",
     "@typescript-eslint/parser": "^5.48.2",
-    "@unocss/cli": "^0.49.0",
     "esbuild": "^0.17.4",
     "esbuild-runner": "^2.2.2",
     "eslint": "^8.32.0",

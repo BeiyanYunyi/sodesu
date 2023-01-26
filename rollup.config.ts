@@ -22,7 +22,7 @@ const basePlugins = [
     babelHelpers: 'bundled',
     presets: ['babel-preset-solid', '@babel/preset-typescript'],
   }),
-  summary(),
+  summary({ showGzippedSize: true, showBrotliSize: true }),
 ];
 
 const dtsPlugins = [...basePlugins, dts()];
