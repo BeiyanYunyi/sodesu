@@ -2,6 +2,7 @@ import type { WalineComment, WalineCommentSorting } from '@waline/client';
 import { getComment } from '@waline/client/dist/api';
 import { createRoot, createSignal } from 'solid-js';
 import configProvider from './configProvider';
+import userInfoState from './userInfoState';
 
 type SortKey = 'insertedAt_desc' | 'insertedAt_asc' | 'like_desc';
 
@@ -40,6 +41,7 @@ let abort: () => void;
 export const getCommentData = (page: number) => {
   const { sorting, setStatus, setCount, setData, setPage, setTotalPages } = commentListState;
   const { config } = configProvider;
+  const { userInfo } = userInfoState;
   const controller = new AbortController();
   setStatus('loading');
   abort?.();
@@ -51,7 +53,7 @@ export const getCommentData = (page: number) => {
     sortBy: sortKeyMap[sorting()],
     page,
     signal: controller.signal,
-    token: undefined,
+    token: userInfo()?.token,
   })
     .then((res) => {
       setStatus('success');

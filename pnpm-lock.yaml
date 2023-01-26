@@ -8,6 +8,7 @@ specifiers:
   '@rollup/plugin-terser': ^0.4.0
   '@rollup/plugin-typescript': ^11.0.0
   '@solid-primitives/date': ^2.0.6
+  '@solid-primitives/storage': ^1.3.4
   '@types/babel__core': ^7.20.0
   '@types/marked': ^4.0.8
   '@types/node': ^18.11.18
@@ -38,6 +39,7 @@ specifiers:
 
 dependencies:
   '@solid-primitives/date': 2.0.6_solid-js@1.6.9
+  '@solid-primitives/storage': 1.3.4_solid-js@1.6.9
   '@waline/client': 2.14.7
   marked: 4.2.12
   solid-js: 1.6.9
@@ -1065,6 +1067,14 @@ packages:
 
   /@solid-primitives/scheduled/1.2.1_solid-js@1.6.9:
     resolution: {integrity: sha512-tV8xJuNJoWR2Kk6FPVpB8KcWjOwJDMYTC31CEW4qDrLwQHzIexJsZsV5Dh5df/YNz5gh3vpxyvBnWTgTf6o/1w==}
+    peerDependencies:
+      solid-js: ^1.6.0
+    dependencies:
+      solid-js: 1.6.9
+    dev: false
+
+  /@solid-primitives/storage/1.3.4_solid-js@1.6.9:
+    resolution: {integrity: sha512-N3Em+fQ6Hdj14s6GSx40HYJP9lWnCSclbar4G4JZXChIekY/6u+ibORdT+2jy+y2iF9+d39R4MSFpDWROBlsEw==}
     peerDependencies:
       solid-js: ^1.6.0
     dependencies:

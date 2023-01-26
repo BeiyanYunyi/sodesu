@@ -3,6 +3,7 @@ import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
 import { addComment, updateComment } from '@waline/client/dist/api';
 import { getWordNumber } from '../waline/utils/wordCount';
 import configProvider from './configProvider';
+import userInfoState from './userInfoState';
 
 const commentBoxState = createRoot(() => {
   const [edit, setEdit] = createSignal<WalineComment | null>(null);
@@ -88,6 +89,7 @@ export const submitComment = () => {
     setPreviewText,
   } = commentBoxState;
   const { userMeta, inputRefs } = userMetaState;
+  const { userInfo } = userInfoState;
   const { serverURL, lang, login, wordLimit, requiredMeta } = config();
   // let token = '' //preserved for Recaptcha
   const comment: WalineCommentData = {
@@ -99,11 +101,11 @@ export const submitComment = () => {
     url: config().path,
     recaptchaV3: '',
   };
-  if (false /* userInfo.value?.token */) {
+  if (userInfo()?.token) {
     // login user
-    // comment.nick = userInfo.value.display_name;
-    // comment.mail = userInfo.value.email;
-    // comment.link = userInfo.value.url;
+    comment.nick = userInfo()!.display_name;
+    comment.mail = userInfo()!.email;
+    comment.link = userInfo()!.url;
   } else {
     if (login === 'force') return null;
 
@@ -147,7 +149,7 @@ export const submitComment = () => {
     comment.at = replyUser();
   }
   setIsSubmitting(true);
-  const options = { serverURL, lang, token: '', comment };
+  const options = { serverURL, lang, token: userInfo()?.token || '', comment };
   return (edit() ? updateComment({ objectId: edit()!.objectId, ...options }) : addComment(options))
     .then((res) => {
       setIsSubmitting(false);

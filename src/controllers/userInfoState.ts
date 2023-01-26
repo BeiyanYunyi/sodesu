@@ -1,0 +1,59 @@
+import { createStorageSignal } from '@solid-primitives/storage';
+import { login, UserInfo } from '@waline/client/dist/api';
+import { createMemo, createRoot, onCleanup, onMount } from 'solid-js';
+import configProvider from './configProvider';
+
+const userInfoState = createRoot(() => {
+  const [userInfo, setUserInfo] = createStorageSignal<UserInfo>('WALINE_USER', undefined, {
+    deserializer: (data) => JSON.parse(data),
+    serializer: (data) => JSON.stringify(data),
+  });
+  const isLogin = createMemo(() => Boolean(userInfo()?.token));
+
+  const onMessageReceive = ({ data }: { data: { type: 'profile'; data: UserInfo } }): void => {
+    if (!data || data.type !== 'profile') return;
+    setUserInfo((usrInfo) => ({ ...usrInfo, ...data.data }));
+    [localStorage, sessionStorage]
+      .filter((store) => store.getItem('WALINE_USER'))
+      .forEach((store) => store.setItem('WALINE_USER', JSON.stringify(userInfo)));
+  };
+
+  onMount(() => {
+    window.addEventListener('message', onMessageReceive);
+  });
+  onCleanup(() => {
+    window.removeEventListener('message', onMessageReceive);
+  });
+  return { userInfo, isLogin, setUserInfo };
+});
+
+export const userLogin = async () => {
+  const { config } = configProvider;
+  const { setUserInfo } = userInfoState;
+  const res = await login({ serverURL: config().serverURL, lang: config().lang });
+  // TODO: respect remember option
+  const { remember, ...rest } = res;
+  setUserInfo({ ...rest });
+};
+
+export const openProfile = async () => {
+  const { config } = configProvider;
+  const { userInfo } = userInfoState;
+  const { serverURL, lang } = config();
+  const width = 800;
+  const height = 800;
+  const left = (window.innerWidth - width) / 2;
+  const top = (window.innerHeight - height) / 2;
+  const query = new URLSearchParams({
+    lng: lang,
+    token: userInfo()!.token,
+  });
+  const handler = window.open(
+    `${serverURL}/ui/profile?${query.toString()}`,
+    '_blank',
+    `width=${width},height=${height},left=${left},top=${top},scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no`,
+  );
+  handler?.postMessage({ type: 'TOKEN', data: userInfo()!.token }, '*');
+};
+
+export default userInfoState;
