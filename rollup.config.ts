@@ -1,53 +1,45 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { babel } from '@rollup/plugin-babel';
+import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
-import { resolve } from 'node:path';
 import type { RollupOptions } from 'rollup';
-import ts from 'typescript';
+import dts from 'rollup-plugin-dts';
 import summary from 'rollup-plugin-summary';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
+
+const basePlugins = [
+  nodeResolve({
+    extensions,
+    browser: true,
+    exportConditions: ['default', 'module', 'import'],
+    preferBuiltins: true,
+  }),
+  commonjs(),
+  babel({
+    extensions,
+    babelHelpers: 'bundled',
+    presets: ['babel-preset-solid', '@babel/preset-typescript'],
+  }),
+  summary(),
+];
+
+const dtsPlugins = [...basePlugins, dts()];
+const commonPlugins = [...basePlugins, terser()];
 
 const solidConfig: RollupOptions = {
   treeshake: 'recommended',
   input: 'src/index.tsx',
   external: ['solid-js', 'solid-js/web', 'solid-js/store'],
   output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.solid.module.js' }],
-  plugins: [
-    terser(),
-    babel({
-      extensions,
-      babelHelpers: 'bundled',
-      presets: ['babel-preset-solid', '@babel/preset-typescript'],
-    }),
-    nodeResolve({
-      extensions,
-      browser: true,
-      exportConditions: ['default', 'module', 'import'],
-    }),
-    summary(),
-    {
-      name: 'ts',
-      buildEnd() {
-        const program = ts.createProgram([resolve('src/index.tsx')], {
-          target: ts.ScriptTarget.ESNext,
-          module: ts.ModuleKind.ESNext,
-          moduleResolution: ts.ModuleResolutionKind.NodeJs,
-          jsx: ts.JsxEmit.Preserve,
-          jsxImportSource: 'solid-js',
-          allowSyntheticDefaultImports: true,
-          esModuleInterop: true,
-          outDir: 'dist/source',
-          declarationDir: 'dist/types',
-          declaration: true,
-          allowJs: true,
-          emitDeclarationOnly: true,
-        });
-        program.emit();
-      },
-    },
-  ],
+  plugins: commonPlugins,
+};
+
+const solidDtsConfig = {
+  ...solidConfig,
+  output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.solid.module.d.ts' }],
+  plugins: dtsPlugins,
 };
 
 const aioConfig = {
@@ -59,6 +51,15 @@ const aioConfig = {
   ],
 };
 
+const aioDtsConfig = {
+  ...aioConfig,
+  output: [
+    { dir: './dist', format: 'esm', entryFileNames: 'sodesu.aio.module.d.ts' },
+    { dir: './dist', format: 'umd', name: 'Sodesu', entryFileNames: 'sodesu.aio.umd.d.ts' },
+  ],
+  plugins: dtsPlugins,
+};
+
 // const solidConfig = withSolid({ input: 'src/index.tsx', targets: ['esm'] });
 
-export default [solidConfig, aioConfig];
+export default [solidConfig, solidDtsConfig, aioConfig, aioDtsConfig];

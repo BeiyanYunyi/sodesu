@@ -11,8 +11,7 @@
     "noEmit": true,
     "types": ["vite/client"],
     "isolatedModules": true,
-    "skipLibCheck": true,
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "skipLibCheck": true
   },
   "exclude": ["dist"]
 }
