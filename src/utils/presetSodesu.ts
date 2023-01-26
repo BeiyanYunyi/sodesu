@@ -83,6 +83,14 @@ const presetSodesu = (): Preset => ({
   .sds-comment:last-child .sds-comment-card {
     border-bottom: none;
   }
+  .sds-root a {
+    color: var(--sds-theme-color);
+    text-decoration: none;
+  }
+  .sds-root a:hover {
+    color: var(--sds-active-color);
+    text-decoration: underline;
+  }
   `,
     },
   ],

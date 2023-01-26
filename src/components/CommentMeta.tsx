@@ -3,13 +3,13 @@ import { Component, Show } from 'solid-js';
 const CommentMeta: Component<{ addr?: string; browser?: string; os?: string }> = (props) => (
   <div aria-hidden>
     <Show when={props.addr}>
-      <span>{props.addr}</span>
+      <span class="text-info text-sInfo bg-sInfoBg p-1 me-1 rounded">{props.addr}</span>
     </Show>
     <Show when={props.browser}>
-      <span>{props.browser}</span>
+      <span class="text-info text-sInfo bg-sInfoBg p-1 me-1 rounded">{props.browser}</span>
     </Show>
     <Show when={props.os}>
-      <span>{props.os}</span>
+      <span class="text-info text-sInfo bg-sInfoBg p-1 me-1 rounded">{props.os}</span>
     </Show>
   </div>
 );

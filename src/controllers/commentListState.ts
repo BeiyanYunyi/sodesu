@@ -72,6 +72,11 @@ export const getCommentData = (page: number) => {
   abort = controller.abort.bind(controller);
 };
 
+export const loadMore = () => {
+  const { page } = commentListState;
+  getCommentData(page() + 1);
+};
+
 export const refresh = () => {
   const { setCount, setData } = commentListState;
   setCount(0);

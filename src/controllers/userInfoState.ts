@@ -7,7 +7,13 @@ import configProvider from './configProvider';
 
 const userInfoState = createRoot(() => {
   const [userInfo, setUserInfo] = createStorageSignal<UserInfo>('WALINE_USER', undefined, {
-    deserializer: (data) => JSON.parse(data),
+    deserializer: (data) => {
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        return null;
+      }
+    },
     serializer: (data) => JSON.stringify(data),
   });
   const isLogin = createMemo(() => Boolean(userInfo()?.token));

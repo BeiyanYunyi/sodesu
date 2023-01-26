@@ -1,14 +1,16 @@
-import { Component, createEffect, createMemo, Index } from 'solid-js';
+import { Component, createEffect, createMemo, Index, Match, Show, Switch } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import CommentBox from './components/CommentBox';
 import CommentCard from './components/CommentCard';
-import commentListState, { refresh } from './controllers/commentListState';
+import CommonButton from './components/CommonButton';
+import { LoadingIcon } from './components/Icons';
+import commentListState, { loadMore, refresh } from './controllers/commentListState';
 import configProvider from './controllers/configProvider';
 import getDarkStyle from './utils/getDarkStyle';
 
 const App: Component = () => {
-  const { config } = configProvider;
-  const { data } = commentListState;
+  const { config, locale } = configProvider;
+  const { data, status, page, totalPages } = commentListState;
   const darkModeStyle = createMemo(() => getDarkStyle(config().dark));
   refresh();
   createEffect(
@@ -24,7 +26,7 @@ const App: Component = () => {
     console.log(data());
   });
   return (
-    <div class="font-sans">
+    <div class="font-sans sds-root">
       <h1 class="text-4xl text-center select-none">Hello Vite + Solid</h1>
       <Portal mount={document.head}>
         <style>{darkModeStyle()}</style>
@@ -32,6 +34,42 @@ const App: Component = () => {
       <CommentBox />
       <div>
         <Index each={data()}>{(item) => <CommentCard content={item()} />}</Index>
+      </div>
+      <div class="text-center">
+        <Show
+          when={status() !== 'error'}
+          fallback={
+            <CommonButton
+              onClick={(e) => {
+                e.preventDefault();
+                refresh();
+              }}
+            >
+              {locale().refresh}
+            </CommonButton>
+          }
+        >
+          <Switch>
+            <Match when={status() === 'loading'}>
+              <div class="text-sInfo">
+                <LoadingIcon size="30" />
+              </div>
+            </Match>
+            <Match when={!data().length}>
+              <div>{locale().sofa}</div>
+            </Match>
+            <Match when={page() < totalPages()}>
+              <CommonButton
+                onClick={(e) => {
+                  e.preventDefault();
+                  loadMore();
+                }}
+              >
+                {locale().more}
+              </CommonButton>
+            </Match>
+          </Switch>
+        </Show>
       </div>
     </div>
   );

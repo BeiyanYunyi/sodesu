@@ -2,6 +2,7 @@ import { Component, Show } from 'solid-js';
 import commentBoxState, { submitComment } from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
 import userInfoState, { userLogin, userLogout } from '../controllers/userInfoState';
+import CommonButton from './CommonButton';
 import { LoadingIcon, MarkdownIcon } from './Icons';
 
 const CommentBoxFooter: Component = () => {
@@ -16,7 +17,7 @@ const CommentBoxFooter: Component = () => {
           aria-label="Markdown is supported"
           rel="noopener noreferrer"
           href="https://guides.github.com/features/mastering-markdown/"
-          class="w-6 h-6 m-[2px] p-0 border-none bg-transparent text-sTheme decoration-none break-word hover:text-sActive"
+          class="w-6 h-6 m-[2px] p-0 border-none bg-transparent"
         >
           <MarkdownIcon size="24" />
         </a>
@@ -25,28 +26,26 @@ const CommentBoxFooter: Component = () => {
         <Show
           when={config().login !== 'disable' && !isLogin()}
           fallback={
-            <button
+            <CommonButton
               type="button"
-              class="inline-block min-w-10 mb-0 py-2 px-4 bg-transparent text-sColor text-xs text-center select-none border cursor-pointer touch-manipulation border-solid border-sBorder rounded-lg transition duration-400 ms-3 hover:(border-sTheme text-sTheme)"
               onClick={(e) => {
                 e.preventDefault();
                 userLogout();
               }}
             >
               {locale().logout}
-            </button>
+            </CommonButton>
           }
         >
-          <button
+          <CommonButton
             type="button"
-            class="inline-block min-w-10 mb-0 py-2 px-4 bg-transparent text-sColor text-xs text-center select-none border cursor-pointer touch-manipulation border-solid border-sBorder rounded-lg transition duration-400 ms-3 hover:(border-sTheme text-sTheme)"
             onClick={(e) => {
               e.preventDefault();
               userLogin();
             }}
           >
             {locale().login}
-          </button>
+          </CommonButton>
         </Show>
         <Show when={config().login !== 'force' || isLogin()}>
           <button
