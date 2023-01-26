@@ -1,6 +1,6 @@
 {
   "name": "sodesu-comment",
-  "version": "0.0.1-alpha1",
+  "version": "0.0.1-alpha2",
   "description": "Comment system with SolidJS",
   "packageManager": "pnpm@7.26.0",
   "scripts": {
@@ -22,22 +22,26 @@
   },
   "main": "dist/sodesu.aio.umd.js",
   "module": "dist/sodesu.solid.module.js",
-  "types": "dist/sodesu.solid.module.d.ts",
+  "types": "dist/sodesu.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
       "import": "./dist/sodesu.solid.module.js",
-      "types": "./dist/sodesu.solid.module.d.ts",
-      "style": "./dist/sodesu.css"
+      "types": "./dist/sodesu.d.ts"
     },
     "./sodesu.css": "./dist/sodesu.css",
     "./aio": {
       "import": "./dist/sodesu.aio.module.js",
-      "types": "./dist/sodesu.aio.module.d.ts",
+      "types": "./dist/sodesu.d.ts",
       "browser": "./dist/sodesu.aio.umd.js",
       "require": "./dist/sodesu.aio.umd.js"
+    },
+    "./preset": {
+      "import": "./dist/sodesu.preset.mjs",
+      "types": "./dist/sodesu.preset.d.ts",
+      "require": "./dist/sodesu.preset.cjs"
     }
   },
   "license": "AGPL-3.0-or-later",
@@ -52,8 +56,9 @@
     "@types/babel__core": "^7.20.0",
     "@types/marked": "^4.0.8",
     "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.48.2",
-    "@typescript-eslint/parser": "^5.48.2",
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "@unocss/core": "^0.49.0",
     "esbuild": "^0.17.4",
     "esbuild-runner": "^2.2.2",
     "eslint": "^8.32.0",
@@ -66,11 +71,11 @@
     "eslint-plugin-solid": "^0.9.3",
     "prettier": "^2.8.3",
     "rimraf": "^4.1.2",
-    "rollup": "^3.10.1",
+    "rollup": "^3.11.0",
     "rollup-plugin-dts": "^5.1.1",
     "rollup-plugin-summary": "^2.0.0",
     "typescript": "^4.9.4",
-    "unocss": "^0.48.4",
+    "unocss": "^0.49.0",
     "vite": "^4.0.4",
     "vite-plugin-solid": "^2.5.0"
   },

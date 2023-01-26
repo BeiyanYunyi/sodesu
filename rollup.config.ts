@@ -38,7 +38,7 @@ const solidConfig: RollupOptions = {
 
 const solidDtsConfig = {
   ...solidConfig,
-  output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.solid.module.d.ts' }],
+  output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.d.ts' }],
   plugins: dtsPlugins,
 };
 
@@ -51,15 +51,37 @@ const aioConfig = {
   ],
 };
 
-const aioDtsConfig = {
-  ...aioConfig,
+const presetConfig: RollupOptions = {
+  ...solidConfig,
+  input: 'src/utils/presetSodesu.ts',
   output: [
-    { dir: './dist', format: 'esm', entryFileNames: 'sodesu.aio.module.d.ts' },
-    { dir: './dist', format: 'umd', name: 'Sodesu', entryFileNames: 'sodesu.aio.umd.d.ts' },
+    { dir: './dist', format: 'esm', entryFileNames: 'sodesu.preset.mjs' },
+    { dir: './dist', format: 'cjs', entryFileNames: 'sodesu.preset.cjs' },
   ],
-  plugins: dtsPlugins,
+};
+
+const presetDtsConfig: RollupOptions = {
+  ...presetConfig,
+  output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.preset.d.ts' }],
+  external: ['unocss'],
+  plugins: [
+    nodeResolve({
+      extensions,
+      browser: false,
+      exportConditions: ['default', 'module', 'import'],
+      preferBuiltins: true,
+    }),
+    commonjs(),
+    babel({
+      extensions,
+      babelHelpers: 'bundled',
+      presets: ['babel-preset-solid', '@babel/preset-typescript'],
+    }),
+    summary({ showGzippedSize: true, showBrotliSize: true }),
+    dts(),
+  ],
 };
 
 // const solidConfig = withSolid({ input: 'src/index.tsx', targets: ['esm'] });
 
-export default [solidConfig, solidDtsConfig, aioConfig, aioDtsConfig];
+export default [solidConfig, solidDtsConfig, aioConfig, presetConfig, presetDtsConfig];
