@@ -1,5 +1,5 @@
 {
-  "name": "sodesu",
+  "name": "sodesu-comment",
   "version": "0.0.1",
   "description": "Comment system with SolidJS",
   "packageManager": "pnpm@7.26.0",
