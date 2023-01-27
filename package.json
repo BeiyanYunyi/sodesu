@@ -1,6 +1,6 @@
 {
   "name": "sodesu-comment",
-  "version": "0.0.1-alpha2",
+  "version": "0.0.1-alpha3",
   "description": "Comment system with SolidJS",
   "packageManager": "pnpm@7.26.0",
   "scripts": {
@@ -20,9 +20,6 @@
   "repository": {
     "url": "https://github.com/lixiang810/sodesu"
   },
-  "main": "dist/sodesu.aio.umd.js",
-  "module": "dist/sodesu.solid.module.js",
-  "types": "dist/sodesu.d.ts",
   "files": [
     "dist"
   ],
