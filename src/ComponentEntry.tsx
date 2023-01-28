@@ -9,7 +9,6 @@ const ComponentEntry: Component<Omit<WalineInitOptions, 'el'>> = (prop) => {
   const { setProps } = configProvider;
   if (!prop.serverURL) throw new Error("Option 'serverURL' is missing!");
   setProps({ ...prop, path });
-  configProvider.init(prop);
   return <App />;
 };
 
