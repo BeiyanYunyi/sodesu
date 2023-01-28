@@ -1,6 +1,6 @@
 {
   "name": "sodesu-comment",
-  "version": "0.0.1-alpha4",
+  "version": "0.0.1-alpha5",
   "description": "Comment system with SolidJS",
   "packageManager": "pnpm@7.26.0",
   "scripts": {
@@ -25,7 +25,8 @@
     "url": "https://github.com/lixiang810/sodesu"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "exports": {
     ".": {
@@ -46,16 +47,18 @@
       "require": "./dist/sodesu.aio.umd.js"
     },
     "./preset": {
-      "import": "./dist/sodesu.preset.mjs",
-      "types": "./dist/sodesu.preset.d.ts",
-      "require": "./dist/sodesu.preset.cjs"
+      "import": "./dist/preset.mjs",
+      "types": "./dist/preset.d.ts",
+      "require": "./dist/preset.cjs"
     },
     "./dist/preset": {
-      "import": "./dist/sodesu.preset.mjs",
-      "types": "./dist/sodesu.preset.d.ts",
-      "require": "./dist/sodesu.preset.cjs"
+      "import": "./dist/preset.mjs",
+      "types": "./dist/preset.d.ts",
+      "require": "./dist/preset.cjs"
     },
-    "./dist/*": "./dist/*"
+    "./dist/*": "./dist/*",
+    "./src/*": "./src/*",
+    "./package.json": "./package.json"
   },
   "license": "AGPL-3.0-or-later",
   "devDependencies": {

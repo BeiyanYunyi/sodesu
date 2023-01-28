@@ -55,14 +55,14 @@ const presetConfig: RollupOptions = {
   ...solidConfig,
   input: 'src/utils/presetSodesu.ts',
   output: [
-    { dir: './dist', format: 'esm', entryFileNames: 'sodesu.preset.mjs' },
-    { dir: './dist', format: 'cjs', entryFileNames: 'sodesu.preset.cjs' },
+    { dir: './dist', format: 'esm', entryFileNames: 'preset.mjs' },
+    { dir: './dist', format: 'cjs', entryFileNames: 'preset.cjs' },
   ],
 };
 
 const presetDtsConfig: RollupOptions = {
   ...presetConfig,
-  output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.preset.d.ts' }],
+  output: [{ dir: './dist', format: 'esm', entryFileNames: 'preset.d.ts' }],
   external: ['unocss'],
   plugins: [
     nodeResolve({
