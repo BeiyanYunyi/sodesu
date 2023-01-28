@@ -1,6 +1,6 @@
 {
   "name": "sodesu-comment",
-  "version": "0.0.1-alpha3",
+  "version": "0.0.1-alpha4",
   "description": "Comment system with SolidJS",
   "packageManager": "pnpm@7.26.0",
   "scripts": {
@@ -10,6 +10,10 @@
     "build:js": "tsc && rollup -c rollup.config.ts --configPlugin typescript",
     "build:style": "esr scripts/build.ts"
   },
+  "main": "./dist/sodesu.solid.module.js",
+  "module": "./dist/sodesu.solid.module.js",
+  "browser": "./dist/sodesu.solid.module.js",
+  "types": "./dist/sodesu.d.ts",
   "keywords": [
     "valine",
     "waline",
@@ -35,11 +39,23 @@
       "browser": "./dist/sodesu.aio.umd.js",
       "require": "./dist/sodesu.aio.umd.js"
     },
+    "./dist/aio": {
+      "import": "./dist/sodesu.aio.module.js",
+      "types": "./dist/sodesu.d.ts",
+      "browser": "./dist/sodesu.aio.umd.js",
+      "require": "./dist/sodesu.aio.umd.js"
+    },
     "./preset": {
       "import": "./dist/sodesu.preset.mjs",
       "types": "./dist/sodesu.preset.d.ts",
       "require": "./dist/sodesu.preset.cjs"
-    }
+    },
+    "./dist/preset": {
+      "import": "./dist/sodesu.preset.mjs",
+      "types": "./dist/sodesu.preset.d.ts",
+      "require": "./dist/sodesu.preset.cjs"
+    },
+    "./dist/*": "./dist/*"
   },
   "license": "AGPL-3.0-or-later",
   "devDependencies": {
