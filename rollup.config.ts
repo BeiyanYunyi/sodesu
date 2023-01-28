@@ -42,6 +42,18 @@ const solidDtsConfig = {
   plugins: dtsPlugins,
 };
 
+const componentConfig = {
+  ...solidConfig,
+  input: 'src/ComponentEntry.tsx',
+  output: [{ dir: './dist', format: 'esm', entryFileNames: 'component.js' }],
+};
+
+const componentDtsConfig = {
+  ...componentConfig,
+  output: [{ dir: './dist', format: 'esm', entryFileNames: 'component.d.ts' }],
+  plugins: dtsPlugins,
+};
+
 const aioConfig = {
   ...solidConfig,
   external: [],
@@ -84,4 +96,12 @@ const presetDtsConfig: RollupOptions = {
 
 // const solidConfig = withSolid({ input: 'src/index.tsx', targets: ['esm'] });
 
-export default [solidConfig, solidDtsConfig, aioConfig, presetConfig, presetDtsConfig];
+export default [
+  solidConfig,
+  solidDtsConfig,
+  componentConfig,
+  componentDtsConfig,
+  aioConfig,
+  presetConfig,
+  presetDtsConfig,
+];
