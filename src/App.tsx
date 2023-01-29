@@ -42,17 +42,21 @@ const App: Component = () => {
         <ul class="p-0 m-0 list-none">
           <For each={sortingMethods}>
             {(item) => (
-              <li
-                class="inline-block text-[0.75rem] cursor-pointer ms-3"
-                classList={{ 'text-sColor': item !== sorting(), 'text-sTheme': item === sorting() }}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setSorting(item);
-                  refresh();
-                }}
-                onKeyDown={(e) => {}}
-              >
-                {locale()[item]}
+              <li class="inline-block ms-3">
+                <button
+                  class="cursor-pointer border-none bg-transparent text-[0.75rem] ps-0 pe-0 hover:text-sActive"
+                  classList={{
+                    'text-sColor': item !== sorting(),
+                    'text-sTheme': item === sorting(),
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSorting(item);
+                    refresh();
+                  }}
+                >
+                  {locale()[item]}
+                </button>
               </li>
             )}
           </For>
