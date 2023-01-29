@@ -1,16 +1,20 @@
-import { Component, createEffect, createMemo, Index, Match, Show, Switch } from 'solid-js';
+import { Component, createEffect, createMemo, For, Index, Match, Show, Switch } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import CommentBox from './components/CommentBox';
 import CommentCard from './components/CommentCard';
 import CommonButton from './components/CommonButton';
 import { LoadingIcon } from './components/Icons';
-import commentListState, { loadMore, refresh } from './controllers/commentListState';
+import commentListState, {
+  loadMore,
+  refresh,
+  sortingMethods,
+} from './controllers/commentListState';
 import configProvider from './controllers/configProvider';
 import getDarkStyle from './utils/getDarkStyle';
 
 const App: Component = () => {
   const { config, locale } = configProvider;
-  const { data, status, page, totalPages } = commentListState;
+  const { data, status, page, totalPages, count, sorting, setSorting } = commentListState;
   const darkModeStyle = createMemo(() => getDarkStyle(config().dark));
   refresh();
   createEffect(
@@ -28,6 +32,32 @@ const App: Component = () => {
         <style>{darkModeStyle()}</style>
       </Portal>
       <CommentBox />
+      <div class="flex items-center p-2">
+        <div class="flex-grow flex-shrink font-bold text-xl text-sColor">
+          <Show when={count()}>
+            <span>{count()}</span>
+          </Show>{' '}
+          {locale().comment}
+        </div>
+        <ul class="p-0 m-0 list-none">
+          <For each={sortingMethods}>
+            {(item) => (
+              <li
+                class="inline-block text-[0.75rem] cursor-pointer ms-3"
+                classList={{ 'text-sColor': item !== sorting(), 'text-sTheme': item === sorting() }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  setSorting(item);
+                  refresh();
+                }}
+                onKeyDown={(e) => {}}
+              >
+                {locale()[item]}
+              </li>
+            )}
+          </For>
+        </ul>
+      </div>
       <div>
         <Index each={data()}>{(item) => <CommentCard content={item()} />}</Index>
       </div>

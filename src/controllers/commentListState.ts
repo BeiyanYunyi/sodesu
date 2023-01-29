@@ -18,6 +18,8 @@ const sortKeyMap: Record<WalineCommentSorting, SortKey> = {
   hottest: 'like_desc',
 };
 
+export const sortingMethods = Object.keys(sortKeyMap) as WalineCommentSorting[];
+
 export interface ReactiveComment extends Exclude<WalineCommentData, 'ua'> {
   avatar: string;
   /**
