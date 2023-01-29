@@ -1,12 +1,13 @@
 import { createDateNow } from '@solid-primitives/date';
-import type { WalineComment } from '@waline/client';
 import { Component, createMemo, Index, Show } from 'solid-js';
+import type { ReactiveComment } from '../controllers/commentListState';
 import configProvider from '../controllers/configProvider';
 import { getTimeAgo } from '../waline/utils/date';
 import { isLinkHttp } from '../waline/utils/path';
+import CommentCardActions from './CommentCardActions';
 import CommentMeta from './CommentMeta';
 
-const CommentCard: Component<{ content: WalineComment }> = (props) => {
+const CommentCard: Component<{ content: ReactiveComment }> = (props) => {
   const link = createMemo(() => {
     const { link: link2 } = props.content;
     if (!link2) return '';
@@ -62,6 +63,7 @@ const CommentCard: Component<{ content: WalineComment }> = (props) => {
             </span>
           </Show>
           <span class="me-3 text-sInfo text-xs">{time()}</span>
+          <CommentCardActions comment={props.content} />
         </div>
         <CommentMeta
           addr={props.content.addr}
@@ -71,7 +73,9 @@ const CommentCard: Component<{ content: WalineComment }> = (props) => {
         {/* eslint-disable-next-line solid/no-innerhtml */}
         <div class="my-3 text-sm break-word text-sColor" innerHTML={props.content.comment} />
         <Show when={props.content.children}>
-          <Index each={props.content.children}>{(item) => <CommentCard content={item()} />}</Index>
+          <Index each={props.content.children()}>
+            {(item) => <CommentCard content={item()} />}
+          </Index>
         </Show>
       </div>
     </div>

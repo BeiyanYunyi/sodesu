@@ -31,38 +31,43 @@
   "exports": {
     ".": {
       "import": "./dist/sodesu.solid.module.js",
-      "types": "./dist/sodesu.d.ts"
+      "types": "./dist/sodesu.d.ts",
+      "default": "./dist/sodesu.solid.module.js"
     },
     "./sodesu.css": "./dist/sodesu.css",
     "./aio": {
       "import": "./dist/sodesu.aio.module.js",
       "types": "./dist/sodesu.d.ts",
-      "browser": "./dist/sodesu.aio.umd.js",
-      "require": "./dist/sodesu.aio.umd.js"
+      "require": "./dist/sodesu.aio.umd.js",
+      "default": "./dist/sodesu.aio.umd.js"
     },
     "./dist/aio": {
       "import": "./dist/sodesu.aio.module.js",
       "types": "./dist/sodesu.d.ts",
-      "browser": "./dist/sodesu.aio.umd.js",
-      "require": "./dist/sodesu.aio.umd.js"
+      "require": "./dist/sodesu.aio.umd.js",
+      "default": "./dist/sodesu.aio.umd.js"
     },
     "./preset": {
       "import": "./dist/preset.mjs",
       "types": "./dist/preset.d.ts",
-      "require": "./dist/preset.cjs"
+      "require": "./dist/preset.cjs",
+      "default": "./dist/preset.cjs"
     },
     "./dist/preset": {
       "import": "./dist/preset.mjs",
       "types": "./dist/preset.d.ts",
-      "require": "./dist/preset.cjs"
+      "require": "./dist/preset.cjs",
+      "default": "./dist/preset.cjs"
     },
     "./component": {
       "import": "./dist/component.js",
-      "types": "./dist/component.d.ts"
+      "types": "./dist/component.d.ts",
+      "default": "./dist/component.js"
     },
     "./dist/component": {
       "import": "./dist/component.js",
-      "types": "./dist/component.d.ts"
+      "types": "./dist/component.d.ts",
+      "default": "./dist/component.js"
     },
     "./dist/*": "./dist/*",
     "./src/*": "./src/*",

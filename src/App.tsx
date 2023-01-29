@@ -22,12 +22,8 @@ const App: Component = () => {
     },
     { serverURL: config().serverURL, path: config().path },
   );
-  createEffect(() => {
-    console.log(data());
-  });
   return (
     <div class="font-sans sds-root">
-      <h1 class="text-4xl text-center select-none">Hello Vite + Solid</h1>
       <Portal mount={document.head}>
         <style>{darkModeStyle()}</style>
       </Portal>
@@ -51,7 +47,7 @@ const App: Component = () => {
         >
           <Switch>
             <Match when={status() === 'loading'}>
-              <div class="text-sInfo">
+              <div class="text-sInfo flex justify-center">
                 <LoadingIcon size="30" />
               </div>
             </Match>

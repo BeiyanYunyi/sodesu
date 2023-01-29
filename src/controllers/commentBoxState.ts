@@ -1,13 +1,13 @@
-import { WalineComment, WalineCommentData } from '@waline/client';
-import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
+import { WalineCommentData } from '@waline/client';
 import { addComment, updateComment } from '@waline/client/dist/api';
+import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
 import { getWordNumber } from '../waline/utils/wordCount';
+import commentListState, { makeDataReactive, ReactiveComment } from './commentListState';
 import configProvider from './configProvider';
 import userInfoState from './userInfoState';
-import commentListState from './commentListState';
 
 const commentBoxState = createRoot(() => {
-  const [edit, setEdit] = createSignal<WalineComment | null>(null);
+  const [edit, setEdit] = createSignal<ReactiveComment | null>(null);
   const [rootId, setRootId] = createSignal<string | undefined>();
   const [replyId, setReplyId] = createSignal<string | undefined>();
   const [replyUser, setReplyUser] = createSignal<string | undefined>();
@@ -93,7 +93,7 @@ export const submitComment = () => {
   const { userMeta, inputRefs } = userMetaState;
   const { userInfo } = userInfoState;
   const { serverURL, lang, login, wordLimit, requiredMeta } = config();
-  const { setData } = commentListState;
+  const { data, setData } = commentListState;
   // let token = '' //preserved for Recaptcha
   const comment: WalineCommentData = {
     comment: content(),
@@ -161,16 +161,11 @@ export const submitComment = () => {
       if (edit()) {
         setEdit((prev) => ({ ...prev!, comment: resComment.comment, orig: resComment.orig }));
       } else if (resComment.rid) {
-        setData((data) =>
-          data.map((item) => {
-            if (item.objectId !== resComment.rid) return item;
-            const target = item;
-            if (!Array.isArray(item.children)) target.children = [];
-            target.children.push(resComment);
-            return target;
-          }),
-        );
-      } else setData((data) => [resComment, ...data]);
+        const target = data().find((item) => item.objectId === resComment.rid);
+        if (!target) return null;
+        if (!Array.isArray(target.children)) target.setChildren([]);
+        target.setChildren((prev) => [...prev, makeDataReactive(resComment)]);
+      } else setData((dat) => [makeDataReactive(resComment), ...dat]);
       setContent('');
       setPreviewText('');
       return null;

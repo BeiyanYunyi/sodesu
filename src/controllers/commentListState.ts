@@ -1,6 +1,11 @@
-import type { WalineComment, WalineCommentSorting } from '@waline/client';
+import type {
+  WalineComment,
+  WalineCommentData,
+  WalineCommentSorting,
+  WalineCommentStatus,
+} from '@waline/client';
 import { getComment } from '@waline/client/dist/api';
-import { createRoot, createSignal } from 'solid-js';
+import { Accessor, createRoot, createSignal, Setter } from 'solid-js';
 import configProvider from './configProvider';
 // eslint-disable-next-line import/no-cycle
 import userInfoState from './userInfoState';
@@ -13,13 +18,51 @@ const sortKeyMap: Record<WalineCommentSorting, SortKey> = {
   hottest: 'like_desc',
 };
 
+export interface ReactiveComment extends Exclude<WalineCommentData, 'ua'> {
+  avatar: string;
+  /**
+   * User type
+   */
+  type?: 'administrator' | 'guest' | `verify:${string}`;
+  objectId: string;
+  /**
+   * Time ISOString when the comment is created
+   */
+  createdAt: string;
+  insertedAt: string;
+  updatedAt: string;
+  children: Accessor<ReactiveComment[]>;
+  sticky?: boolean;
+  browser?: string;
+  os?: string;
+  level?: number;
+  addr?: string;
+  label?: string;
+  user_id?: string | number;
+  status?: WalineCommentStatus;
+  like: Accessor<number>;
+  orig?: string;
+  setLike: Setter<number>;
+  setChildren: Setter<ReactiveComment[]>;
+}
+
+export const makeDataReactive = (data: WalineComment): ReactiveComment => {
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  const [children, setChildren] = createSignal(makeDatasReactive(data.children || []));
+  const [like, setLike] = createSignal(data.like || 0);
+  return { ...data, children, setChildren, like, setLike };
+};
+
+export const makeDatasReactive = (datas: WalineComment[]) =>
+  datas.map((data) => makeDataReactive(data));
+
 const commentListState = createRoot(() => {
   const { config } = configProvider;
   const [status, setStatus] = createSignal<'loading' | 'success' | 'error'>('loading');
   const [sorting, setSorting] = createSignal(config().commentSorting);
   const [page, setPage] = createSignal(1);
   const [count, setCount] = createSignal(1);
-  const [data, setData] = createSignal<WalineComment[]>([]);
+  const [data, setData] = createSignal<ReactiveComment[]>([]);
   const [totalPages, setTotalPages] = createSignal(0);
   return {
     status,
@@ -59,7 +102,7 @@ export const getCommentData = (page: number) => {
     .then((res) => {
       setStatus('success');
       setCount(res.count);
-      setData((data) => data.concat(...res.data));
+      setData((data) => data.concat(...makeDatasReactive(res.data)));
       setPage(page);
       setTotalPages(res.totalPages);
     })
