@@ -27,7 +27,7 @@ const CommentBox: Component = () => {
           </div>
           <button
             title={locale().profile}
-            class="bg-transparent border-none max-w-20 break-word break-words text-sTheme text-xs hover:(bg-transparent text-sActive) cursor-pointer"
+            class="bg-transparent border-none max-w-20 break-word break-words text-sTheme text-xs hover:bg-transparent hover:text-sActive cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
               openProfile();
