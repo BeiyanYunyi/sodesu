@@ -32,7 +32,7 @@ const solidConfig: RollupOptions = {
   treeshake: 'recommended',
   input: 'src/index.tsx',
   external: ['solid-js', 'solid-js/web', 'solid-js/store'],
-  output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.solid.module.js' }],
+  output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.solid.mjs' }],
   plugins: commonPlugins,
 };
 
@@ -45,7 +45,7 @@ const solidDtsConfig = {
 const componentConfig = {
   ...solidConfig,
   input: 'src/ComponentEntry.tsx',
-  output: [{ dir: './dist', format: 'esm', entryFileNames: 'component.js' }],
+  output: [{ dir: './dist', format: 'esm', entryFileNames: 'component.mjs' }],
 };
 
 const componentDtsConfig = {
@@ -58,7 +58,7 @@ const aioConfig = {
   ...solidConfig,
   external: [],
   output: [
-    { dir: './dist', format: 'esm', entryFileNames: 'sodesu.aio.module.js' },
+    { dir: './dist', format: 'esm', entryFileNames: 'sodesu.aio.mjs' },
     { dir: './dist', format: 'umd', name: 'Sodesu', entryFileNames: 'sodesu.aio.umd.js' },
   ],
 };

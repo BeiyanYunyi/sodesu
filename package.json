@@ -1,8 +1,8 @@
 {
   "name": "sodesu-comment",
-  "version": "0.0.1-alpha8",
+  "version": "0.0.1-alpha9",
   "description": "Comment system with SolidJS",
-  "packageManager": "pnpm@7.26.0",
+  "packageManager": "pnpm@7.26.2",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -10,9 +10,9 @@
     "build:js": "tsc && rollup -c rollup.config.ts --configPlugin typescript",
     "build:style": "esr scripts/build.ts"
   },
-  "main": "./dist/sodesu.solid.module.js",
-  "module": "./dist/sodesu.solid.module.js",
-  "browser": "./dist/sodesu.solid.module.js",
+  "main": "./dist/sodesu.solid.mjs",
+  "module": "./dist/sodesu.solid.mjs",
+  "browser": "./dist/sodesu.solid.mjs",
   "types": "./dist/sodesu.d.ts",
   "keywords": [
     "valine",
@@ -30,19 +30,19 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/sodesu.solid.module.js",
+      "import": "./dist/sodesu.solid.mjs",
       "types": "./dist/sodesu.d.ts",
-      "default": "./dist/sodesu.solid.module.js"
+      "default": "./dist/sodesu.solid.mjs"
     },
     "./sodesu.css": "./dist/sodesu.css",
     "./aio": {
-      "import": "./dist/sodesu.aio.module.js",
+      "import": "./dist/sodesu.aio.mjs",
       "types": "./dist/sodesu.d.ts",
       "require": "./dist/sodesu.aio.umd.js",
       "default": "./dist/sodesu.aio.umd.js"
     },
     "./dist/aio": {
-      "import": "./dist/sodesu.aio.module.js",
+      "import": "./dist/sodesu.aio.mjs",
       "types": "./dist/sodesu.d.ts",
       "require": "./dist/sodesu.aio.umd.js",
       "default": "./dist/sodesu.aio.umd.js"
@@ -60,14 +60,14 @@
       "default": "./dist/preset.cjs"
     },
     "./component": {
-      "import": "./dist/component.js",
+      "import": "./dist/component.mjs",
       "types": "./dist/component.d.ts",
-      "default": "./dist/component.js"
+      "default": "./dist/component.mjs"
     },
     "./dist/component": {
-      "import": "./dist/component.js",
+      "import": "./dist/component.mjs",
       "types": "./dist/component.d.ts",
-      "default": "./dist/component.js"
+      "default": "./dist/component.mjs"
     },
     "./safeList": {
       "import": "./dist/safeList.mjs",
