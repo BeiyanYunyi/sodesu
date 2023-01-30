@@ -43,22 +43,22 @@ const CommentCard: Component<{ content: ReactiveComment }> = (props) => {
             </a>
           </Show>
           <Show when={props.content.type === 'administrator'}>
-            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded-1">
+            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded">
               {locale().admin}
             </span>
           </Show>
           <Show when={props.content.label}>
-            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded-1">
+            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded">
               {props.content.label}
             </span>
           </Show>
           <Show when={props.content.sticky}>
-            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded-1">
+            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded">
               {locale().sticky}
             </span>
           </Show>
           <Show when={props.content.level !== undefined && props.content.level >= 0}>
-            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded-1">
+            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded">
               {locale()[`level${props.content.level!}`] || `Level ${props.content.level}`}
             </span>
           </Show>
