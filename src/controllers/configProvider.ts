@@ -1,35 +1,41 @@
-import type { WalineInitOptions, WalineProps } from '@waline/client';
-import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
+import { createEffect, createMemo, createRoot, createSignal, onMount } from 'solid-js';
+import SodesuInitOptions, { SodesuConfig, SodesuProps } from '../types/SodesuInitOptions';
 import { commentCount } from '../waline/comment';
 import { pageviewCount } from '../waline/pageview';
 import { getConfig } from '../waline/utils/config';
 import { getRoot } from '../waline/utils/getRoot';
 
 const configProvider = createRoot(() => {
-  const [props, setProps] = createSignal<WalineProps>({ serverURL: '', path: '' });
-  const config = createMemo(() => getConfig(props()));
+  const [props, setProps] = createSignal<SodesuProps>({ serverURL: '', path: '' });
+  const [commentClassName, setCommentClassName] = createSignal('');
+  const config = createMemo<SodesuConfig>(() => ({
+    ...getConfig(props()),
+    commentClassName: commentClassName(),
+  }));
   const locale = createMemo(() => config().locale);
-  const [pageView, setPageView] = createSignal<WalineInitOptions['pageview']>(undefined);
+  const [pageView, setPageView] = createSignal<SodesuInitOptions['pageview']>(undefined);
   const [mountCommentCount, setMountCommentCount] =
-    createSignal<WalineInitOptions['comment']>(undefined);
+    createSignal<SodesuInitOptions['comment']>(undefined);
   const init = ({
     el = '#sodesu',
     path = window.location.pathname,
     ...initProps
-  }: WalineInitOptions) => {
+  }: SodesuInitOptions) => {
     const root = el ? getRoot(el) : null;
     if (el && !root) throw new Error(`Option 'el' do not match any domElement!`);
     if (!root) throw new Error('Cannot get root!');
     if (!initProps.serverURL) throw new Error("Option 'serverURL' is missing!");
     setProps({ ...initProps, path });
+    setCommentClassName(initProps.commentClassName || '');
     setPageView(initProps.pageview);
     setMountCommentCount(initProps.comment);
     return root;
   };
-  const update = (opts: Partial<Omit<WalineInitOptions, 'el'>>) => {
+  const update = (opts: Partial<Omit<SodesuInitOptions, 'el'>>) => {
     setProps((p) => ({ ...p, opts }));
+    setCommentClassName(opts.commentClassName || '');
   };
-  createEffect(() => {
+  const mountPageView = () => {
     if (pageView()) {
       pageviewCount({
         serverURL: config().serverURL,
@@ -37,8 +43,8 @@ const configProvider = createRoot(() => {
         selector: typeof pageView() === 'string' ? (pageView() as string) : undefined,
       });
     }
-  });
-  createEffect(() => {
+  };
+  const mountComment = () => {
     if (mountCommentCount()) {
       commentCount({
         serverURL: config().serverURL,
@@ -47,8 +53,18 @@ const configProvider = createRoot(() => {
           typeof mountCommentCount() === 'string' ? (mountCommentCount() as string) : undefined,
       });
     }
+  };
+  onMount(() => {
+    mountPageView();
+    mountComment();
   });
-  return { setProps, config, locale, init, update };
+  createEffect(() => {
+    mountPageView();
+  });
+  createEffect(() => {
+    mountComment();
+  });
+  return { setProps, config, locale, init, update, commentClassName };
 });
 
 export default configProvider;

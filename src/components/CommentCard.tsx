@@ -14,7 +14,7 @@ const CommentCard: Component<{ content: ReactiveComment }> = (props) => {
     return isLinkHttp(link2) ? link2 : `https://${link2}`;
   });
   const [now] = createDateNow();
-  const { locale } = configProvider;
+  const { locale, commentClassName } = configProvider;
   const time = createMemo(() => getTimeAgo(props.content.insertedAt, now(), locale()));
   return (
     <div id={props.content.objectId} class="sds-comment flex p-2">
@@ -70,8 +70,12 @@ const CommentCard: Component<{ content: ReactiveComment }> = (props) => {
           browser={props.content.browser}
           os={props.content.os}
         />
-        {/* eslint-disable-next-line solid/no-innerhtml */}
-        <div class="my-3 text-sm break-word text-sColor" innerHTML={props.content.comment} />
+        <div
+          class="my-3 text-sm break-word text-sColor"
+          classList={{ [commentClassName()]: true }}
+          /* eslint-disable-next-line solid/no-innerhtml */
+          innerHTML={props.content.comment}
+        />
         <Show when={props.content.children}>
           <Index each={props.content.children()}>
             {(item) => <CommentCard content={item()} />}
