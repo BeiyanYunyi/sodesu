@@ -9,6 +9,8 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    阅读量: <span id="/" class="waline-pageview-count"></span> 评论数:
+    <span id="/" class="waline-comment-count"></span>
     <div id="root"></div>
     <script type="module">
       import Sodesu from '/src/index.tsx';
@@ -19,6 +21,8 @@
         dark: 'auto',
         path:
           window.location.pathname === '/' ? '/' : window.location.pathname.replace(/\/$/, '.html'),
+        pageview: true,
+        comment: true,
       });
     </script>
   </body>
