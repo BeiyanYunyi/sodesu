@@ -10,7 +10,7 @@
 import Sodesu from 'sodesu-comment';
 Sodesu.init({
   el: '#comment-container',
-  serverURL: 'https://bmhgu5.deta.dev/',
+  serverURL: 'https://your.server.url/',
   dark: 'html.dark',
   pageview: true,
   commentClassName: 'prose prose-neutral dark:prose-invert min-w-0 max-w-none',
