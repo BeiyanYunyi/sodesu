@@ -84,16 +84,26 @@ export default defineConfig({
 });
 ```
 
-这是在 UnoCSS 下兼容性最好的方案，例如我的博客就是[这样配置](https://github.com/lixiang810/Astro-blog-Lithium/blob/main/uno.config.ts)的，因为 Astro 的构建过程会让 UnoCSS 无法正确识别依赖项里存在的类名。
+这是在 UnoCSS 下兼容性最好的方案，例如我的博客就是[这样配置](https://github.com/lixiang810/Astro-blog-Lithium/blob/main/uno.config.ts)的，因为 Astro 的构建过程似乎会让 UnoCSS 无法正确识别依赖项里存在的类名，所以我在构建时将使用过的类名一并导出，只要把它们加入 safelist，就能让 UnoCSS 正确处理它们。
 
 如果你用的不是 Astro，那么你或许可以使用类似这样的配置，只要确保 `include` 能覆盖到位于 `node_modules` 里的 `sodesu` 源码就可以了：
 
-```js [asdf.js]
+```js
 import { defineConfig, presetWind } from 'unocss';
 import presetSodesu from 'sodesu-comment/dist/preset';
 
 export default defineConfig({
   presets: [presetWind(), presetSodesu()],
   include: ['**/*.jsx', '**/*.tsx', '**/*.vue', '**/*.html', '**/*.astro', /.*sodesu.*/],
+});
+```
+
+## 单页应用支持
+
+通过如下方式来对 Sodesu 的配置项进行更新：
+
+```js
+Sodesu.update({
+  /* Options */
 });
 ```
