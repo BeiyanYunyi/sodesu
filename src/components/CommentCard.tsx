@@ -1,18 +1,22 @@
 import { createDateNow } from '@solid-primitives/date';
 import { Component, createMemo, Index, Show } from 'solid-js';
+import commentBoxState from '../controllers/commentBoxState';
 import type { ReactiveComment } from '../controllers/commentListState';
 import configProvider from '../controllers/configProvider';
 import { getTimeAgo } from '../waline/utils/date';
 import { isLinkHttp } from '../waline/utils/path';
+import CommentBox from './CommentBox';
 import CommentCardActions from './CommentCardActions';
 import CommentMeta from './CommentMeta';
 
-const CommentCard: Component<{ content: ReactiveComment }> = (props) => {
+const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (props) => {
   const link = createMemo(() => {
     const { link: link2 } = props.content;
     if (!link2) return '';
     return isLinkHttp(link2) ? link2 : `https://${link2}`;
   });
+  const { replyId } = commentBoxState;
+  const showCommentBox = createMemo(() => replyId() === props.content.objectId);
   const [now] = createDateNow();
   const { locale, commentClassName } = configProvider;
   const time = createMemo(() => getTimeAgo(props.content.insertedAt, now(), locale()));
@@ -63,7 +67,7 @@ const CommentCard: Component<{ content: ReactiveComment }> = (props) => {
             </span>
           </Show>
           <span class="me-3 text-sInfo text-xs">{time()}</span>
-          <CommentCardActions comment={props.content} />
+          <CommentCardActions comment={props.content} rootId={props.rootId} />
         </div>
         <CommentMeta
           addr={props.content.addr}
@@ -76,9 +80,12 @@ const CommentCard: Component<{ content: ReactiveComment }> = (props) => {
           /* eslint-disable-next-line solid/no-innerhtml */
           innerHTML={props.content.comment}
         />
+        <Show when={showCommentBox()}>
+          <CommentBox />
+        </Show>
         <Show when={props.content.children}>
           <Index each={props.content.children()}>
-            {(item) => <CommentCard content={item()} />}
+            {(item) => <CommentCard content={item()} rootId={props.rootId} />}
           </Index>
         </Show>
       </div>

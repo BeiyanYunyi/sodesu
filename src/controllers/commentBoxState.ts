@@ -74,6 +74,13 @@ export const userMetaState = createRoot(() => {
   return { userMeta, setUserMeta, inputRefs };
 });
 
+export const clearReplyState = () => {
+  const { setReplyId, setReplyUser, setRootId } = commentBoxState;
+  setReplyId(undefined);
+  setReplyUser(undefined);
+  setRootId(undefined);
+};
+
 export const submitComment = () => {
   const { config, locale } = configProvider;
   const {
@@ -163,8 +170,8 @@ export const submitComment = () => {
       } else if (resComment.rid) {
         const target = data().find((item) => item.objectId === resComment.rid);
         if (!target) return null;
-        if (!Array.isArray(target.children)) target.setChildren([]);
         target.setChildren((prev) => [...prev, makeDataReactive(resComment)]);
+        clearReplyState();
       } else setData((dat) => [makeDataReactive(resComment), ...dat]);
       setContent('');
       setPreviewText('');

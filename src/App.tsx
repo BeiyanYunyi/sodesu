@@ -31,7 +31,7 @@ const App: Component = () => {
       <Portal mount={document.head}>
         <style>{darkModeStyle()}</style>
       </Portal>
-      <CommentBox />
+      <CommentBox isMain />
       <div class="flex items-center p-2">
         <div class="flex-grow flex-shrink font-bold text-xl text-sColor">
           <Show when={count()}>
@@ -63,7 +63,9 @@ const App: Component = () => {
         </ul>
       </div>
       <div>
-        <Index each={data()}>{(item) => <CommentCard content={item()} />}</Index>
+        <Index each={data()}>
+          {(item) => <CommentCard content={item()} rootId={item().objectId} />}
+        </Index>
       </div>
       <div class="text-center">
         <Show

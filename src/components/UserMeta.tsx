@@ -21,7 +21,7 @@ const UserMeta: Component = () => {
               <input
                 id={`wl-${kind}`}
                 type={kind === 'mail' ? 'email' : 'text'}
-                class="flex-grow p-2 sdsInputBox text-sColor"
+                class="flex-grow p-2 border-none outline-none transition-colors duration-300 focus:bg-sBgLight bg-none text-sColor"
                 value={value()}
                 ref={inputRefs[kind]}
                 onInput={(e) => {

@@ -2,11 +2,6 @@ import type { Preset } from '@unocss/core';
 
 const presetSodesu = (): Preset => ({
   name: 'preset-sodesu',
-  shortcuts: {
-    sdsInputBox:
-      'border-none outline-none transition-colors duration-300 focus:bg-sBgLight bg-none',
-    sdsBtn: 'inline-block',
-  },
   rules: [
     [/^bb-(\d*)$/, ([, d]) => ({ 'border-bottom': `${d}px dashed var(--sds-border-color)` })],
     ['bb-none', { 'border-bottom': 'none' }],

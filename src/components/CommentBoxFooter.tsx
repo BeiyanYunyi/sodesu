@@ -5,7 +5,7 @@ import userInfoState, { userLogin, userLogout } from '../controllers/userInfoSta
 import CommonButton from './CommonButton';
 import { LoadingIcon, MarkdownIcon } from './Icons';
 
-const CommentBoxFooter: Component = () => {
+const CommentBoxFooter: Component<{ disabled?: boolean }> = (props) => {
   const { config, locale } = configProvider;
   const { isSubmitting } = commentBoxState;
   const { isLogin } = userInfoState;
@@ -27,6 +27,7 @@ const CommentBoxFooter: Component = () => {
           when={config().login !== 'disable' && !isLogin()}
           fallback={
             <CommonButton
+              disabled={props.disabled}
               type="button"
               onClick={(e) => {
                 e.preventDefault();
@@ -38,6 +39,7 @@ const CommentBoxFooter: Component = () => {
           }
         >
           <CommonButton
+            disabled={props.disabled}
             type="button"
             onClick={(e) => {
               e.preventDefault();
@@ -51,7 +53,7 @@ const CommentBoxFooter: Component = () => {
           <button
             type="submit"
             class="inline-block min-w-10 mb-0 py-2 px-4 bg-sTheme text-sWhite text-xs flex justify-center select-none border cursor-pointer touch-manipulation border-solid border-sTheme bg-sTheme rounded-lg transition duration-400 ms-3 disabled:border-sBorder disabled:bg-sDisableBg disabled:text-sDisable disabled:cursor-not-allowed disabled:hover:border-sBorder disabled:hover:bg-sDisableBg disabled:hover:text-sDisable hover:border-sActive hover:bg-sActive"
-            disabled={isSubmitting()}
+            disabled={isSubmitting() || props.disabled}
             onClick={(e) => {
               e.preventDefault();
               submitComment();

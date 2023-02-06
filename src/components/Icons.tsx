@@ -44,3 +44,12 @@ export const MarkdownIcon: Component<{ size: number | string }> = (prop) => (
     />
   </svg>
 );
+
+export const ReplyIcon: Component = () => (
+  <svg viewBox="0 0 1024 1024" width="24" height="24">
+    <path
+      fill="currentColor"
+      d="M810.667 213.333a64 64 0 0 1 64 64V704a64 64 0 0 1-64 64H478.336l-146.645 96.107a21.333 21.333 0 0 1-33.024-17.856V768h-85.334a64 64 0 0 1-64-64V277.333a64 64 0 0 1 64-64h597.334zm0 64H213.333V704h149.334v63.296L459.243 704h351.424V277.333zm-271.36 213.334v64h-176.64v-64h176.64zm122.026-128v64H362.667v-64h298.666z"
+    />
+  </svg>
+);
