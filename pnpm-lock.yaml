@@ -18,6 +18,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.49.0
   '@unocss/core': ^0.49.0
   '@waline/client': ^2.14.7
+  cross-env: ^7.0.3
   esbuild: ^0.17.4
   esbuild-runner: ^2.2.2
   eslint: ^8.32.0
@@ -62,6 +63,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.49.0_iu322prlnwsygkcra5kbpy22si
   '@typescript-eslint/parser': 5.49.0_7uibuqfxkfaozanbtbziikiqje
   '@unocss/core': 0.49.0
+  cross-env: 7.0.3
   esbuild: 0.17.4
   esbuild-runner: 2.2.2_esbuild@0.17.4
   eslint: 8.32.0
@@ -2189,6 +2191,14 @@ packages:
 
   /convert-source-map/1.9.0:
     resolution: {integrity: sha512-ASFBup0Mz1uyiIjANan1jzLQami9z1PoYSZCiiYW2FczPbenXc45FZdBZLzOT+r6+iciuEModtmCti+hjaAk0A==}
+    dev: true
+
+  /cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
     dev: true
 
   /cross-spawn/7.0.3:

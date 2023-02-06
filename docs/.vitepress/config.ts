@@ -4,7 +4,7 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'Sodesu',
   description: 'A Waline-compatible comment system',
-  base: '/sodesu/',
+  base: process.env.DOCS_BASE,
   lastUpdated: true,
   cleanUrls: true,
 });

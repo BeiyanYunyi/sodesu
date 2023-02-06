@@ -39,6 +39,8 @@ jobs:
         run: pnpm i --prefer-offline
       - name: Build page
         run: pnpm docs:build
+        env:
+          DOCS_BASE: '/sodesu/'
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v1
