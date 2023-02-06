@@ -20,8 +20,9 @@ export default defineConfig({
     lastUpdatedText: '上次更新于',
     outline: [2, 3],
     nav: [
-      { text: '快速开始', link: '/guide/getting-started' },
-      { text: '特色功能', link: '/special-features' },
+      { text: '🚀 快速开始', link: '/guide/getting-started' },
+      { text: '➕ 特色功能', link: '/special-features' },
+      { text: '➖ 功能精简', link: '/trade-offs' },
     ],
   },
 });
