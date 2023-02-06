@@ -84,7 +84,7 @@ export default defineConfig({
 });
 ```
 
-这是在 UnoCSS 下兼容性最好的方案，例如我的博客就是[这样配置](https://github.com/lixiang810/Astro-blog-Lithium/blob/main/uno.config.ts)的，因为 Astro 的构建过程似乎会让 UnoCSS 无法正确识别依赖项里存在的类名，所以我在构建时将使用过的类名一并导出，只要把它们加入 safelist，就能让 UnoCSS 正确处理它们。
+这是在 UnoCSS 下兼容性最好的方案，例如我的博客就是[这样配置](https://github.com/BeiyanYunyi/Astro-blog-Lithium/blob/main/uno.config.ts)的，因为 Astro 的构建过程似乎会让 UnoCSS 无法正确识别依赖项里存在的类名，所以我在构建时将使用过的类名一并导出，只要把它们加入 safelist，就能让 UnoCSS 正确处理它们。
 
 如果你用的不是 Astro，那么你或许可以使用类似这样的配置，只要确保 `include` 能覆盖到位于 `node_modules` 里的 `sodesu` 源码就可以了：
 

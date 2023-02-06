@@ -12,7 +12,7 @@ hero:
       link: /guide/getting-started
     - theme: alt
       text: 查看源码
-      link: https://github.com/vuejs/vitepress
+      link: https://github.com/BeiyanYunyi/sodesu
 features:
   - icon: 🚀
     title: Solid.js

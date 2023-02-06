@@ -106,7 +106,7 @@ const App: Component = () => {
       </div>
       <div class="py-1 text-sLightGrey text-info text-end">
         Powered by{' '}
-        <a href="https://github.com/lixiang810/sodesu" target="_blank" rel="noopener noreferrer">
+        <a href="https://github.com/BeiyanYunyi/sodesu" target="_blank" rel="noopener noreferrer">
           Sodesu
         </a>{' '}
         v{version}

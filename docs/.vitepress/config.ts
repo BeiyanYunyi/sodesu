@@ -8,9 +8,9 @@ export default defineConfig({
   lastUpdated: true,
   cleanUrls: true,
   themeConfig: {
-    socialLinks: [{ icon: 'github', link: 'https://github.com/lixiang810/sodesu' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/BeiyanYunyi/sodesu' }],
     editLink: {
-      pattern: 'https://github.com/lixiang810/sodesu/edit/main/docs/:path',
+      pattern: 'https://github.com/BeiyanYunyi/sodesu/edit/main/docs/:path',
       text: '在 GitHub 上编辑此页',
     },
     footer: {
