@@ -1,5 +1,6 @@
 import { Component, createEffect, createMemo, For, Index, Match, Show, Switch } from 'solid-js';
 import { Portal } from 'solid-js/web';
+import { version } from '../package.json';
 import CommentBox from './components/CommentBox';
 import CommentCard from './components/CommentCard';
 import CommonButton from './components/CommonButton';
@@ -102,6 +103,13 @@ const App: Component = () => {
             </Match>
           </Switch>
         </Show>
+      </div>
+      <div class="py-1 text-sLightGrey text-info text-end">
+        Powered by{' '}
+        <a href="https://github.com/lixiang810/sodesu" target="_blank" rel="noopener noreferrer">
+          Sodesu
+        </a>{' '}
+        v{version}
       </div>
     </div>
   );

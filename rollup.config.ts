@@ -6,6 +6,7 @@ import terser from '@rollup/plugin-terser';
 import type { RollupOptions } from 'rollup';
 import dts from 'rollup-plugin-dts';
 import summary from 'rollup-plugin-summary';
+import json from '@rollup/plugin-json';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 
@@ -23,6 +24,7 @@ const basePlugins = [
     presets: ['babel-preset-solid', '@babel/preset-typescript'],
   }),
   summary({ showGzippedSize: true, showBrotliSize: true }),
+  json(),
 ];
 
 const dtsPlugins = [...basePlugins, dts()];
