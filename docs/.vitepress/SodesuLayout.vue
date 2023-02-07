@@ -1,18 +1,12 @@
 <template>
   <Layout>
     <template #home-features-after>
-      <ClientOnly>
-        <div class="home-container">
-          <SodesuComment />
-        </div>
-      </ClientOnly>
+      <div class="home-container">
+        <SodesuComment />
+      </div>
     </template>
     <template #doc-after>
-      <ClientOnly>
-        <div class="home-container">
-          <SodesuComment />
-        </div>
-      </ClientOnly>
+      <SodesuComment />
     </template>
   </Layout>
 </template>

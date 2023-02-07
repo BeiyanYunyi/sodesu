@@ -37,6 +37,8 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm i --prefer-offline
+      - name: Build sodesu
+        run: pnpm build
       - name: Build page
         run: pnpm docs:build
         env:
