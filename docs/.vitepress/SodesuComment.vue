@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup>
-import Sodesu from '../../dist/sodesu.solid.mjs';
+import Sodesu from '../../dist/sodesu.aio.mjs';
 import '../../dist/sodesu.css';
 import { onMounted } from 'vue';
 
