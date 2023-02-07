@@ -32,7 +32,7 @@ const configProvider = createRoot(() => {
     return root;
   };
   const update = (opts: Partial<Omit<SodesuInitOptions, 'el'>>) => {
-    setProps((p) => ({ ...p, opts }));
+    setProps((p) => ({ ...p, ...opts }));
     setCommentClassName(opts.commentClassName || '');
   };
   const mountPageView = () => {
