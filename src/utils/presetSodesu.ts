@@ -86,6 +86,9 @@ const presetSodesu = (): Preset => ({
     color: var(--sds-active-color);
     text-decoration: underline;
   }
+  .sds-root {
+    line-height: 1;
+  }
   `,
     },
   ],
