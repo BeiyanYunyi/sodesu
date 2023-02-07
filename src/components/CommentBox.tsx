@@ -43,7 +43,7 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
           <UserMeta />
         </Show>
         <textarea
-          class="my-3 mx-2 min-h-35 font-sans text-sm resize-y rounded-lg border-none outline-none transition-colors duration-300 focus:bg-sBgLight bg-none text-sColor disabled:cursor-not-allowed"
+          class="my-3 mx-2 min-h-35 font-sans text-sm resize-y rounded-lg border-none outline-none transition-colors duration-300 focus:bg-sBgLight bg-transparent text-sColor disabled:cursor-not-allowed"
           onInput={(e) => {
             setContent(e.currentTarget.value);
           }}
