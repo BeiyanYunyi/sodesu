@@ -17,3 +17,41 @@ Sodesu 与 Waline 官方前端的设计目的并不相同。我写 Sodesu 的初
 ## 评论管理
 
 我极少管理我博客内的评论，并且 Waline 后端也可以进行管理，因此它的优先级也不高。
+
+## 样式修改
+
+由于使用了 UnoCSS 这样的 Atomic CSS 库，Sodesu 的样式是基本不可修改的——你没法通过自己写一个 CSS 文件把它改成你想要的样子。Atomic CSS 使得 Sodesu 各元素存在很大程度上的类名复用，你没法只修改一个元素的样子。如果你确实这么需要，请使用 Waline 官方客户端，或者直接 fork 下 Sodesu 的源码进行修改。
+
+当然，Sodesu 的配色方案是可以调整的，方法与 Waline 一致——用自己的 CSS 覆盖掉即可。
+
+可以修改的变量如下（与 Waline 里的各变量名完全一致，只是把 `waline` 换成了 `sds`）：
+
+```css
+:root {
+  --sds-font-size: 1rem;
+  --sds-white: #fff;
+  --sds-light-grey: #999;
+  --sds-dark-grey: #666;
+  --sds-theme-color: #27ae60;
+  --sds-active-color: #2ecc71;
+  --sds-color: #444;
+  --sds-bgcolor: #fff;
+  --sds-bgcolor-light: #f8f8f8;
+  --sds-bgcolor-hover: #f0f0f0;
+  --sds-border-color: #ddd;
+  --sds-disable-bgcolor: #f8f8f8;
+  --sds-disable-color: #000;
+  --sds-code-bgcolor: #282c34;
+  --sds-bq-color: #f0f0f0;
+  --sds-avatar-size: 3.25rem;
+  --sds-avatar-radius: 50%;
+  --sds-m-avatar-size: calc(var(--sds-avatar-size) * 9 / 13);
+  --sds-badge-color: #3498db;
+  --sds-badge-font-size: 0.75em;
+  --sds-info-bgcolor: #f8f8f8;
+  --sds-info-color: #999;
+  --sds-info-font-size: 0.625em;
+  --sds-border: 1px solid var(--sds-border-color);
+  --sds-box-shadow: none;
+}
+```
