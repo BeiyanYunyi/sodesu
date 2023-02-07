@@ -8,7 +8,7 @@ Sodesu 与 Waline 官方前端的设计目的并不相同。我写 Sodesu 的初
 
 这涉及 Markdown 的前端渲染。Waline 官方前端使用的方案是 marked。marked 的体积很大，引入它会使 Sodesu 的体积增加 48kB（16kB Gzipped），换句话说，让 Sodesu 的体积翻一倍。
 
-我的博客偏技术型，相对而言，用户的 markdown 熟练度会更高一些，因此 Markdown 预览功能的优先度并不高。尽管如此，我仍然会尝试实现 Markdown 预览——用 [snarkdown](https://github.com/developit/snarkdown) 或者 [GitHub 现成的接口](https://docs.github.com/en/rest/markdown#render-a-markdown-document)（api.github.com 在国内访问性尚可，且没有跨域限制）来实现。
+我的博客偏技术型，相对而言，用户的 markdown 熟练度会更高一些，因此 Markdown 预览功能的优先度并不高。尽管如此，我仍然会尝试实现 Markdown 预览——用 [snarkdown](https://github.com/developit/snarkdown) ，或者暴露一个函数，以让用户调用例如自行反代的 [GitHub 现成的接口](https://docs.github.com/en/rest/markdown#render-a-markdown-document)来实现。
 
 ## 表情选择
 
