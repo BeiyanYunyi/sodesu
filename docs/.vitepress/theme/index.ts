@@ -6,10 +6,12 @@ const theme: typeof DefaultTheme = {
   Layout: SodesuLayout,
   enhanceApp: (ctx) => {
     DefaultTheme.enhanceApp(ctx);
-    ctx.router.onAfterRouteChanged = async (to) => {
-      const Sodesu = await import('../../../dist/sodesu.aio.mjs');
-      Sodesu.default.update({ path: window.location.pathname });
-    };
+    if (typeof window !== 'undefined') {
+      ctx.router.onAfterRouteChanged = async (to) => {
+        const Sodesu = await import('../../../dist/sodesu.aio.mjs');
+        Sodesu.default.update({ path: window.location.pathname });
+      };
+    }
   },
 };
 
