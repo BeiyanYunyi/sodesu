@@ -4,21 +4,25 @@ Sodesu 与 Waline 官方前端的设计目的并不相同。我写 Sodesu 的初
 
 出于体积上的考虑，它会比 Waline 官方前端减少一些功能。有一些功能是我还没实现，另一些则是我确定不会在 Sodesu 中引入的。无论是哪种情况，我都将尝试在下方列举。如果你需要一些未被实现的功能，但它们并未在下方列出，欢迎提出 issue。
 
-## Markdown 预览
+## 将来可能实现的特性
+
+### Markdown 预览
 
 这涉及 Markdown 的前端渲染。Waline 官方前端使用的方案是 marked。marked 的体积很大，引入它会使 Sodesu 的体积增加 48kB（16kB Gzipped），换句话说，让 Sodesu 的体积翻一倍。
 
 我的博客偏技术型，相对而言，用户的 markdown 熟练度会更高一些，因此 Markdown 预览功能的优先度并不高。尽管如此，我仍然会尝试实现 Markdown 预览——用 [snarkdown](https://github.com/developit/snarkdown) ，或者暴露一个函数，以让用户调用例如自行反代的 [GitHub 现成的接口](https://docs.github.com/en/rest/markdown#render-a-markdown-document)来实现。
 
-## 表情选择
+### 表情选择
 
 我认为直接让用户输入 Emoji 会是个更好的选择。尽管如此，引入一个表情选择器的代价并不大，我可以尝试着去做，但优先级并不高。
 
-## 评论管理
+### 评论管理
 
 我极少管理我博客内的评论，并且 Waline 后端也可以进行管理，因此它的优先级也不高。
 
-## 样式修改
+## 不会实现 / 无法实现的特性
+
+### 样式修改
 
 由于使用了 UnoCSS 这样的 Atomic CSS 库，Sodesu 的样式是基本不可修改的——你没法通过自己写一个 CSS 文件把它改成你想要的样子。Atomic CSS 使得 Sodesu 各元素存在很大程度上的类名复用，你没法只修改一个元素的样子。如果你确实这么需要，请使用 Waline 官方客户端，或者直接 fork 下 Sodesu 的源码进行修改。
 
@@ -56,7 +60,7 @@ Sodesu 与 Waline 官方前端的设计目的并不相同。我写 Sodesu 的初
 }
 ```
 
-## 页脚版权信息
+### 关闭页脚版权信息
 
 Sodesu 会在评论区右下角显示一行类似这样的版权信息：
 
