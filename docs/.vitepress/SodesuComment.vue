@@ -1,4 +1,14 @@
 <template>
+  <div class="vp-doc">
+    <hr />
+    <blockquote>
+      友情提示：评论区仅作评论展示，如有问题咨询请去
+      <a href="https://github.com/BeiyanYunyi/sodesu/discussions" target="_blank">
+        Github Discussion
+      </a>
+      中提问。
+    </blockquote>
+  </div>
   <div class="container">
     <div id="sodesu-comment" />
   </div>
