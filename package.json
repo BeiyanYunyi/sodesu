@@ -10,7 +10,7 @@
     "build:js": "tsc && rollup -c rollup.config.ts --configPlugin typescript",
     "build:style": "esr scripts/build.ts",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
+    "docs:build": "pnpm build && vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
   "main": "./dist/sodesu.solid.mjs",
