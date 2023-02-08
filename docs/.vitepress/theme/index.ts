@@ -1,5 +1,5 @@
 import DefaultTheme from 'vitepress/theme';
-import SodesuLayout from '../SodesuLayout.vue';
+import SodesuLayout from './SodesuLayout.vue';
 
 const theme: typeof DefaultTheme = {
   ...DefaultTheme,

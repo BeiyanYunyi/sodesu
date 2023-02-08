@@ -14,11 +14,11 @@
   </div>
 </template>
 <script setup>
-import '../../dist/sodesu.css';
+import '../../../dist/sodesu.css';
 import { onMounted } from 'vue';
 
 onMounted(async () => {
-  const Sodesu = await import('../../dist/sodesu.aio.mjs');
+  const Sodesu = await import('../../../dist/sodesu.aio.mjs');
   Sodesu.default.init({
     el: '#sodesu-comment',
     serverURL: 'https://walinejs.comment.lithub.cc',
