@@ -27,6 +27,6 @@ export default withPwa(
         { text: '➖ 功能精简', link: '/trade-offs' },
       ],
     },
-    pwa: { base: process.env.DOCS_BASE, devOptions: { enabled: true } },
+    pwa: { base: process.env.DOCS_BASE },
   }),
 );
