@@ -9,7 +9,7 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
   const { locale, config } = configProvider;
   const { replyUser, content, edit, setContent } = commentBoxState;
   const { isLogin, userInfo } = userInfoState;
-  const disabled = createMemo(() => props.isMain && !!replyUser());
+  const disabled = createMemo(() => props.isMain && (!!replyUser() || !!edit()));
   return (
     <div class="flex mb-3">
       <Show when={config().login !== 'disable' && isLogin() && !edit()?.objectId}>

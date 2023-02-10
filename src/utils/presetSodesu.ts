@@ -17,6 +17,7 @@ const presetSodesu = (): Preset => ({
     ['text-badge', { 'font-size': 'var(--sds-badge-font-size)' }],
     ['text-info', { 'font-size': 'var(--sds-info-font-size)' }],
     ['sds-comment', { '--sds-avatar-real-size': 'var(--sds-avatar-size)' }],
+    ['sds-btn', { 'padding-inline': '0' }],
   ],
   layers: {
     sodesu: -19, // 1 more then preset-typography

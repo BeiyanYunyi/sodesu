@@ -1,9 +1,4 @@
-import type {
-  WalineComment,
-  WalineCommentData,
-  WalineCommentSorting,
-  WalineCommentStatus,
-} from '@waline/client';
+import type { WalineComment, WalineCommentSorting, WalineCommentStatus } from '@waline/client';
 import { getComment } from '@waline/client/dist/api';
 import { Accessor, createRoot, createSignal, Setter } from 'solid-js';
 import configProvider from './configProvider';
@@ -20,7 +15,50 @@ const sortKeyMap: Record<WalineCommentSorting, SortKey> = {
 
 export const sortingMethods = Object.keys(sortKeyMap) as WalineCommentSorting[];
 
-export interface ReactiveComment extends Exclude<WalineCommentData, 'ua'> {
+interface ReactiveCommentData {
+  /**
+   * User Nickname
+   */
+  nick: string;
+  /**
+   * User email
+   */
+  mail: string;
+  /**
+   * User link
+   */
+  link?: string;
+  /**
+   * Content of comment
+   */
+  comment: Accessor<string>;
+  /**
+   * User Agent
+   */
+  ua: string;
+  /**
+   * Parent comment id
+   */
+  pid?: string;
+  /**
+   * Root comment id
+   */
+  rid?: string;
+  /**
+   * User id being at
+   */
+  at?: string;
+  /**
+   * Comment link
+   */
+  url: string;
+  /**
+   * Recaptcha Token
+   */
+  recaptchaV3?: string;
+}
+
+export interface ReactiveComment extends Exclude<ReactiveCommentData, 'ua'> {
   avatar: string;
   /**
    * User type
@@ -43,16 +81,20 @@ export interface ReactiveComment extends Exclude<WalineCommentData, 'ua'> {
   user_id?: string | number;
   status?: WalineCommentStatus;
   like: Accessor<number>;
-  orig?: string;
+  orig: Accessor<string | undefined>;
   setLike: Setter<number>;
   setChildren: Setter<ReactiveComment[]>;
+  setComment: Setter<string>;
+  setOrig: Setter<string>;
 }
 
 export const makeDataReactive = (data: WalineComment): ReactiveComment => {
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   const [children, setChildren] = createSignal(makeDatasReactive(data.children || []));
   const [like, setLike] = createSignal(data.like || 0);
-  return { ...data, children, setChildren, like, setLike };
+  const [comment, setComment] = createSignal(data.comment);
+  const [orig, setOrig] = createSignal(data.orig);
+  return { ...data, children, setChildren, like, setLike, comment, setComment, orig, setOrig };
 };
 
 export const makeDatasReactive = (datas: WalineComment[]) =>

@@ -15,13 +15,15 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
     if (!link2) return '';
     return isLinkHttp(link2) ? link2 : `https://${link2}`;
   });
-  const { replyId } = commentBoxState;
-  const showCommentBox = createMemo(() => replyId() === props.content.objectId);
+  const { replyId, edit } = commentBoxState;
+  const showCommentBox = createMemo(
+    () => replyId() === props.content.objectId || edit()?.objectId === props.content.objectId,
+  );
   const [now] = createDateNow();
   const { locale, commentClassName } = configProvider;
   const time = createMemo(() => getTimeAgo(props.content.insertedAt, now(), locale()));
   return (
-    <div id={props.content.objectId} class="sds-comment flex p-2">
+    <div id={props.content.objectId} class="sds-comment flex p-2 pe-0">
       <div aria-hidden class="me-3">
         <Show when={props.content.avatar}>
           <img src={props.content.avatar} alt="A user's avatar" class="sds-avatar" />
@@ -78,7 +80,7 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
           class="my-3 text-sm break-word text-sColor"
           classList={{ [commentClassName()]: true }}
           /* eslint-disable-next-line solid/no-innerhtml */
-          innerHTML={props.content.comment}
+          innerHTML={props.content.comment()}
         />
         <Show when={showCommentBox()}>
           <CommentBox />

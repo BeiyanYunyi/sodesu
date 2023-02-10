@@ -41,6 +41,11 @@ const commentBoxState = createRoot(() => {
       setIsWordCountLegal(true);
     }
   });
+  createEffect(() => {
+    if (edit()) {
+      setContent(edit()!.orig() || '');
+    }
+  });
   return {
     edit,
     rootId,
@@ -166,7 +171,11 @@ export const submitComment = () => {
       if (res.errmsg) return alert(res.errmsg);
       const resComment = res.data!;
       if (edit()) {
-        setEdit((prev) => ({ ...prev!, comment: resComment.comment, orig: resComment.orig }));
+        const target = data().find((item) => item.objectId === edit()!.objectId);
+        if (!target) return null;
+        target.setComment(resComment.comment);
+        if (resComment.orig) target.setOrig(resComment.orig);
+        setEdit(null);
       } else if (resComment.rid) {
         const target = data().find((item) => item.objectId === resComment.rid);
         if (!target) return null;
