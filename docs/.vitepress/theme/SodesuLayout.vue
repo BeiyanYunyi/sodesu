@@ -9,7 +9,7 @@
       <SodesuComment />
     </template>
     <template #layout-bottom>
-      <ReloadPrompt />
+      <RegisterSW />
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
@@ -19,7 +19,7 @@
 </template>
 <script setup lang="ts">
 import DefaultTheme from 'vitepress/theme';
-import ReloadPrompt from './ReloadPrompt.vue';
+import RegisterSW from './RegisterSW.vue';
 import SodesuComment from './SodesuComment.vue';
 
 const { Layout } = DefaultTheme;
