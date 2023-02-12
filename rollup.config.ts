@@ -31,7 +31,7 @@ const dtsPlugins = [...basePlugins, dts()];
 const commonPlugins = [...basePlugins, terser()];
 
 const solidConfig: RollupOptions = {
-  treeshake: 'recommended',
+  treeshake: 'smallest',
   input: 'src/index.tsx',
   external: ['solid-js', 'solid-js/web', 'solid-js/store'],
   output: [{ dir: './dist', format: 'esm', entryFileNames: 'sodesu.solid.mjs' }],
