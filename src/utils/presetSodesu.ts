@@ -90,6 +90,14 @@ const presetSodesu = (): Preset => ({
   .sds-root {
     line-height: 1;
   }
+  .sds-content pre, .sds-content pre[class*="language-"] {
+    background: var(--sds-code-bgcolor);
+    margin: .75rem 0;
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    line-height: 1.4;
+    overflow: auto;
+  }
   `,
     },
   ],

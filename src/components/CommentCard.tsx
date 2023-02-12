@@ -77,7 +77,7 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
           os={props.content.os}
         />
         <div
-          class="my-3 text-sm break-word text-sColor"
+          class="my-3 text-sm break-word text-sColor sds-content"
           classList={{ [commentClassName()]: true }}
           /* eslint-disable-next-line solid/no-innerhtml */
           innerHTML={props.content.comment()}
