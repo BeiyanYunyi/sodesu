@@ -8,6 +8,7 @@ import { isLinkHttp } from '../waline/utils/path';
 import CommentBox from './CommentBox';
 import CommentCardActions from './CommentCardActions';
 import CommentMeta from './CommentMeta';
+import { VerifiedIcon } from './Icons';
 
 const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (props) => {
   const link = createMemo(() => {
@@ -24,9 +25,12 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
   const time = createMemo(() => getTimeAgo(props.content.insertedAt, now(), locale()));
   return (
     <div id={props.content.objectId} class="sds-comment flex p-2 pe-0">
-      <div aria-hidden class="me-3">
+      <div aria-hidden class="me-3 relative">
         <Show when={props.content.avatar}>
-          <img src={props.content.avatar} alt="A user's avatar" class="sds-avatar" />
+          <img src={props.content.avatar} alt={props.content.nick} class="sds-avatar" />
+          <Show when={props.content.type}>
+            <VerifiedIcon />
+          </Show>
         </Show>
       </div>
       <div class="sds-comment-card flex-grow flex-shrink min-w-0 pb-2 bb-1">
