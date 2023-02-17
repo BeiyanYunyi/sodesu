@@ -14,7 +14,7 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
     <Show when={!disabled()}>
       <div class="flex mb-3">
         <Show when={config().login !== 'disable' && isLogin() && !edit()?.objectId}>
-          <div class="max-w-20 text-center">
+          <div class="max-w-20 text-center me-2">
             <div class="sds-comment">
               <button
                 title={locale().profile}

@@ -4,6 +4,23 @@ Sodesu 与 Waline 官方前端的设计目的并不相同。我写 Sodesu 的初
 
 出于体积上的考虑，它会比 Waline 官方前端减少一些功能。有一些功能是我还没实现，另一些则是我确定不会在 Sodesu 中引入的。无论是哪种情况，我都将尝试在下方列举。如果你需要一些未被实现的功能，但它们并未在下方列出，欢迎提出 issue。
 
+## 已实现并需要选择启用的特性
+
+### 代码高亮
+
+Waline 后端使用 Prism 将 markdown 中的代码块进行高亮处理，而 Sodesu 的样式中并未包括 Prism。为了让 Sodesu 正确呈现代码样式（而非一片灰），你需要在前端额外引入 Prism 的样式。经测试，在所有官方主题中，`prism-tomorrow` 主题的效果是最好的。示例引入方式如下：
+
+```html
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
+/>
+```
+
+::: info
+可观察[本项目开发用的 html](https://github.com/BeiyanYunyi/sodesu/blob/main/index.html) 来了解这个标签应当被插入到哪里，不过随便挑一个地方放应该都没问题，只会造成首屏加载速度上的微妙差别。当然，别放到 `<body>` 和 `<head>` 外面。
+:::
+
 ## 将来可能实现的特性
 
 ### Markdown 预览
