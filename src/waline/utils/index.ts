@@ -5,7 +5,7 @@ export * from './date';
 export * from './error';
 export * from './getRoot';
 export * from './image';
-export * from './markdown';
+// export * from './markdown';
 export * from './path';
 export * from './query';
 export * from './wordCount';
