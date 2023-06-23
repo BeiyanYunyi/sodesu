@@ -22,7 +22,7 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
   );
   const [now] = createDateNow();
   const { locale, commentClassName } = configProvider;
-  const time = createMemo(() => getTimeAgo(props.content.insertedAt, now(), locale()));
+  const time = createMemo(() => getTimeAgo(new Date(props.content.time), now(), locale()));
   return (
     <div id={props.content.objectId} class="sds-comment flex p-2 pe-0">
       <div aria-hidden class="me-3 relative">

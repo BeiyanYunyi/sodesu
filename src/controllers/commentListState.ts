@@ -78,6 +78,7 @@ export interface ReactiveComment extends Exclude<ReactiveCommentData, 'ua'> {
   level?: number;
   addr?: string;
   label?: string;
+  time: number;
   user_id?: string | number;
   status?: WalineCommentStatus;
   like: Accessor<number>;
