@@ -95,7 +95,18 @@ export const makeDataReactive = (data: WalineComment): ReactiveComment => {
   const [like, setLike] = createSignal(data.like || 0);
   const [comment, setComment] = createSignal(data.comment);
   const [orig, setOrig] = createSignal(data.orig);
-  return { ...data, children, setChildren, like, setLike, comment, setComment, orig, setOrig };
+  return {
+    ...data,
+    time: (data as unknown as { time: number }).time,
+    children,
+    setChildren,
+    like,
+    setLike,
+    comment,
+    setComment,
+    orig,
+    setOrig,
+  };
 };
 
 export const makeDatasReactive = (datas: WalineComment[]) =>
