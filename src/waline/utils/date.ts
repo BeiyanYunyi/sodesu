@@ -1,4 +1,4 @@
-import { WalineDateLocale } from '../typings';
+import type { WalineDateLocale } from '../typings';
 
 const padWithZeros = (vNumber: number, width: number): string => {
   let numAsString = vNumber.toString();
@@ -18,11 +18,7 @@ export const dateFormat = (date: Date): string => {
   return `${vYear}-${vMonth}-${vDay}`;
 };
 
-export const getTimeAgo = (
-  date: Date | string,
-  now: Date,
-  locale: WalineDateLocale
-): string => {
+export const getTimeAgo = (date: Date | string, now: Date, locale: WalineDateLocale): string => {
   if (!date) return '';
 
   const time =

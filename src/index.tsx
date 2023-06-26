@@ -1,7 +1,7 @@
 import { render } from 'solid-js/web';
 import App from './App';
 import configProvider from './controllers/configProvider';
-import SodesuInitOptions from './types/SodesuInitOptions';
+import type SodesuInitOptions from './types/SodesuInitOptions';
 
 const Sodesu = {
   init: (opt: SodesuInitOptions) => {

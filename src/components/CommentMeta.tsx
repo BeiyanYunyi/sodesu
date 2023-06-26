@@ -1,4 +1,4 @@
-import { Component, Show } from 'solid-js';
+import { Show, type Component } from 'solid-js';
 
 const CommentMeta: Component<{ addr?: string; browser?: string; os?: string }> = (props) => (
   <div aria-hidden>

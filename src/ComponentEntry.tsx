@@ -2,7 +2,7 @@
 import type { Component } from 'solid-js';
 import App from './App';
 import configProvider from './controllers/configProvider';
-import SodesuInitOptions from './types/SodesuInitOptions';
+import type SodesuInitOptions from './types/SodesuInitOptions';
 
 const ComponentEntry: Component<Omit<SodesuInitOptions, 'el'>> = (prop) => {
   const { path = window.location.pathname } = prop;

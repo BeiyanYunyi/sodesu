@@ -1,6 +1,6 @@
 import type { WalineComment, WalineCommentSorting, WalineCommentStatus } from '@waline/client';
 import { getComment } from '@waline/client/dist/api';
-import { Accessor, createRoot, createSignal, Setter } from 'solid-js';
+import { createRoot, createSignal, type Accessor, type Setter } from 'solid-js';
 import configProvider from './configProvider';
 // eslint-disable-next-line import/no-cycle
 import userInfoState from './userInfoState';

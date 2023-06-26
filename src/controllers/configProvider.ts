@@ -1,5 +1,6 @@
 import { createEffect, createMemo, createRoot, createSignal, onMount } from 'solid-js';
-import SodesuInitOptions, { SodesuConfig, SodesuProps } from '../types/SodesuInitOptions';
+import type SodesuInitOptions from '../types/SodesuInitOptions';
+import type { SodesuConfig, SodesuProps } from '../types/SodesuInitOptions';
 import { commentCount } from '../waline/comment';
 import { pageviewCount } from '../waline/pageview';
 import { getConfig } from '../waline/utils/config';

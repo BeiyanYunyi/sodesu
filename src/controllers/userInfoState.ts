@@ -1,5 +1,5 @@
 import { createStorageSignal } from '@solid-primitives/storage';
-import { login, UserInfo } from '@waline/client/dist/api';
+import { login, type UserInfo } from '@waline/client/dist/api';
 import { createMemo, createRoot, onCleanup, onMount } from 'solid-js';
 // eslint-disable-next-line import/no-cycle
 import { refresh } from './commentListState';

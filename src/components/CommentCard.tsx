@@ -1,5 +1,5 @@
 import { createDateNow } from '@solid-primitives/date';
-import { Component, createMemo, Index, Show } from 'solid-js';
+import { Index, Show, createMemo, type Component } from 'solid-js';
 import commentBoxState from '../controllers/commentBoxState';
 import type { ReactiveComment } from '../controllers/commentListState';
 import configProvider from '../controllers/configProvider';

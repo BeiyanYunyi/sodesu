@@ -1,4 +1,4 @@
-import { Component, createMemo, For } from 'solid-js';
+import { For, createMemo, type Component } from 'solid-js';
 import { userMetaState } from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
 

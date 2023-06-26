@@ -12,7 +12,8 @@
     "types": ["vite/client"],
     "isolatedModules": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true
   },
   "exclude": ["dist"]
 }

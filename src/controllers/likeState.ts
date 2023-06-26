@@ -1,7 +1,7 @@
 import { createStorageSignal } from '@solid-primitives/storage';
 import { updateComment } from '@waline/client/dist/api';
 import { createRoot } from 'solid-js';
-import { ReactiveComment } from './commentListState';
+import { type ReactiveComment } from './commentListState';
 import configProvider from './configProvider';
 import userInfoState from './userInfoState';
 

@@ -1,9 +1,9 @@
 import { deleteComment } from '@waline/client/dist/api';
-import { Component, createMemo, Show } from 'solid-js';
+import { type Component, createMemo, Show } from 'solid-js';
 import commentBoxState, { clearReplyState } from '../controllers/commentBoxState';
 import {
   deleteComment as deleteCommentFront,
-  ReactiveComment,
+  type ReactiveComment,
 } from '../controllers/commentListState';
 import configProvider from '../controllers/configProvider';
 import likeState, { handleLike } from '../controllers/likeState';
