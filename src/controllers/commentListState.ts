@@ -188,8 +188,7 @@ export const deleteComment = (id: string) => {
   setData((data) =>
     data.filter((item) => {
       item.setChildren((children) => children.filter((child) => child.objectId !== id));
-      if (item.objectId !== id) return true;
-      return false;
+      return item.objectId !== id;
     }),
   );
 };
