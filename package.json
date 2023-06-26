@@ -2,7 +2,7 @@
   "name": "sodesu-comment",
   "version": "0.0.1-alpha.22",
   "description": "Comment system with SolidJS",
-  "packageManager": "pnpm@8.6.3",
+  "packageManager": "pnpm@8.6.4",
   "scripts": {
     "start": "vite",
     "dev": "vite",

@@ -1,13 +1,17 @@
+import { deleteComment } from '@waline/client/dist/api';
 import { Component, createMemo, Show } from 'solid-js';
 import commentBoxState, { clearReplyState } from '../controllers/commentBoxState';
-import { ReactiveComment } from '../controllers/commentListState';
+import {
+  deleteComment as deleteCommentFront,
+  ReactiveComment,
+} from '../controllers/commentListState';
 import configProvider from '../controllers/configProvider';
 import likeState, { handleLike } from '../controllers/likeState';
 import userInfoState from '../controllers/userInfoState';
-import { EditIcon, LikeIcon, ReplyIcon } from './Icons';
+import { DeleteIcon, EditIcon, LikeIcon, ReplyIcon } from './Icons';
 
 const CommentCardActions: Component<{ comment: ReactiveComment; rootId: string }> = (props) => {
-  const { locale } = configProvider;
+  const { locale, config } = configProvider;
   const { replyId, setReplyId, setReplyUser, setRootId, setContent, setEdit, edit } =
     commentBoxState;
   const { likes } = likeState;
@@ -36,6 +40,26 @@ const CommentCardActions: Component<{ comment: ReactiveComment; rootId: string }
           }}
         >
           <EditIcon />
+        </button>
+      </Show>
+      <Show when={isAdmin() || isOwner()}>
+        <button
+          type="button"
+          class="inline-flex items-center border-none bg-transparent text-sColor cursor-pointer sds-btn me-2"
+          onClick={async (e) => {
+            e.preventDefault();
+            if (!confirm('Are you sure you want to delete this comment?')) return;
+            const { serverURL, lang } = config();
+            await deleteComment({
+              serverURL,
+              lang,
+              token: userInfo()!.token,
+              objectId: props.comment.objectId,
+            });
+            deleteCommentFront(props.comment.objectId);
+          }}
+        >
+          <DeleteIcon />
         </button>
       </Show>
       <button

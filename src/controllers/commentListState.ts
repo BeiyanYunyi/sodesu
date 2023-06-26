@@ -183,4 +183,15 @@ export const refresh = () => {
   getCommentData(1);
 };
 
+export const deleteComment = (id: string) => {
+  const { setData } = commentListState;
+  setData((data) =>
+    data.filter((item) => {
+      item.setChildren((children) => children.filter((child) => child.objectId !== id));
+      if (item.objectId !== id) return true;
+      return false;
+    }),
+  );
+};
+
 export default commentListState;
