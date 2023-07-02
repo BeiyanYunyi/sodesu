@@ -3,11 +3,11 @@ import commentBoxState, { submitComment } from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
 import userInfoState, { userLogin, userLogout } from '../controllers/userInfoState';
 import CommonButton from './CommonButton';
-import { LoadingIcon, MarkdownIcon } from './Icons';
+import { LoadingIcon, MarkdownIcon, PreviewIcon } from './Icons';
 
 const CommentBoxFooter: Component = () => {
   const { config, locale } = configProvider;
-  const { isSubmitting } = commentBoxState;
+  const { isSubmitting, showPreview, setShowPreview } = commentBoxState;
   const { isLogin } = userInfoState;
   return (
     <div class="flex flex-wrap my-2 mx-3">
@@ -21,6 +21,18 @@ const CommentBoxFooter: Component = () => {
         >
           <MarkdownIcon size="24" />
         </a>
+        <button
+          type="button"
+          class="w-6 h-6 m-[2px] p-0 border-none bg-transparent hover:text-sTheme"
+          classList={{ 'text-sActive': showPreview() }}
+          title={locale().preview}
+          onClick={(e) => {
+            e.preventDefault();
+            setShowPreview((ori) => !ori);
+          }}
+        >
+          <PreviewIcon />
+        </button>
       </div>
       <div class="flex flex-grow-3 flex-shrink items-center justify-end">
         <Show

@@ -7,7 +7,7 @@ import UserMeta from './UserMeta';
 
 const CommentBox: Component<{ isMain?: boolean }> = (props) => {
   const { locale, config } = configProvider;
-  const { replyUser, content, edit, setContent } = commentBoxState;
+  const { replyUser, content, edit, setContent, showPreview, previewText } = commentBoxState;
   const { isLogin, userInfo } = userInfoState;
   const disabled = createMemo(() => props.isMain && (!!replyUser() || !!edit()));
   return (
@@ -59,6 +59,21 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
               if ((e.ctrlKey || e.metaKey) && key === 'Enter') submitComment();
             }}
           />
+          <Show when={showPreview()}>
+            {
+              <div class="py-2 pl-2">
+                <hr class="my-[0.825rem] border-dashed border-sBgLight" />
+                <h4>{locale().preview}</h4>
+                <div
+                  class={`my-3 text-sm break-word text-sColor sds-content ${
+                    config().commentClassName
+                  }`}
+                  /* eslint-disable-next-line solid/no-innerhtml */
+                  innerHTML={previewText()}
+                />
+              </div>
+            }
+          </Show>
           <CommentBoxFooter />
         </div>
       </div>
