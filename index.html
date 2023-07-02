@@ -14,6 +14,7 @@
     <div id="root"></div>
     <script type="module">
       import Sodesu from '/src/index.tsx';
+      import remarkRenderer from '/src/utils/remarkRenderer.ts';
       import 'virtual:uno.css';
       Sodesu.init({
         el: '#root',
@@ -24,6 +25,7 @@
         pageview: true,
         comment: true,
         commentClassName: 'prose',
+        renderPreview: remarkRenderer,
       });
     </script>
     <link

@@ -18,12 +18,16 @@ import '../../../dist/sodesu.css';
 import { onMounted } from 'vue';
 
 onMounted(async () => {
-  const Sodesu = await import('../../../dist/sodesu.aio.mjs');
+  const [Sodesu, remarkRenderer] = await Promise.all([
+    import('../../../dist/sodesu.aio.mjs'),
+    import('../../../src/utils/remarkRenderer'),
+  ]);
   Sodesu.default.init({
     el: '#sodesu-comment',
     serverURL: 'https://walinejs.comment.lithub.cc',
     dark: 'html.dark',
     commentClassName: 'vp-doc',
+    renderPreview: remarkRenderer.default,
   });
 });
 </script>

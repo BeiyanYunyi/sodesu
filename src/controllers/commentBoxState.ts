@@ -1,6 +1,6 @@
 import { type WalineCommentData } from '@waline/client';
 import { addComment, updateComment } from '@waline/client/dist/api';
-import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
+import { createEffect, createMemo, createResource, createRoot, createSignal } from 'solid-js';
 import { getWordNumber } from '../waline/utils/wordCount';
 import commentListState, { makeDataReactive, type ReactiveComment } from './commentListState';
 import configProvider from './configProvider';
@@ -16,8 +16,16 @@ const commentBoxState = createRoot(() => {
   const [isWordCountLegal, setIsWordCountLegal] = createSignal(false);
   const [wordLimit, setWordLimit] = createSignal(0);
   const [isSubmitting, setIsSubmitting] = createSignal(false);
-  const [previewText, setPreviewText] = createSignal('');
+  const [showPreview, setShowPreview] = createSignal(false);
   const { config } = configProvider;
+  const previewSignal = createMemo(() => ({ showPreview: showPreview(), content: content() }));
+  const [previewText, { mutate: setPreviewText }] = createResource(
+    previewSignal,
+    async (preSign: { content: string; showPreview: boolean }) => {
+      if (!preSign.showPreview) return '';
+      return config().renderPreview(preSign.content);
+    },
+  );
   const limit = createMemo(() => config().wordLimit);
   let editorRef: HTMLTextAreaElement | undefined;
   createEffect(() => {
@@ -58,6 +66,7 @@ const commentBoxState = createRoot(() => {
     isSubmitting,
     previewText,
     editorRef,
+    showPreview,
     setEdit,
     setReplyId,
     setReplyUser,
@@ -66,6 +75,7 @@ const commentBoxState = createRoot(() => {
     setWordCount,
     setIsSubmitting,
     setPreviewText,
+    setShowPreview,
   };
 });
 

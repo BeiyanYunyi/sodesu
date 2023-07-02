@@ -1,5 +1,6 @@
-import { defineConfig } from 'vitepress';
 import { withPwa } from '@vite-pwa/vitepress';
+import { defineConfig } from 'vitepress';
+import mk from '@traptitech/markdown-it-katex';
 
 export default withPwa(
   defineConfig({
@@ -28,5 +29,25 @@ export default withPwa(
       ],
     },
     pwa: { base: process.env.DOCS_BASE, selfDestroying: true },
+    vite: {
+      optimizeDeps: {
+        include: [
+          'remark-gfm',
+          'remark-parse',
+          'remark-rehype',
+          'rehype-document',
+          'rehype-format',
+          'rehype-stringify',
+          'unified',
+          'remark-math',
+          'rehype-katex',
+        ],
+      },
+    },
+    markdown: {
+      config: (md) => {
+        md.use(mk);
+      },
+    },
   }),
 );
