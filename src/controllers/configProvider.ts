@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import snarkdown from '@bpmn-io/snarkdown';
 import { createEffect, createMemo, createRoot, createSignal, onMount } from 'solid-js';
 import type SodesuInitOptions from '../types/SodesuInitOptions';
@@ -10,12 +11,10 @@ import { getRoot } from '../waline/utils/getRoot';
 const configProvider = createRoot(() => {
   const [props, setProps] = createSignal<SodesuProps>({ serverURL: '', path: '' });
   const [commentClassName, setCommentClassName] = createSignal('');
-  const [renderPreview, setRenderPreview] =
-    createSignal<SodesuInitOptions['renderPreview']>(undefined);
   const config = createMemo<SodesuConfig>(() => ({
     ...getConfig(props()),
     commentClassName: commentClassName(),
-    renderPreview: renderPreview() || (async (text) => snarkdown(text)),
+    renderPreview: props().renderPreview || (async (text) => snarkdown(text)),
   }));
   const locale = createMemo(() => config().locale);
   const [pageView, setPageView] = createSignal<SodesuInitOptions['pageview']>(undefined);
@@ -32,7 +31,6 @@ const configProvider = createRoot(() => {
     if (!initProps.serverURL) throw new Error("Option 'serverURL' is missing!");
     setProps({ ...initProps, path });
     setCommentClassName(initProps.commentClassName || '');
-    setRenderPreview(() => initProps.renderPreview);
     setPageView(initProps.pageview);
     setMountCommentCount(initProps.comment);
     return root;
