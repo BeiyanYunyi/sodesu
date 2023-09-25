@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { presetWind } from 'unocss';
 import { defineConfig } from 'unocss/vite';
-import presetSodesu from './src/utils/presetSodesu';
+import presetSodesu from './src/utils/presetSodesu.js';
 
 export default defineConfig({
   presets: [presetWind(), presetSodesu()],
