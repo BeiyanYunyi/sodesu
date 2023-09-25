@@ -194,6 +194,9 @@ export const submitComment = () => {
       } else setData((dat) => [makeDataReactive(resComment), ...dat]);
       setContent('');
       setPreviewText('');
+      if (replyId()) {
+        clearReplyState();
+      }
       return null;
     })
     .catch((err: TypeError) => {
