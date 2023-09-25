@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "esModuleInterop": true,
@@ -14,6 +14,10 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "verbatimModuleSyntax": true
+  },
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true
   },
   "exclude": ["dist"]
 }
