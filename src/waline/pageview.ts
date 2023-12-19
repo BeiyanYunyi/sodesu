@@ -52,7 +52,13 @@ export { type WalineAbort } from './typings/index.js';
 
 const renderVisitorCount = (counts: number[], countElements: HTMLElement[]): void => {
   countElements.forEach((element, index) => {
-    element.innerText = counts[index].toString();
+    if (typeof counts[index] === 'number') {
+      element.innerText = counts[index].toString();
+    } else {
+      element.innerText = (counts[0] as unknown as { data: { time: number }[] }).data[
+        index
+      ].time.toString();
+    }
   });
 };
 
