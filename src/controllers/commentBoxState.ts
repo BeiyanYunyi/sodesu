@@ -186,6 +186,7 @@ export const submitComment = () => {
         target.setComment(resComment.comment);
         if (resComment.orig) target.setOrig(resComment.orig);
         setEdit(null);
+        clearReplyState();
       } else if (resComment.rid) {
         const target = data().find((item) => item.objectId === resComment.rid);
         if (!target) return null;

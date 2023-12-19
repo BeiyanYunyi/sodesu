@@ -24,7 +24,7 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
   const { locale, commentClassName } = configProvider;
   const time = createMemo(() => getTimeAgo(new Date(props.content.time), now(), locale()));
   return (
-    <div id={props.content.objectId} class="sds-comment flex p-2 pe-0">
+    <div id={props.content.objectId} class="sds-comment flex flex-shrink-0 p-2 pe-0">
       <div aria-hidden class="me-3 relative">
         <Show when={props.content.avatar}>
           <img src={props.content.avatar} alt={props.content.nick} class="sds-avatar" />
