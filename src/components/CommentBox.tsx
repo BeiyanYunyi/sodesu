@@ -15,7 +15,7 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
       <div class="flex mb-3">
         <Show when={config().login !== 'disable' && isLogin() && !edit()?.objectId}>
           <div class="max-w-20 text-center me-2">
-            <div class="sds-comment">
+            <div class="sds-comment ">
               <button
                 title={locale().profile}
                 class="bg-transparent border-none hover:bg-transparent cursor-pointer"
@@ -24,7 +24,7 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
                   openProfile();
                 }}
               >
-                <img src={userInfo()?.avatar} alt="Avatar of current user" class="sds-avatar" />
+                <img src={userInfo()?.avatar} alt="Avatar of current user" class="sds-avatar " />
               </button>
             </div>
             <button

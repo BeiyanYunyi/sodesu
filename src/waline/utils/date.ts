@@ -1,4 +1,4 @@
-import type { WalineDateLocale } from '../typings';
+import { type WalineDateLocale } from '../typings';
 
 const padWithZeros = (vNumber: number, width: number): string => {
   let numAsString = vNumber.toString();

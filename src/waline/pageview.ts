@@ -1,9 +1,7 @@
-import { getPageview, updatePageview } from '@waline/client/dist/api';
-import { getServerURL } from './utils/config';
-import { errorHandler } from './utils/error';
-import { getQuery } from './utils/query';
+import { getPageview, updatePageview } from '@waline/api';
 
-import type { WalineAbort } from './typings';
+import { type WalineAbort } from './typings/index.js';
+import { errorHandler, getQuery, getServerURL } from './utils/index.js';
 
 export interface WalinePageviewCountOptions {
   /**
@@ -50,6 +48,8 @@ export interface WalinePageviewCountOptions {
   lang?: string;
 }
 
+export { type WalineAbort } from './typings/index.js';
+
 const renderVisitorCount = (counts: number[], countElements: HTMLElement[]): void => {
   countElements.forEach((element, index) => {
     element.innerText = counts[index].toString();
@@ -76,14 +76,14 @@ export const pageviewCount = ({
     return query !== null && path !== query;
   };
 
-  const fetch = (targetElements: HTMLElement[]): Promise<void> =>
+  const fetch = (elements: HTMLElement[]): Promise<void> =>
     getPageview({
       serverURL: getServerURL(serverURL),
-      paths: targetElements.map((element) => getQuery(element) || path),
+      paths: elements.map((element) => getQuery(element) || path),
       lang,
       signal: controller.signal,
     })
-      .then((counts) => renderVisitorCount(counts, targetElements))
+      .then((counts) => renderVisitorCount(counts, elements))
       .catch(errorHandler);
 
   // we should update pageviews
@@ -91,22 +91,22 @@ export const pageviewCount = ({
     const normalElements = elements.filter((element) => !filter(element));
     const elementsNeedstoBeFetched = elements.filter(filter);
 
-    updatePageview({
+    void updatePageview({
       serverURL: getServerURL(serverURL),
       path,
       lang,
-    }).then((count) =>
+    }).then(([count]) =>
       renderVisitorCount(new Array<number>(normalElements.length).fill(count), normalElements),
     );
 
     // if we should fetch count of other pages
     if (elementsNeedstoBeFetched.length) {
-      fetch(elementsNeedstoBeFetched);
+      void fetch(elementsNeedstoBeFetched);
     }
   }
   // we should not update pageviews
   else {
-    fetch(elements);
+    void fetch(elements);
   }
 
   return controller.abort.bind(controller);

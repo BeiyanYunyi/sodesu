@@ -1,5 +1,5 @@
-import { deleteComment } from '@waline/client/dist/api';
-import { type Component, createMemo, Show } from 'solid-js';
+import { deleteComment } from '@waline/client';
+import { Show, createMemo, type Component } from 'solid-js';
 import commentBoxState, { clearReplyState } from '../controllers/commentBoxState';
 import {
   deleteComment as deleteCommentFront,
@@ -23,7 +23,7 @@ const CommentCardActions: Component<{ comment: ReactiveComment; rootId: string }
   );
   const editingThis = createMemo(() => edit()?.objectId === props.comment.objectId);
   return (
-    <div class="float-right">
+    <div class="float-right ">
       <Show when={isAdmin() || isOwner()}>
         <button
           type="button"

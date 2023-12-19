@@ -24,17 +24,18 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
   const { locale, commentClassName } = configProvider;
   const time = createMemo(() => getTimeAgo(new Date(props.content.time), now(), locale()));
   return (
-    <div id={props.content.objectId} class="sds-comment flex flex-shrink-0 p-2 pe-0">
-      <div aria-hidden class="me-3 relative">
+    <div id={props.content.objectId} class="sds-comment flex p-2 pe-0">
+      <div aria-hidden class="me-3 relative flex-shrink-0">
         <Show when={props.content.avatar}>
-          <img src={props.content.avatar} alt={props.content.nick} class="sds-avatar" />
+          {/* 不加空格会被编译成 class=sds-avatar，怪 */}
+          <img src={props.content.avatar} alt={props.content.nick} class="sds-avatar " />
           <Show when={props.content.type}>
             <VerifiedIcon />
           </Show>
         </Show>
       </div>
       <div class="sds-comment-card flex-grow flex-shrink min-w-0 pb-2 bb-1">
-        <div class="overflow-hidden">
+        <div class="overflow-hidden ">
           <Show
             when={link()}
             fallback={
