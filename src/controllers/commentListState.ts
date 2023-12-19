@@ -1,5 +1,5 @@
 import type { WalineComment, WalineCommentSorting, WalineCommentStatus } from '@waline/client';
-import { getComment } from '@waline/client/dist/api';
+import { getComment } from '@waline/client';
 import { createRoot, createSignal, type Accessor, type Setter } from 'solid-js';
 import configProvider from './configProvider';
 // eslint-disable-next-line import/no-cycle
@@ -21,10 +21,6 @@ interface ReactiveCommentData {
    */
   nick: string;
   /**
-   * User email
-   */
-  mail: string;
-  /**
    * User link
    */
   link?: string;
@@ -32,10 +28,6 @@ interface ReactiveCommentData {
    * Content of comment
    */
   comment: Accessor<string>;
-  /**
-   * User Agent
-   */
-  ua: string;
   /**
    * Parent comment id
    */
@@ -48,10 +40,6 @@ interface ReactiveCommentData {
    * User id being at
    */
   at?: string;
-  /**
-   * Comment link
-   */
-  url: string;
   /**
    * Recaptcha Token
    */
@@ -90,8 +78,10 @@ export interface ReactiveComment extends Exclude<ReactiveCommentData, 'ua'> {
 }
 
 export const makeDataReactive = (data: WalineComment): ReactiveComment => {
-  // eslint-disable-next-line @typescript-eslint/no-use-before-define
-  const [children, setChildren] = createSignal(makeDatasReactive(data.children || []));
+  const [children, setChildren] = createSignal(
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    makeDatasReactive('children' in data ? data.children : []),
+  );
   const [like, setLike] = createSignal(data.like || 0);
   const [comment, setComment] = createSignal(data.comment);
   const [orig, setOrig] = createSignal(data.orig);

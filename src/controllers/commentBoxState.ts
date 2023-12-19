@@ -1,5 +1,4 @@
-import { type WalineCommentData } from '@waline/client';
-import { addComment, updateComment } from '@waline/client/dist/api';
+import { addComment, updateComment, type WalineCommentData } from '@waline/client';
 import { createEffect, createMemo, createResource, createRoot, createSignal } from 'solid-js';
 import { getWordNumber } from '../waline/utils/wordCount';
 import commentListState, { makeDataReactive, type ReactiveComment } from './commentListState';
@@ -187,7 +186,7 @@ export const submitComment = () => {
         if (resComment.orig) target.setOrig(resComment.orig);
         setEdit(null);
         clearReplyState();
-      } else if (resComment.rid) {
+      } else if ('rid' in resComment) {
         const target = data().find((item) => item.objectId === resComment.rid);
         if (!target) return null;
         target.setChildren((prev) => [...prev, makeDataReactive(resComment)]);

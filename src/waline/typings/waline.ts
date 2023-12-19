@@ -1,15 +1,15 @@
-import type {
-  WalineCommentSorting,
-  WalineHighlighter,
-  WalineEmojiInfo,
-  WalineEmojiPresets,
-  WalineImageUploader,
-  WalineLoginStatus,
-  WalineMeta,
-  WalineTexRenderer,
-  WalineSearchOptions,
-} from './base';
-import type { WalineLocale } from './locale';
+import {
+  type WalineCommentSorting,
+  type WalineHighlighter,
+  type WalineEmojiInfo,
+  type WalineEmojiPresets,
+  type WalineImageUploader,
+  type WalineLoginStatus,
+  type WalineMeta,
+  type WalineTeXRenderer,
+  type WalineSearchOptions,
+} from './base.js';
+import { type WalineLocale } from './locale.js';
 
 export interface WalineProps {
   /**
@@ -201,7 +201,7 @@ export interface WalineProps {
    *
    * @default true
    */
-  texRenderer?: WalineTexRenderer | boolean;
+  texRenderer?: WalineTeXRenderer | boolean;
 
   /**
    *
@@ -238,6 +238,11 @@ export interface WalineProps {
    * recaptcha v3 client key
    */
   recaptchaV3Key?: string;
+
+  /**
+   * turnstile client key
+   */
+  turnstileKey?: string;
 
   /**
    * reaction

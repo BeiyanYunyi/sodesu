@@ -77,7 +77,7 @@ const App: Component = () => {
           {(item) => <CommentCard content={item()} rootId={item().objectId} />}
         </Index>
       </div>
-      <div class="text-center">
+      <div class="text-center ">
         <Show
           when={status() !== 'error'}
           fallback={
