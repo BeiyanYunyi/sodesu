@@ -33,9 +33,9 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: lts
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm i --prefer-offline
@@ -47,9 +47,9 @@ jobs:
           DOCS_BASE: '/sodesu/'
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v1
+        uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: docs/.vitepress/dist
       - name: Deploy to GitHub Pages
