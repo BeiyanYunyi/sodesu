@@ -1,6 +1,6 @@
 {
   "name": "sodesu-comment",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Comment system with SolidJS",
   "packageManager": "pnpm@8.15.3",
   "type": "module",

@@ -56,9 +56,6 @@ export interface ReactiveComment extends Exclude<ReactiveCommentData, 'ua'> {
   /**
    * Time ISOString when the comment is created
    */
-  createdAt: string;
-  insertedAt: string;
-  updatedAt: string;
   children: Accessor<ReactiveComment[]>;
   sticky?: boolean;
   browser?: string;
