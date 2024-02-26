@@ -1,4 +1,4 @@
-import { getPageview, updatePageview } from '@waline/api';
+import { getPageview, updatePageview, type GetArticleCounterResponse } from '@waline/api';
 
 import { type WalineAbort } from './typings/index.js';
 import { errorHandler, getQuery, getServerURL } from './utils/index.js';
@@ -50,15 +50,18 @@ export interface WalinePageviewCountOptions {
 
 export { type WalineAbort } from './typings/index.js';
 
-const renderVisitorCount = (counts: number[], countElements: HTMLElement[]): void => {
+const renderVisitorCount = (
+  counts: GetArticleCounterResponse,
+  countElements: HTMLElement[],
+): void => {
   countElements.forEach((element, index) => {
-    if (typeof counts[index] === 'number') {
-      element.innerText = counts[index].toString();
-    } else {
-      element.innerText = (counts[0] as unknown as { data: { time: number }[] }).data[
-        index
-      ].time.toString();
+    const count = counts[index].time;
+
+    if (typeof count !== 'number') {
+      return;
     }
+
+    element.innerText = count.toString();
   });
 };
 
@@ -101,9 +104,7 @@ export const pageviewCount = ({
       serverURL: getServerURL(serverURL),
       path,
       lang,
-    }).then(([count]) =>
-      renderVisitorCount(new Array<number>(normalElements.length).fill(count), normalElements),
-    );
+    }).then((counts) => renderVisitorCount(counts, normalElements));
 
     // if we should fetch count of other pages
     if (elementsNeedstoBeFetched.length) {
