@@ -58,7 +58,7 @@ pnpm add solid-js
 当然，你也可以选择引入已经包含了 Solid.js 的 Sodesu：
 
 ```js
-import Sodesu from 'sodesu/dist/sodesu.aio.mjs';
+import Sodesu from 'sodesu/aio';
 Sodesu.init({
   el: '#sodesu',
   serverURL: 'https://your-domain.vercel.app',
@@ -68,15 +68,15 @@ Sodesu.init({
 无论是哪一种方式，都没有引入样式。所以你可以参考 CDN 引入时的办法，在 html 中引入它。但如果你的项目足够工程化，那么你可以直接在你的页面中引入样式：
 
 ```js
-import 'sodesu-comment/dist/sodesu.css';
+import 'sodesu-comment/sodesu.css';
 ```
 
 或者，如果你的项目已经在使用 UnoCSS，那么你可以将它配置一下：
 
 ```js
 import { defineConfig, presetWind } from 'unocss';
-import presetSodesu from 'sodesu-comment/dist/preset';
-import safeList from 'sodesu-comment/dist/safeList';
+import presetSodesu from 'sodesu-comment/preset';
+import safeList from 'sodesu-comment/safeList';
 
 export default defineConfig({
   presets: [presetWind(), presetSodesu()],
@@ -90,7 +90,7 @@ export default defineConfig({
 
 ```js
 import { defineConfig, presetWind } from 'unocss';
-import presetSodesu from 'sodesu-comment/dist/preset';
+import presetSodesu from 'sodesu-comment/preset';
 
 export default defineConfig({
   presets: [presetWind(), presetSodesu()],

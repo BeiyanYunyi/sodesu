@@ -21,7 +21,7 @@ Sodesu.init({
 
 ## 自定义 Markdown 渲染器
 
-Sodesu 默认使用 [snarkdown](https://www.npmjs.com/package/@bpmn-io/snarkdown) 渲染 Markdown 预览。作为一个体积只有 1.15kB Gzipped 的 Markdown 渲染器，snarkdown 存在一些缺陷，例如不支持代码高亮。
+Sodesu 默认使用 [starkdown](https://www.npmjs.com/package/starkdown) 渲染 Markdown 预览。作为一个体积只有 1.6kB Gzipped 的 Markdown 渲染器，starkdown 存在一些缺陷，例如不支持代码高亮。
 
 Sodesu 提供了自定义 Markdown 渲染器的功能，你可以使用任何你喜欢的 Markdown 渲染器，例如 [marked](https://www.npmjs.com/package/marked)、[markdown-it](https://www.npmjs.com/package/markdown-it) 和 [remark](https://www.npmjs.com/package/remark) 等。
 

@@ -1,21 +1,24 @@
-import { createStorageSignal } from '@solid-primitives/storage';
+import { makePersisted } from '@solid-primitives/storage';
 import { updateComment } from '@waline/client';
-import { createRoot } from 'solid-js';
+import { createRoot, createSignal } from 'solid-js';
 import { type ReactiveComment } from './commentListState';
 import configProvider from './configProvider';
 import userInfoState from './userInfoState';
 
 export type LikeID = number | string;
 const likeState = createRoot(() => {
-  const [likes, setLikes] = createStorageSignal<LikeID[]>('WALINE_LIKE', [], {
-    deserializer: (data) => {
+  // eslint-disable-next-line solid/reactivity
+  const [likes, setLikes] = makePersisted(createSignal<LikeID[]>([]), {
+    storage: localStorage,
+    name: 'WALINE_LIKE',
+    deserialize: (data) => {
       try {
         return JSON.parse(data);
       } catch (e) {
         return [];
       }
     },
-    serializer: (data) => JSON.stringify(data),
+    serialize: (data) => JSON.stringify(data),
   });
   return { likes, setLikes };
 });

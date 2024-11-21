@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import snarkdown from '@bpmn-io/snarkdown';
+import { starkdown } from 'starkdown';
 import { createEffect, createMemo, createRoot, createSignal, onMount } from 'solid-js';
 import type SodesuInitOptions from '../types/SodesuInitOptions';
 import type { SodesuConfig, SodesuProps } from '../types/SodesuInitOptions';
@@ -14,7 +14,7 @@ const configProvider = createRoot(() => {
   const config = createMemo<SodesuConfig>(() => ({
     ...getConfig(props()),
     commentClassName: commentClassName(),
-    renderPreview: props().renderPreview || (async (text) => snarkdown(text)),
+    renderPreview: props().renderPreview || (async (text) => starkdown(text)),
   }));
   const locale = createMemo(() => config().locale);
   const [pageView, setPageView] = createSignal<SodesuInitOptions['pageview']>(undefined);

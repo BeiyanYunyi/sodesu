@@ -1,20 +1,22 @@
-import { createStorageSignal } from '@solid-primitives/storage';
+import { makePersisted } from '@solid-primitives/storage';
 import { login, type UserInfo } from '@waline/client';
-import { createMemo, createRoot, onCleanup, onMount } from 'solid-js';
+import { createMemo, createRoot, createSignal, onCleanup, onMount } from 'solid-js';
 // eslint-disable-next-line import/no-cycle
 import { refresh } from './commentListState';
 import configProvider from './configProvider';
 
 const userInfoState = createRoot(() => {
-  const [userInfo, setUserInfo] = createStorageSignal<UserInfo>('WALINE_USER', undefined, {
-    deserializer: (data) => {
+  // eslint-disable-next-line solid/reactivity
+  const [userInfo, setUserInfo] = makePersisted(createSignal<UserInfo | null>(null), {
+    name: 'WALINE_USER',
+    deserialize: (data) => {
       try {
         return JSON.parse(data);
       } catch (e) {
         return null;
       }
     },
-    serializer: (data) => JSON.stringify(data),
+    serialize: (data) => JSON.stringify(data),
   });
   const isLogin = createMemo(() => Boolean(userInfo()?.token));
   const isAdmin = createMemo(() => Boolean(userInfo()?.type === 'administrator'));
