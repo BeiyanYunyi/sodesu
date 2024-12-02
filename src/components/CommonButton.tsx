@@ -1,8 +1,8 @@
-import type { ParentComponent, JSX } from 'solid-js';
+import type { JSX, ParentComponent } from 'solid-js';
 
-const CommonButton: ParentComponent<JSX.ButtonHTMLAttributes<HTMLButtonElement>> = (props) => (
+const CommonButton: ParentComponent<JSX.ButtonHTMLAttributes<HTMLButtonElement>> = props => (
   <button
-    class="inline-block min-w-10 mb-0 py-2 px-4 bg-transparent text-sColor text-xs text-center select-none border cursor-pointer touch-manipulation border-solid border-sBorder rounded-lg transition duration-400 ms-3 hover:border-sTheme hover:text-sTheme disabled:cursor-not-allowed disabled:text-sDisable disabled:border-sBorder disabled:bg-sDisableBg disabled:text-sDisable disabled:cursor-not-allowed disabled:hover:border-sBorder disabled:hover:bg-sDisableBg disabled:hover:text-sDisable"
+    class="mb-0 ms-3 inline-block min-w-10 cursor-pointer touch-manipulation select-none border border-sBorder rounded-lg border-solid bg-transparent px-4 py-2 text-center text-xs text-sColor transition duration-400 disabled:cursor-not-allowed disabled:cursor-not-allowed disabled:border-sBorder hover:border-sTheme disabled:bg-sDisableBg disabled:text-sDisable disabled:text-sDisable hover:text-sTheme disabled:hover:border-sBorder disabled:hover:bg-sDisableBg disabled:hover:text-sDisable"
     {...props}
   >
     {props.children}

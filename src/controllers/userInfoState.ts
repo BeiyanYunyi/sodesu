@@ -1,32 +1,33 @@
 import { makePersisted } from '@solid-primitives/storage';
 import { login, type UserInfo } from '@waline/client';
 import { createMemo, createRoot, createSignal, onCleanup, onMount } from 'solid-js';
-// eslint-disable-next-line import/no-cycle
+
 import { refresh } from './commentListState';
 import configProvider from './configProvider';
 
 const userInfoState = createRoot(() => {
-  // eslint-disable-next-line solid/reactivity
   const [userInfo, setUserInfo] = makePersisted(createSignal<UserInfo | null>(null), {
     name: 'WALINE_USER',
     deserialize: (data) => {
       try {
         return JSON.parse(data);
-      } catch (e) {
+      }
+      catch (e) {
         return null;
       }
     },
-    serialize: (data) => JSON.stringify(data),
+    serialize: data => JSON.stringify(data),
   });
   const isLogin = createMemo(() => Boolean(userInfo()?.token));
   const isAdmin = createMemo(() => Boolean(userInfo()?.type === 'administrator'));
 
   const onMessageReceive = ({ data }: { data: { type: 'profile'; data: UserInfo } }): void => {
-    if (!data || data.type !== 'profile') return;
-    setUserInfo((usrInfo) => ({ ...usrInfo, ...data.data }));
+    if (!data || data.type !== 'profile')
+      return;
+    setUserInfo(usrInfo => ({ ...usrInfo, ...data.data }));
     [localStorage, sessionStorage]
-      .filter((store) => store.getItem('WALINE_USER'))
-      .forEach((store) => store.setItem('WALINE_USER', JSON.stringify(userInfo)));
+      .filter(store => store.getItem('WALINE_USER'))
+      .forEach(store => store.setItem('WALINE_USER', JSON.stringify(userInfo)));
   };
 
   onMount(() => {
@@ -38,24 +39,24 @@ const userInfoState = createRoot(() => {
   return { userInfo, isLogin, setUserInfo, isAdmin };
 });
 
-export const userLogin = async () => {
+export async function userLogin() {
   const { config } = configProvider;
   const { setUserInfo } = userInfoState;
   const res = await login({ serverURL: config().serverURL, lang: config().lang });
   // TODO: respect remember option
   const { remember, ...rest } = res;
   setUserInfo({ ...rest });
-};
+}
 
-export const userLogout = async () => {
+export async function userLogout() {
   const { setUserInfo } = userInfoState;
   setUserInfo(null);
   localStorage.removeItem('WALINE_USER');
   sessionStorage.removeItem('WALINE_USER');
   refresh();
-};
+}
 
-export const openProfile = async () => {
+export async function openProfile() {
   const { config } = configProvider;
   const { userInfo } = userInfoState;
   const { serverURL, lang } = config();
@@ -73,6 +74,6 @@ export const openProfile = async () => {
     `width=${width},height=${height},left=${left},top=${top},scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no`,
   );
   handler?.postMessage({ type: 'TOKEN', data: userInfo()!.token }, '*');
-};
+}
 
 export default userInfoState;

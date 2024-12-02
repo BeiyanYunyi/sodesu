@@ -1,6 +1,7 @@
+import process from 'node:process';
+import mk from '@traptitech/markdown-it-katex';
 import { withPwa } from '@vite-pwa/vitepress';
 import { defineConfig } from 'vitepress';
-import mk from '@traptitech/markdown-it-katex';
 
 export default withPwa(
   defineConfig({

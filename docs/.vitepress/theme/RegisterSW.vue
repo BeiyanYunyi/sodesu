@@ -1,13 +1,26 @@
+<template>
+  <template v-if="offlineReady">
+    <div class="pwa-toast" role="alertdialog" aria-labelledby="pwa-message">
+      <div id="pwa-message" class="mb-3">
+        App ready to work offline
+      </div>
+      <button type="button" class="pwa-cancel" @click="close">
+        Close
+      </button>
+    </div>
+  </template>
+</template>
+
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
 
 const offlineReady = ref(false);
-const onOfflineReady = () => {
+function onOfflineReady() {
   offlineReady.value = true;
-};
-const close = async () => {
+}
+async function close() {
   offlineReady.value = false;
-};
+}
 
 onBeforeMount(async () => {
   const { registerSW } = await import('virtual:pwa-register');
@@ -23,15 +36,6 @@ onBeforeMount(async () => {
   });
 });
 </script>
-
-<template>
-  <template v-if="offlineReady">
-    <div class="pwa-toast" role="alertdialog" aria-labelledby="pwa-message">
-      <div id="pwa-message" class="mb-3">App ready to work offline</div>
-      <button type="button" class="pwa-cancel" @click="close">Close</button>
-    </div>
-  </template>
-</template>
 
 <style>
 .pwa-toast {

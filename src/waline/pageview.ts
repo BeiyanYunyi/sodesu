@@ -1,6 +1,6 @@
-import { getPageview, updatePageview, type GetArticleCounterResponse } from '@waline/api';
+import type { WalineAbort } from './typings/index.js';
 
-import { type WalineAbort } from './typings/index.js';
+import { type GetArticleCounterResponse, getPageview, updatePageview } from '@waline/api';
 import { errorHandler, getQuery, getServerURL } from './utils/index.js';
 
 export interface WalinePageviewCountOptions {
@@ -50,10 +50,7 @@ export interface WalinePageviewCountOptions {
 
 export { type WalineAbort } from './typings/index.js';
 
-const renderVisitorCount = (
-  counts: GetArticleCounterResponse,
-  countElements: HTMLElement[],
-): void => {
+function renderVisitorCount(counts: GetArticleCounterResponse, countElements: HTMLElement[]): void {
   countElements.forEach((element, index) => {
     const count = counts[index].time;
 
@@ -63,15 +60,15 @@ const renderVisitorCount = (
 
     element.innerText = count.toString();
   });
-};
+}
 
-export const pageviewCount = ({
+export function pageviewCount({
   serverURL,
   path = window.location.pathname,
   selector = '.waline-pageview-count',
   update = true,
   lang = navigator.language,
-}: WalinePageviewCountOptions): WalineAbort => {
+}: WalinePageviewCountOptions): WalineAbort {
   const controller = new AbortController();
 
   const elements = Array.from(
@@ -88,23 +85,23 @@ export const pageviewCount = ({
   const fetch = (elements: HTMLElement[]): Promise<void> =>
     getPageview({
       serverURL: getServerURL(serverURL),
-      paths: elements.map((element) => getQuery(element) || path),
+      paths: elements.map(element => getQuery(element) || path),
       lang,
       signal: controller.signal,
     })
-      .then((counts) => renderVisitorCount(counts, elements))
+      .then(counts => renderVisitorCount(counts, elements))
       .catch(errorHandler);
 
   // we should update pageviews
   if (update) {
-    const normalElements = elements.filter((element) => !filter(element));
+    const normalElements = elements.filter(element => !filter(element));
     const elementsNeedstoBeFetched = elements.filter(filter);
 
     void updatePageview({
       serverURL: getServerURL(serverURL),
       path,
       lang,
-    }).then((counts) => renderVisitorCount(counts, normalElements));
+    }).then(counts => renderVisitorCount(counts, normalElements));
 
     // if we should fetch count of other pages
     if (elementsNeedstoBeFetched.length) {
@@ -117,4 +114,4 @@ export const pageviewCount = ({
   }
 
   return controller.abort.bind(controller);
-};
+}

@@ -1,6 +1,6 @@
 import type { Component } from 'solid-js';
 
-export const LikeIcon: Component<{ active: boolean }> = (prop) => (
+export const LikeIcon: Component<{ active: boolean }> = prop => (
   <svg viewBox="0 0 1024 1024" width="24" height="24">
     <path
       d={`M850.654 323.804c-11.042-25.625-26.862-48.532-46.885-68.225-20.022-19.61-43.258-34.936-69.213-45.73-26.78-11.124-55.124-16.727-84.375-16.727-40.622 0-80.256 11.123-114.698 32.135A214.79 214.79 0 0 0 512 241.819a214.79 214.79 0 0 0-23.483-16.562c-34.442-21.012-74.076-32.135-114.698-32.135-29.25 0-57.595 5.603-84.375 16.727-25.872 10.711-49.19 26.12-69.213 45.73-20.105 19.693-35.843 42.6-46.885 68.225-11.453 26.615-17.303 54.877-17.303 83.963 0 27.439 5.603 56.03 16.727 85.117 9.31 24.307 22.659 49.52 39.715 74.981 27.027 40.293 64.188 82.316 110.33 124.915 76.465 70.615 152.189 119.394 155.402 121.371l19.528 12.525c8.652 5.52 19.776 5.52 28.427 0l19.529-12.525c3.213-2.06 78.854-50.756 155.401-121.371 46.143-42.6 83.304-84.622 110.33-124.915 17.057-25.46 30.487-50.674 39.716-74.981 11.124-29.087 16.727-57.678 16.727-85.117.082-29.086-5.768-57.348-17.221-83.963z${
@@ -13,7 +13,7 @@ export const LikeIcon: Component<{ active: boolean }> = (prop) => (
   </svg>
 );
 
-export const LoadingIcon: Component<{ size: number | string }> = (prop) => (
+export const LoadingIcon: Component<{ size: number | string }> = prop => (
   <svg width={prop.size} height={prop.size} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
     <circle
       cx="50"
@@ -36,7 +36,7 @@ export const LoadingIcon: Component<{ size: number | string }> = (prop) => (
   </svg>
 );
 
-export const MarkdownIcon: Component<{ size: number | string }> = (prop) => (
+export const MarkdownIcon: Component<{ size: number | string }> = prop => (
   <svg xmlns="http://www.w3.org/2000/svg" width={prop.size} height={prop.size} viewBox="0 0 24 24">
     <path
       fill="currentColor"
@@ -68,7 +68,7 @@ export const VerifiedIcon: Component = () => (
     viewBox="0 0 1024 1024"
     width="14"
     height="14"
-    class="absolute top-[calc(var(--sds-avatar-real-size)*3/4)] rounded-full bg-sBg inset-inline-[calc(var(--sds-avatar-real-size)*3/4)]"
+    class="absolute inset-inline-[calc(var(--sds-avatar-real-size)*3/4)] top-[calc(var(--sds-avatar-real-size)*3/4)] rounded-full bg-sBg"
   >
     <path
       d="m894.4 461.56-54.4-63.2c-10.4-12-18.8-34.4-18.8-50.4v-68c0-42.4-34.8-77.2-77.2-77.2h-68c-15.6 0-38.4-8.4-50.4-18.8l-63.2-54.4c-27.6-23.6-72.8-23.6-100.8 0l-62.8 54.8c-12 10-34.8 18.4-50.4 18.4h-69.2c-42.4 0-77.2 34.8-77.2 77.2v68.4c0 15.6-8.4 38-18.4 50l-54 63.6c-23.2 27.6-23.2 72.4 0 100l54 63.6c10 12 18.4 34.4 18.4 50v68.4c0 42.4 34.8 77.2 77.2 77.2h69.2c15.6 0 38.4 8.4 50.4 18.8l63.2 54.4c27.6 23.6 72.8 23.6 100.8 0l63.2-54.4c12-10.4 34.4-18.8 50.4-18.8h68c42.4 0 77.2-34.8 77.2-77.2v-68c0-15.6 8.4-38.4 18.8-50.4l54.4-63.2c23.2-27.6 23.2-73.2-.4-100.8zm-216-25.2-193.2 193.2a30 30 0 0 1-42.4 0l-96.8-96.8a30.16 30.16 0 0 1 0-42.4c11.6-11.6 30.8-11.6 42.4 0l75.6 75.6 172-172c11.6-11.6 30.8-11.6 42.4 0 11.6 11.6 11.6 30.8 0 42.4z"

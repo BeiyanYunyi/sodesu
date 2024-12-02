@@ -1,15 +1,18 @@
-export const decodePath = (path: string): string => {
+export function decodePath(path: string): string {
   try {
     path = decodeURI(path);
-  } catch (err) {
+  }
+  catch (err) {
     // ignore error
   }
 
   return path;
-};
+}
 
-export const removeEndingSplash = (content = ''): string =>
-  content.replace(/\/$/u, '');
+export function removeEndingSplash(content = ''): string {
+  return content.replace(/\/$/u, '');
+}
 
-export const isLinkHttp = (link: string): boolean =>
-  /^(https?:)?\/\//.test(link);
+export function isLinkHttp(link: string): boolean {
+  return /^(https?:)?\/\//.test(link);
+}

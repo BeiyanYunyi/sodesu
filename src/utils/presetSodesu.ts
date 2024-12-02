@@ -1,52 +1,54 @@
 import type { Preset } from '@unocss/core';
 
-const presetSodesu = (): Preset => ({
-  name: 'preset-sodesu',
-  rules: [
-    [/^bb-(\d*)$/, ([, d]) => ({ 'border-bottom': `${d}px dashed var(--sds-border-color)` })],
-    ['bb-none', { 'border-bottom': 'none' }],
-    ['break-word', { 'word-break': 'break-word' }],
-    [
-      'sds-avatar',
-      {
-        'border-radius': 'var(--sds-avatar-radius)',
-        'box-shadow': 'var(--sds-box-shadow)',
-        width: 'var(--sds-avatar-real-size)',
-      },
+function presetSodesu(): Preset {
+  return {
+    name: 'preset-sodesu',
+    safelist: ['sds-avatar'],
+    rules: [
+      [/^bb-(\d*)$/, ([, d]) => ({ 'border-bottom': `${d}px dashed var(--sds-border-color)` })],
+      ['bb-none', { 'border-bottom': 'none' }],
+      ['break-word', { 'word-break': 'break-word' }],
+      [
+        'sds-avatar',
+        {
+          'border-radius': 'var(--sds-avatar-radius)',
+          'box-shadow': 'var(--sds-box-shadow)',
+          'width': 'var(--sds-avatar-real-size)',
+        },
+      ],
+      ['text-badge', { 'font-size': 'var(--sds-badge-font-size)' }],
+      ['text-info', { 'font-size': 'var(--sds-info-font-size)' }],
+      ['sds-comment', { '--sds-avatar-real-size': 'var(--sds-avatar-size)' }],
+      ['sds-btn', { 'padding-inline': '0' }],
     ],
-    ['text-badge', { 'font-size': 'var(--sds-badge-font-size)' }],
-    ['text-info', { 'font-size': 'var(--sds-info-font-size)' }],
-    ['sds-comment', { '--sds-avatar-real-size': 'var(--sds-avatar-size)' }],
-    ['sds-btn', { 'padding-inline': '0' }],
-  ],
-  layers: {
-    sodesu: -19, // 1 more then preset-typography
-  },
-  theme: {
-    colors: {
-      sWhite: 'var(--sds-white)',
-      sLightGrey: 'var(--sds-light-grey)',
-      sDarkGrey: 'var(--sds-dark-grey)',
-      sTheme: 'var(--sds-theme-color)',
-      sActive: 'var(--sds-active-color)',
-      sColor: 'var(--sds-color)',
-      sBg: 'var(--sds-bgcolor)',
-      sBgLight: 'var(--sds-bgcolor-light)',
-      sBgHover: 'var(--sds-bgcolor-hover)',
-      sBorder: 'var(--sds-border-color)',
-      sDisableBg: 'var(--sds-disable-bgcolor)',
-      sDisable: 'var(--sds-disable-color)',
-      sCodeBg: 'var(--sds-code-bgcolor)',
-      sBq: 'var(--sds-bq-color)',
-      sBadge: 'var(--sds-badge-color)',
-      sInfoBg: 'var(--sds-info-bgcolor)',
-      sInfo: 'var(--sds-info-color)',
+    layers: {
+      sodesu: -19, // 1 more than preset-typography
     },
-  },
-  preflights: [
-    {
-      layer: 'sodesu',
-      getCSS: () => `:root {
+    theme: {
+      colors: {
+        sWhite: 'var(--sds-white)',
+        sLightGrey: 'var(--sds-light-grey)',
+        sDarkGrey: 'var(--sds-dark-grey)',
+        sTheme: 'var(--sds-theme-color)',
+        sActive: 'var(--sds-active-color)',
+        sColor: 'var(--sds-color)',
+        sBg: 'var(--sds-bgcolor)',
+        sBgLight: 'var(--sds-bgcolor-light)',
+        sBgHover: 'var(--sds-bgcolor-hover)',
+        sBorder: 'var(--sds-border-color)',
+        sDisableBg: 'var(--sds-disable-bgcolor)',
+        sDisable: 'var(--sds-disable-color)',
+        sCodeBg: 'var(--sds-code-bgcolor)',
+        sBq: 'var(--sds-bq-color)',
+        sBadge: 'var(--sds-badge-color)',
+        sInfoBg: 'var(--sds-info-bgcolor)',
+        sInfo: 'var(--sds-info-color)',
+      },
+    },
+    preflights: [
+      {
+        layer: 'sodesu',
+        getCSS: () => `:root {
     --sds-font-size: 1rem;
     --sds-white: #fff;
     --sds-light-grey: #999;
@@ -99,8 +101,9 @@ const presetSodesu = (): Preset => ({
     overflow: auto;
   }
   `,
-    },
-  ],
-});
+      },
+    ],
+  };
+}
 
 export default presetSodesu;

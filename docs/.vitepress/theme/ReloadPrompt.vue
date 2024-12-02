@@ -1,18 +1,39 @@
+<template>
+  <template v-if="offlineReady || needRefresh">
+    <div class="pwa-toast" role="alertdialog" aria-labelledby="pwa-message">
+      <div id="pwa-message" class="mb-3">
+        {{
+          offlineReady
+            ? 'App ready to work offline'
+            : 'New content available, click the reload button to update.'
+        }}
+      </div>
+      <button v-if="needRefresh" type="button" class="pwa-refresh" @click="updateServiceWorker?.()">
+        Reload
+      </button>
+      <button type="button" class="pwa-cancel" @click="close">
+        Close
+      </button>
+    </div>
+  </template>
+</template>
+
 <script setup lang="ts">
 import { onBeforeMount, ref } from 'vue';
+
 const offlineReady = ref(false);
 const needRefresh = ref(false);
 let updateServiceWorker: (() => Promise<void>) | undefined;
-const onOfflineReady = () => {
+function onOfflineReady() {
   offlineReady.value = true;
-};
-const onNeedRefresh = () => {
+}
+function onNeedRefresh() {
   needRefresh.value = true;
-};
-const close = async () => {
+}
+async function close() {
   offlineReady.value = false;
   needRefresh.value = false;
-};
+}
 onBeforeMount(async () => {
   const { registerSW } = await import('virtual:pwa-register');
   updateServiceWorker = registerSW({
@@ -30,23 +51,6 @@ onBeforeMount(async () => {
 });
 </script>
 
-<template>
-  <template v-if="offlineReady || needRefresh">
-    <div class="pwa-toast" role="alertdialog" aria-labelledby="pwa-message">
-      <div id="pwa-message" class="mb-3">
-        {{
-          offlineReady
-            ? 'App ready to work offline'
-            : 'New content available, click the reload button to update.'
-        }}
-      </div>
-      <button v-if="needRefresh" type="button" class="pwa-refresh" @click="updateServiceWorker?.()">
-        Reload
-      </button>
-      <button type="button" class="pwa-cancel" @click="close">Close</button>
-    </div>
-  </template>
-</template>
 <style>
 .pwa-toast {
   position: fixed;

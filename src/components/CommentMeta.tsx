@@ -1,15 +1,15 @@
-import { Show, type Component } from 'solid-js';
+import { type Component, Show } from 'solid-js';
 
-const CommentMeta: Component<{ addr?: string; browser?: string; os?: string }> = (props) => (
+const CommentMeta: Component<{ addr?: string; browser?: string; os?: string }> = props => (
   <div aria-hidden>
     <Show when={props.addr}>
-      <span class="text-info text-sInfo bg-sInfoBg p-1 me-1 rounded">{props.addr}</span>
+      <span class="me-1 rounded bg-sInfoBg p-1 text-sInfo text-info">{props.addr}</span>
     </Show>
     <Show when={props.browser}>
-      <span class="text-info text-sInfo bg-sInfoBg p-1 me-1 rounded">{props.browser}</span>
+      <span class="me-1 rounded bg-sInfoBg p-1 text-sInfo text-info">{props.browser}</span>
     </Show>
     <Show when={props.os}>
-      <span class="text-info text-sInfo bg-sInfoBg p-1 me-1 rounded">{props.os}</span>
+      <span class="me-1 rounded bg-sInfoBg p-1 text-sInfo text-info">{props.os}</span>
     </Show>
   </div>
 );

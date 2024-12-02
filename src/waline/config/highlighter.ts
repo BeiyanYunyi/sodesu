@@ -23,14 +23,14 @@
  *
  */
 
-const WORD_REGEXP =
-  /[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af\u0400-\u04FF]+|\w+/;
+const WORD_REGEXP
+  = /[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\uAC00-\uD7AF\u0400-\u04FF]+|\w+/;
 const LEFT_ANGLE_REGEXP = /</;
-const LINE_COMMENT_REGEXP = /(?:^|\s)\/\/(.+?)$/gm;
-const BLOCK_COMMENT_REGEXP = /\/\*([\S\s]*?)\*\//gm;
+const LINE_COMMENT_REGEXP = /(?:^|\s)\/\/(.+)$/gm;
+const BLOCK_COMMENT_REGEXP = /\/\*([\s\S]*?)\*\//g;
 const REGEXP = new RegExp(
   `(${WORD_REGEXP.source}|${LEFT_ANGLE_REGEXP.source})|((?:${LINE_COMMENT_REGEXP.source})|(?:${BLOCK_COMMENT_REGEXP.source}))`,
-  'gmi',
+  'gim',
 );
 
 const COLORS = [
@@ -50,16 +50,20 @@ const COLORS = [
 ];
 const cache: Record<string, string> = {};
 
-export const defaultHighlighter = (input: string): string => {
+export function defaultHighlighter(input: string): string {
   let index = 0;
 
   return input.replace(REGEXP, (_match, word: string, comment: string) => {
-    if (comment) return `<span style="color: slategray">${comment}</span>`;
-    if (word === '<') return '&lt;';
+    if (comment)
+      return `<span style="color: slategray">${comment}</span>`;
+    if (word === '<')
+      return '&lt;';
 
     let color: string;
 
-    if (cache[word]) color = cache[word];
+    if (cache[word]) {
+      color = cache[word];
+    }
     else {
       color = COLORS[index];
       cache[word] = color;
@@ -71,4 +75,4 @@ export const defaultHighlighter = (input: string): string => {
 
     return out;
   });
-};
+}

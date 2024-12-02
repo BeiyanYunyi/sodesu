@@ -1,12 +1,11 @@
-/* eslint-disable import/no-extraneous-dependencies */
+import type { RollupOptions } from 'rollup';
 import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
-import type { RollupOptions } from 'rollup';
 import dts from 'rollup-plugin-dts';
 import summary from 'rollup-plugin-summary';
-import json from '@rollup/plugin-json';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 

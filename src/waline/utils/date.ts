@@ -1,29 +1,30 @@
-import { type WalineDateLocale } from '../typings';
+import type { WalineDateLocale } from '../typings';
 
-const padWithZeros = (vNumber: number, width: number): string => {
+function padWithZeros(vNumber: number, width: number): string {
   let numAsString = vNumber.toString();
 
   while (numAsString.length < width) {
-    numAsString = '0' + numAsString;
+    numAsString = `0${numAsString}`;
   }
 
   return numAsString;
-};
+}
 
-export const dateFormat = (date: Date): string => {
+export function dateFormat(date: Date): string {
   const vDay = padWithZeros(date.getDate(), 2);
   const vMonth = padWithZeros(date.getMonth() + 1, 2);
   const vYear = padWithZeros(date.getFullYear(), 2);
 
   return `${vYear}-${vMonth}-${vDay}`;
-};
+}
 
-export const getTimeAgo = (date: Date | string, now: Date, locale: WalineDateLocale): string => {
-  if (!date) return '';
+export function getTimeAgo(date: Date | string, now: Date, locale: WalineDateLocale): string {
+  if (!date)
+    return '';
 
-  const time =
-    typeof date === 'string'
-      ? new Date(date.indexOf(' ') !== -1 ? date.replace(/-/g, '/') : date)
+  const time
+    = typeof date === 'string'
+      ? new Date(date.includes(' ') ? date.replace(/-/g, '/') : date)
       : date;
 
   const timePassed = now.getTime() - time.getTime();
@@ -38,7 +39,7 @@ export const getTimeAgo = (date: Date | string, now: Date, locale: WalineDateLoc
     const hours = Math.floor(leave1 / (3600 * 1000));
 
     if (hours === 0) {
-      //计算相差分钟数
+      // 计算相差分钟数
 
       // 计算小时数后剩余的毫秒数
       const leave2 = leave1 % (3600 * 1000);
@@ -59,9 +60,11 @@ export const getTimeAgo = (date: Date | string, now: Date, locale: WalineDateLoc
     return `${hours} ${locale.hours}`;
   }
 
-  if (days < 0) return locale.now;
+  if (days < 0)
+    return locale.now;
 
-  if (days < 8) return `${days} ${locale.days}`;
+  if (days < 8)
+    return `${days} ${locale.days}`;
 
   return dateFormat(time);
-};
+}

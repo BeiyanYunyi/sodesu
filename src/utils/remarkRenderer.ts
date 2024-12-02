@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import rehypeDocument from 'rehype-document';
 import rehypeFormat from 'rehype-format';
 import rehypeKatex from 'rehype-katex';
@@ -19,9 +18,9 @@ const processor = unified()
   .use(rehypeFormat)
   .use(rehypeStringify);
 
-const remarkRenderer = async (text: string) => {
+async function remarkRenderer(text: string) {
   const txt = await processor.process(text);
   return txt.toString();
-};
+}
 
 export default remarkRenderer;

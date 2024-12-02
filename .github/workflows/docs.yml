@@ -17,7 +17,7 @@ permissions:
   deployments: write
 
 concurrency:
-  group: 'pages'
+  group: pages
   cancel-in-progress: true
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
+          cache: pnpm
       - name: Install dependencies
         run: pnpm i --prefer-offline
       - name: Build sodesu
@@ -44,7 +44,7 @@ jobs:
       - name: Build page
         run: pnpm docs:build
         env:
-          DOCS_BASE: '/sodesu/'
+          DOCS_BASE: /sodesu/
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

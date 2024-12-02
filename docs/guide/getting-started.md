@@ -74,9 +74,9 @@ import 'sodesu-comment/sodesu.css';
 或者，如果你的项目已经在使用 UnoCSS，那么你可以将它配置一下：
 
 ```js
-import { defineConfig, presetWind } from 'unocss';
 import presetSodesu from 'sodesu-comment/preset';
 import safeList from 'sodesu-comment/safeList';
+import { defineConfig, presetWind } from 'unocss';
 
 export default defineConfig({
   presets: [presetWind(), presetSodesu()],
@@ -89,8 +89,8 @@ export default defineConfig({
 如果你用的不是 Astro，那么你或许可以使用类似这样的配置，只要确保 `include` 能覆盖到位于 `node_modules` 里的 `sodesu` 源码就可以了：
 
 ```js
-import { defineConfig, presetWind } from 'unocss';
 import presetSodesu from 'sodesu-comment/preset';
+import { defineConfig, presetWind } from 'unocss';
 
 export default defineConfig({
   presets: [presetWind(), presetSodesu()],

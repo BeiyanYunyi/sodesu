@@ -1,12 +1,12 @@
 import {
+  type Component,
+  createEffect,
+  createMemo,
   For,
   Index,
   Match,
   Show,
   Switch,
-  createEffect,
-  createMemo,
-  type Component,
 } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import { version } from '../package.json';
@@ -37,24 +37,25 @@ const App: Component = () => {
     { serverURL: config().serverURL, path: config().path },
   );
   return (
-    <div class="font-sans sds-root">
+    <div class="sds-root font-sans">
       <Portal mount={document.head}>
         <style>{darkModeStyle()}</style>
       </Portal>
       <CommentBox isMain />
       <div class="flex items-center p-2">
-        <div class="flex-grow flex-shrink font-bold text-xl text-sColor">
+        <div class="flex-shrink flex-grow text-xl text-sColor font-bold">
           <Show when={count()}>
             <span>{count()}</span>
-          </Show>{' '}
+          </Show>
+          {' '}
           {locale().comment}
         </div>
-        <ul class="p-0 m-0 list-none">
+        <ul class="m-0 list-none p-0">
           <For each={sortingMethods}>
-            {(item) => (
-              <li class="inline-block ms-3">
+            {item => (
+              <li class="ms-3 inline-block">
                 <button
-                  class="cursor-pointer border-none bg-transparent text-[0.75rem] ps-0 pe-0 hover:text-sActive"
+                  class="cursor-pointer border-none bg-transparent pe-0 ps-0 text-[0.75rem] hover:text-sActive"
                   classList={{
                     'text-sColor': item !== sorting(),
                     'text-sTheme': item === sorting(),
@@ -74,13 +75,13 @@ const App: Component = () => {
       </div>
       <div>
         <Index each={data()}>
-          {(item) => <CommentCard content={item()} rootId={item().objectId} />}
+          {item => <CommentCard content={item()} rootId={item().objectId} />}
         </Index>
       </div>
-      <div class="text-center ">
+      <div class="text-center">
         <Show
           when={status() !== 'error'}
-          fallback={
+          fallback={(
             <CommonButton
               onClick={(e) => {
                 e.preventDefault();
@@ -89,11 +90,11 @@ const App: Component = () => {
             >
               {locale().refresh}
             </CommonButton>
-          }
+          )}
         >
           <Switch>
             <Match when={status() === 'loading'}>
-              <div class="text-sInfo flex justify-center">
+              <div class="flex justify-center text-sInfo">
                 <LoadingIcon size="30" />
               </div>
             </Match>
@@ -113,12 +114,15 @@ const App: Component = () => {
           </Switch>
         </Show>
       </div>
-      <div class="py-1 text-sLightGrey text-info text-end">
-        Powered by{' '}
+      <div class="py-1 text-end text-sLightGrey text-info">
+        Powered by
+        {' '}
         <a href="https://github.com/BeiyanYunyi/sodesu" target="_blank" rel="noopener noreferrer">
           Sodesu
-        </a>{' '}
-        v{version}
+        </a>
+        {' '}
+        v
+        {version}
       </div>
     </div>
   );

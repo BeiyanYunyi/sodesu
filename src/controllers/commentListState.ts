@@ -1,8 +1,8 @@
 import type { WalineComment, WalineCommentSorting, WalineCommentStatus } from '@waline/client';
 import { getComment } from '@waline/client';
-import { createRoot, createSignal, type Accessor, type Setter } from 'solid-js';
+import { type Accessor, createRoot, createSignal, type Setter } from 'solid-js';
 import configProvider from './configProvider';
-// eslint-disable-next-line import/no-cycle
+
 import userInfoState from './userInfoState';
 
 type SortKey = 'insertedAt_desc' | 'insertedAt_asc' | 'like_desc';
@@ -74,7 +74,7 @@ export interface ReactiveComment extends Exclude<ReactiveCommentData, 'ua'> {
   setOrig: Setter<string>;
 }
 
-export const makeDataReactive = (data: WalineComment): ReactiveComment => {
+export function makeDataReactive(data: WalineComment): ReactiveComment {
   const [children, setChildren] = createSignal(
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     makeDatasReactive('children' in data ? data.children : []),
@@ -94,10 +94,11 @@ export const makeDataReactive = (data: WalineComment): ReactiveComment => {
     orig,
     setOrig,
   };
-};
+}
 
-export const makeDatasReactive = (datas: WalineComment[]) =>
-  datas.map((data) => makeDataReactive(data));
+export function makeDatasReactive(datas: WalineComment[]) {
+  return datas.map(data => makeDataReactive(data));
+}
 
 const commentListState = createRoot(() => {
   const { config } = configProvider;
@@ -125,7 +126,7 @@ const commentListState = createRoot(() => {
 
 let abort: () => void;
 
-export const getCommentData = (page: number) => {
+export function getCommentData(page: number) {
   const { sorting, setStatus, setCount, setData, setPage, setTotalPages } = commentListState;
   const { config } = configProvider;
   const { userInfo } = userInfoState;
@@ -145,7 +146,7 @@ export const getCommentData = (page: number) => {
     .then((res) => {
       setStatus('success');
       setCount(res.count);
-      setData((data) => data.concat(...makeDatasReactive(res.data)));
+      setData(data => data.concat(...makeDatasReactive(res.data)));
       setPage(page);
       setTotalPages(res.totalPages);
     })
@@ -156,28 +157,28 @@ export const getCommentData = (page: number) => {
       }
     });
   abort = controller.abort.bind(controller);
-};
+}
 
-export const loadMore = () => {
+export function loadMore() {
   const { page } = commentListState;
   getCommentData(page() + 1);
-};
+}
 
-export const refresh = () => {
+export function refresh() {
   const { setCount, setData } = commentListState;
   setCount(0);
   setData([]);
   getCommentData(1);
-};
+}
 
-export const deleteComment = (id: string) => {
+export function deleteComment(id: string) {
   const { setData } = commentListState;
-  setData((data) =>
+  setData(data =>
     data.filter((item) => {
-      item.setChildren((children) => children.filter((child) => child.objectId !== id));
+      item.setChildren(children => children.filter(child => child.objectId !== id));
       return item.objectId !== id;
     }),
   );
-};
+}
 
 export default commentListState;

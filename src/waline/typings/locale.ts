@@ -23,8 +23,8 @@ export interface WalineReactionLocale {
 
 export interface WalineLocale
   extends WalineDateLocale,
-    WalineLevelLocale,
-    WalineReactionLocale {
+  WalineLevelLocale,
+  WalineReactionLocale {
   nick: string;
   mail: string;
   link: string;

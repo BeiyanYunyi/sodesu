@@ -7,5 +7,5 @@ export * from './getRoot.js';
 export * from './image.js';
 export * from './path.js';
 export * from './query.js';
-export * from './wordCount.js';
 export * from './userAgent.js';
+export * from './wordCount.js';

@@ -1,6 +1,6 @@
 /// <reference types="user-agent-data-types" />
 
-export const userAgent = async (): Promise<string> => {
+export async function userAgent(): Promise<string> {
   if (!navigator) {
     return '';
   }
@@ -21,11 +21,11 @@ export const userAgent = async (): Promise<string> => {
     return ua;
   }
 
-  const isWindows11Later = parseInt(platformVersion.split('.')[0]) >= 13;
+  const isWindows11Later = Number.parseInt(platformVersion.split('.')[0]) >= 13;
 
   if (isWindows11Later) {
     ua = ua.replace('Windows NT 10.0', 'Windows NT 11.0');
   }
 
   return ua;
-};
+}

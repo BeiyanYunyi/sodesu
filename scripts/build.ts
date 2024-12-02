@@ -1,11 +1,10 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { transform } from 'esbuild';
 import { readFile, writeFile } from 'node:fs/promises';
+import { transform } from 'esbuild';
 import { createGenerator } from 'unocss';
 import config from '../uno.config.js';
 
 (async () => {
-  const generator = createGenerator(config);
+  const generator = await createGenerator(config);
   const file = await readFile('dist/sodesu.solid.mjs', 'utf-8');
   const result = await generator.generate(file);
   const res = await transform(result.css, {

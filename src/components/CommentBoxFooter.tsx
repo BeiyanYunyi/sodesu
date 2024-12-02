@@ -1,4 +1,4 @@
-import { Show, type Component } from 'solid-js';
+import { type Component, Show } from 'solid-js';
 import commentBoxState, { submitComment } from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
 import userInfoState, { userLogin, userLogout } from '../controllers/userInfoState';
@@ -10,34 +10,34 @@ const CommentBoxFooter: Component = () => {
   const { isSubmitting, showPreview, setShowPreview } = commentBoxState;
   const { isLogin } = userInfoState;
   return (
-    <div class="flex flex-wrap my-2 mx-3">
-      <div class="flex flex-grow-2 flex-shrink items-center">
+    <div class="mx-3 my-2 flex flex-wrap">
+      <div class="flex flex-shrink flex-grow-2 items-center">
         <a
           title="Markdown Guide"
           aria-label="Markdown is supported"
           rel="noopener noreferrer"
           href="https://guides.github.com/features/mastering-markdown/"
-          class="w-6 h-6 m-[2px] p-0 border-none bg-transparent"
+          class="m-[2px] h-6 w-6 border-none bg-transparent p-0"
         >
           <MarkdownIcon size="24" />
         </a>
         <button
           type="button"
-          class="w-6 h-6 m-[2px] p-0 border-none bg-transparent hover:text-sTheme"
+          class="m-[2px] h-6 w-6 border-none bg-transparent p-0 hover:text-sTheme"
           classList={{ 'text-sActive': showPreview() }}
           title={locale().preview}
           onClick={(e) => {
             e.preventDefault();
-            setShowPreview((ori) => !ori);
+            setShowPreview(ori => !ori);
           }}
         >
           <PreviewIcon />
         </button>
       </div>
-      <div class="flex flex-grow-3 flex-shrink items-center justify-end">
+      <div class="flex flex-shrink flex-grow-3 items-center justify-end">
         <Show
           when={config().login !== 'disable' && !isLogin()}
-          fallback={
+          fallback={(
             <CommonButton
               type="button"
               onClick={(e) => {
@@ -47,7 +47,7 @@ const CommentBoxFooter: Component = () => {
             >
               {locale().logout}
             </CommonButton>
-          }
+          )}
         >
           <CommonButton
             type="button"
@@ -62,7 +62,7 @@ const CommentBoxFooter: Component = () => {
         <Show when={config().login !== 'force' || isLogin()}>
           <button
             type="submit"
-            class="inline-block min-w-10 mb-0 py-2 px-4 bg-sTheme text-sWhite text-xs flex justify-center select-none border cursor-pointer touch-manipulation border-solid border-sTheme bg-sTheme rounded-lg transition duration-400 ms-3 disabled:border-sBorder disabled:bg-sDisableBg disabled:text-sDisable disabled:cursor-not-allowed disabled:hover:border-sBorder disabled:hover:bg-sDisableBg disabled:hover:text-sDisable hover:border-sActive hover:bg-sActive"
+            class="mb-0 ms-3 inline-block min-w-10 flex cursor-pointer touch-manipulation select-none justify-center border border-sTheme rounded-lg border-solid bg-sTheme bg-sTheme px-4 py-2 text-xs text-sWhite transition duration-400 disabled:cursor-not-allowed disabled:border-sBorder hover:border-sActive disabled:bg-sDisableBg hover:bg-sActive disabled:text-sDisable disabled:hover:border-sBorder disabled:hover:bg-sDisableBg disabled:hover:text-sDisable"
             disabled={isSubmitting()}
             onClick={(e) => {
               e.preventDefault();

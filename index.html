@@ -11,8 +11,10 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     阅读量: <span id="/" class="waline-pageview-count"></span> 评论数:
     <span id="/" class="waline-comment-count"></span>页面阅读量 1：
-    <span class="waline-pageview-count" data-path="/guide/features/pageview.html"></span>页面阅读量
-    2：<span class="waline-pageview-count" data-path="/guide/features/i18n.html"></span>
+    <span class="waline-pageview-count" data-path="/guide/features/pageview.html"></span>页面阅读量 2：<span
+      class="waline-pageview-count"
+      data-path="/guide/features/i18n.html"
+    ></span>
     <div id="root"></div>
     <script type="module">
       import Sodesu from '/src/index.tsx';
@@ -22,17 +24,13 @@
         el: '#root',
         serverURL: 'https://walinejs.comment.lithub.cc',
         dark: 'auto',
-        path:
-          window.location.pathname === '/' ? '/' : window.location.pathname.replace(/\/$/, '.html'),
+        path: window.location.pathname === '/' ? '/' : window.location.pathname.replace(/\/$/, '.html'),
         pageview: true,
         comment: true,
         commentClassName: 'prose',
         renderPreview: remarkRenderer,
       });
     </script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
   </body>
 </html>

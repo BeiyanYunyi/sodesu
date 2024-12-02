@@ -1,7 +1,7 @@
-import { createDateNow } from '@solid-primitives/date';
-import { Index, Show, createMemo, type Component } from 'solid-js';
-import commentBoxState from '../controllers/commentBoxState';
 import type { ReactiveComment } from '../controllers/commentListState';
+import { createDateNow } from '@solid-primitives/date';
+import { type Component, createMemo, Index, Show } from 'solid-js';
+import commentBoxState from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
 import { getTimeAgo } from '../waline/utils/date';
 import { isLinkHttp } from '../waline/utils/path';
@@ -13,7 +13,8 @@ import { VerifiedIcon } from './Icons';
 const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (props) => {
   const link = createMemo(() => {
     const { link: link2 } = props.content;
-    if (!link2) return '';
+    if (!link2)
+      return '';
     return isLinkHttp(link2) ? link2 : `https://${link2}`;
   });
   const { replyId, edit } = commentBoxState;
@@ -24,28 +25,28 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
   const { locale, commentClassName } = configProvider;
   const time = createMemo(() => getTimeAgo(new Date(props.content.time), now(), locale()));
   return (
-    <div id={props.content.objectId} class="sds-comment flex p-2 pe-0">
-      <div aria-hidden class="me-3 relative flex-shrink-0">
+    <div id={props.content.objectId} class="flex p-2 pe-0 sds-comment">
+      <div aria-hidden class="relative me-3 flex-shrink-0">
         <Show when={props.content.avatar}>
           {/* 不加空格会被编译成 class=sds-avatar，怪 */}
-          <img src={props.content.avatar} alt={props.content.nick} class="sds-avatar " />
+          <img class="sds-avatar" src={props.content.avatar} alt={props.content.nick} />
           <Show when={props.content.type}>
             <VerifiedIcon />
           </Show>
         </Show>
       </div>
-      <div class="sds-comment-card flex-grow flex-shrink min-w-0 pb-2 bb-1">
-        <div class="overflow-hidden ">
+      <div class="sds-comment-card min-w-0 flex-shrink flex-grow pb-2 bb-1">
+        <div class="overflow-hidden">
           <Show
             when={link()}
-            fallback={
-              <span class="text-sDarkGrey inline-block font-bold text-sm decoration-none me-2">
+            fallback={(
+              <span class="me-2 inline-block text-sm text-sDarkGrey font-bold decoration-none">
                 {props.content.nick}
               </span>
-            }
+            )}
           >
             <a
-              class="text-sDarkGrey inline-block font-bold text-sm decoration-none me-2"
+              class="me-2 inline-block text-sm text-sDarkGrey font-bold decoration-none"
               href={link()}
               target="_blank"
               rel="noopener noreferrer"
@@ -54,26 +55,26 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
             </a>
           </Show>
           <Show when={props.content.type === 'administrator'}>
-            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded">
+            <span class="me-3 inline-block border border-sBadge rounded border-solid p-1 text-sBadge text-badge">
               {locale().admin}
             </span>
           </Show>
           <Show when={props.content.label}>
-            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded">
+            <span class="me-3 inline-block border border-sBadge rounded border-solid p-1 text-sBadge text-badge">
               {props.content.label}
             </span>
           </Show>
           <Show when={props.content.sticky}>
-            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded">
+            <span class="me-3 inline-block border border-sBadge rounded border-solid p-1 text-sBadge text-badge">
               {locale().sticky}
             </span>
           </Show>
           <Show when={props.content.level !== undefined && props.content.level >= 0}>
-            <span class="inline-block me-3 p-1 border border-solid border-sBadge text-badge text-sBadge rounded">
+            <span class="me-3 inline-block border border-sBadge rounded border-solid p-1 text-sBadge text-badge">
               {locale()[`level${props.content.level!}`] || `Level ${props.content.level}`}
             </span>
           </Show>
-          <span class="me-3 text-sInfo text-xs">{time()}</span>
+          <span class="me-3 text-xs text-sInfo">{time()}</span>
           <CommentCardActions comment={props.content} rootId={props.rootId} />
         </div>
         <CommentMeta
@@ -82,7 +83,7 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
           os={props.content.os}
         />
         <div
-          class="my-3 text-sm break-word text-sColor sds-content"
+          class="sds-content my-3 text-sm text-sColor break-word"
           classList={{ [commentClassName()]: true }}
           /* eslint-disable-next-line solid/no-innerhtml */
           innerHTML={props.content.comment()}
@@ -92,7 +93,7 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
         </Show>
         <Show when={props.content.children}>
           <Index each={props.content.children()}>
-            {(item) => <CommentCard content={item()} rootId={props.rootId} />}
+            {item => <CommentCard content={item()} rootId={props.rootId} />}
           </Index>
         </Show>
       </div>
