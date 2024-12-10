@@ -1,5 +1,6 @@
-import type { WalineComment, WalineCommentSorting, WalineCommentStatus } from '@waline/client';
-import { getComment } from '@waline/client';
+import type { WalineComment, WalineCommentStatus } from '@waline/api';
+import type { WalineCommentSorting } from '@waline/client';
+import { getComment } from '@waline/api';
 import { type Accessor, createRoot, createSignal, type Setter } from 'solid-js';
 import configProvider from './configProvider';
 
@@ -76,7 +77,6 @@ export interface ReactiveComment extends Exclude<ReactiveCommentData, 'ua'> {
 
 export function makeDataReactive(data: WalineComment): ReactiveComment {
   const [children, setChildren] = createSignal(
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
     makeDatasReactive('children' in data ? data.children : []),
   );
   const [like, setLike] = createSignal(data.like || 0);

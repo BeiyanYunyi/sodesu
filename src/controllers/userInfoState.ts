@@ -1,5 +1,6 @@
+import type { UserInfo } from '@waline/api';
 import { makePersisted } from '@solid-primitives/storage';
-import { login, type UserInfo } from '@waline/client';
+import { login } from '@waline/api';
 import { createMemo, createRoot, createSignal, onCleanup, onMount } from 'solid-js';
 
 import { refresh } from './commentListState';

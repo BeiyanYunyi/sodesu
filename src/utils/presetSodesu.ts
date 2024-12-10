@@ -3,7 +3,6 @@ import type { Preset } from '@unocss/core';
 function presetSodesu(): Preset {
   return {
     name: 'preset-sodesu',
-    safelist: ['sds-avatar'],
     rules: [
       [/^bb-(\d*)$/, ([, d]) => ({ 'border-bottom': `${d}px dashed var(--sds-border-color)` })],
       ['bb-none', { 'border-bottom': 'none' }],

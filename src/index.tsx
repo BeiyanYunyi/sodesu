@@ -2,6 +2,7 @@ import type SodesuInitOptions from './types/SodesuInitOptions';
 import { render } from 'solid-js/web';
 import App from './App';
 import configProvider from './controllers/configProvider';
+import 'virtual:uno.css';
 
 const Sodesu = {
   init: (opt: SodesuInitOptions) => {

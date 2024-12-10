@@ -1,4 +1,4 @@
-import { addComment, updateComment, type WalineCommentData } from '@waline/client';
+import { addComment, updateComment, type WalineCommentData } from '@waline/api';
 import { createEffect, createMemo, createResource, createRoot, createSignal } from 'solid-js';
 import { getWordNumber } from '../waline/utils/wordCount';
 import commentListState, { makeDataReactive, type ReactiveComment } from './commentListState';

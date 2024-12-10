@@ -2,7 +2,7 @@
   "name": "sodesu-comment",
   "type": "module",
   "version": "0.1.0",
-  "packageManager": "pnpm@9.14.2+sha512.6e2baf77d06b9362294152c851c4f278ede37ab1eba3a55fda317a4a17b209f4dbb973fb250a77abc463a341fcb1f17f17cfa24091c4eb319cda0d9b84278387",
+  "packageManager": "pnpm@9.14.4+sha512.c8180b3fbe4e4bca02c94234717896b5529740a6cbadf19fa78254270403ea2f27d4e1d46a08a0f56c89b63dc8ebfd3ee53326da720273794e6200fcf0d184ab",
   "description": "Comment system with SolidJS",
   "license": "AGPL-3.0-or-later",
   "repository": {
@@ -17,31 +17,31 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/sodesu.d.ts",
-      "import": "./dist/sodesu.solid.mjs",
-      "default": "./dist/sodesu.solid.mjs"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/sodesu.solid.js",
+      "default": "./dist/sodesu.solid.js"
     },
     "./sodesu.css": "./dist/sodesu.css",
     "./aio": {
-      "types": "./dist/sodesu.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/sodesu.aio.mjs",
       "require": "./dist/sodesu.aio.umd.js",
       "default": "./dist/sodesu.aio.umd.js"
     },
     "./preset": {
-      "types": "./dist/preset.d.ts",
-      "import": "./dist/preset.mjs",
+      "types": "./dist/utils/presetSodesu.d.ts",
+      "import": "./dist/preset.js",
       "require": "./dist/preset.cjs",
       "default": "./dist/preset.cjs"
     },
     "./component": {
-      "types": "./dist/component.d.ts",
-      "import": "./dist/component.mjs",
-      "default": "./dist/component.mjs"
+      "types": "./dist/ComponentEntry.d.ts",
+      "import": "./dist/component.js",
+      "default": "./dist/component.js"
     },
     "./safeList": {
       "types": "./dist/safeList.d.ts",
-      "import": "./dist/safeList.mjs",
+      "import": "./dist/safeList.js",
       "require": "./dist/safeList.cjs",
       "default": "./dist/safeList.cjs"
     },
@@ -66,9 +66,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "rimraf dist && pnpm build:js && pnpm build:style",
-    "build:js": "tsc && rollup -c rollup.config.ts --configPlugin typescript",
-    "build:style": "pnpm tsx scripts/build.ts",
+    "build": "tsc && tsx scripts/vBuild.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
@@ -96,16 +94,17 @@
     "@traptitech/markdown-it-katex": "^3.6.0",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^22.10.1",
-    "@unocss/core": "^0.65.0",
-    "@unocss/eslint-plugin": "^0.65.0",
+    "@unocss/core": "^0.65.1",
+    "@unocss/eslint-plugin": "^0.65.1",
     "@vite-pwa/vitepress": "^0.5.3",
     "cross-env": "^7.0.3",
     "esbuild": "^0.24.0",
     "eslint": "^9.16.0",
     "eslint-plugin-format": "^0.1.2",
     "eslint-plugin-solid": "^0.14.4",
-    "katex": "^0.16.11",
-    "prettier": "^3.4.1",
+    "katex": "^0.16.15",
+    "lightningcss": "^1.28.2",
+    "prettier": "^3.4.2",
     "rehype-document": "^7.0.3",
     "rehype-format": "^5.0.1",
     "rehype-katex": "^7.0.1",
@@ -115,16 +114,19 @@
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.1",
     "rimraf": "^6.0.1",
-    "rollup": "^4.28.0",
+    "rollup": "^4.28.1",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-summary": "^3.0.0",
     "starkdown": "^3.2.9",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
     "unified": "^11.0.5",
-    "unocss": "^0.65.0",
+    "unocss": "^0.65.1",
     "user-agent-data-types": "^0.4.2",
-    "vite": "^6.0.2",
+    "vite": "^6.0.3",
+    "vite-bundle-analyzer": "^0.15.2",
+    "vite-plugin-dts": "^4.3.0",
+    "vite-plugin-inspect": "^0.10.3",
     "vite-plugin-pwa": "^0.21.1",
     "vite-plugin-solid": "^2.10.2",
     "vitepress": "1.5.0",
