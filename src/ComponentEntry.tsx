@@ -7,8 +7,7 @@ import configProvider from './controllers/configProvider';
 const ComponentEntry: Component<Omit<SodesuInitOptions, 'el'>> = (prop) => {
   const { path = window.location.pathname } = prop;
   const { setProps } = configProvider;
-  if (!prop.serverURL)
-    throw new Error('Option \'serverURL\' is missing!');
+  if (!prop.serverURL) throw new Error("Option 'serverURL' is missing!");
   setProps({ ...prop, path });
   return <App />;
 };

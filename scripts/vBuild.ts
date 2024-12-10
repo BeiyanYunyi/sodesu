@@ -11,7 +11,7 @@ const p0 = await build({
       entry: 'src/index.tsx',
       name: 'Sodesu',
       formats: ['es', 'umd'],
-      fileName: format => format === 'es' ? `sodesu.aio.mjs` : `sodesu.aio.umd.js`,
+      fileName: (format) => (format === 'es' ? `sodesu.aio.mjs` : `sodesu.aio.umd.js`),
     },
     emptyOutDir: false,
   },
@@ -79,14 +79,8 @@ transform({
   },
 });
 const result = Array.from(new Set(classes));
-const pms2 = writeFile(
-  'dist/safeList.cjs',
-  `module.exports=${JSON.stringify(result)}`,
-);
-const pms3 = writeFile(
-  'dist/safeList.js',
-  `export default ${JSON.stringify(result)}`,
-);
+const pms2 = writeFile('dist/safeList.cjs', `module.exports=${JSON.stringify(result)}`);
+const pms3 = writeFile('dist/safeList.js', `export default ${JSON.stringify(result)}`);
 const pms4 = writeFile(
   'dist/safeList.d.ts',
   'declare const safeList: string[]; export default safeList;',

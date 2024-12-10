@@ -28,7 +28,7 @@ const CommentBoxFooter: Component = () => {
           title={locale().preview}
           onClick={(e) => {
             e.preventDefault();
-            setShowPreview(ori => !ori);
+            setShowPreview((ori) => !ori);
           }}
         >
           <PreviewIcon />
@@ -37,7 +37,7 @@ const CommentBoxFooter: Component = () => {
       <div class="flex flex-shrink flex-grow-3 items-center justify-end">
         <Show
           when={config().login !== 'disable' && !isLogin()}
-          fallback={(
+          fallback={
             <CommonButton
               type="button"
               onClick={(e) => {
@@ -47,7 +47,7 @@ const CommentBoxFooter: Component = () => {
             >
               {locale().logout}
             </CommonButton>
-          )}
+          }
         >
           <CommonButton
             type="button"

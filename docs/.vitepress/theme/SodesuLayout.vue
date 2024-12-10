@@ -13,7 +13,7 @@
       <link
         rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
-      >
+      />
     </template>
   </Layout>
 </template>

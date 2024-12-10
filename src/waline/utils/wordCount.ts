@@ -24,12 +24,11 @@ export function getChinese(content: string): RegExpMatchArray | null {
  * Get word number of given string
  */
 export function getWordNumber(content: string): number {
-  return (getWords(content)?.reduce<number>(
-    (accumulator, word) =>
-      accumulator
-      + (['', ',', '.'].includes(word.trim())
-        ? 0
-        : word.trim().split(/\s+/u).length),
-    0,
-  ) || 0) + (getChinese(content)?.length || 0);
+  return (
+    (getWords(content)?.reduce<number>(
+      (accumulator, word) =>
+        accumulator + (['', ',', '.'].includes(word.trim()) ? 0 : word.trim().split(/\s+/u).length),
+      0,
+    ) || 0) + (getChinese(content)?.length || 0)
+  );
 }

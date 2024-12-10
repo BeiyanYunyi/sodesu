@@ -23,8 +23,8 @@
  *
  */
 
-const WORD_REGEXP
-  = /[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\uAC00-\uD7AF\u0400-\u04FF]+|\w+/;
+const WORD_REGEXP =
+  /[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\uAC00-\uD7AF\u0400-\u04FF]+|\w+/;
 const LEFT_ANGLE_REGEXP = /</;
 const LINE_COMMENT_REGEXP = /(?:^|\s)\/\/(.+)$/gm;
 const BLOCK_COMMENT_REGEXP = /\/\*([\s\S]*?)\*\//g;
@@ -54,17 +54,14 @@ export function defaultHighlighter(input: string): string {
   let index = 0;
 
   return input.replace(REGEXP, (_match, word: string, comment: string) => {
-    if (comment)
-      return `<span style="color: slategray">${comment}</span>`;
-    if (word === '<')
-      return '&lt;';
+    if (comment) return `<span style="color: slategray">${comment}</span>`;
+    if (word === '<') return '&lt;';
 
     let color: string;
 
     if (cache[word]) {
       color = cache[word];
-    }
-    else {
+    } else {
       color = COLORS[index];
       cache[word] = color;
     }

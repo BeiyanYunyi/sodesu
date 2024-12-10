@@ -13,8 +13,7 @@ import { VerifiedIcon } from './Icons';
 const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (props) => {
   const link = createMemo(() => {
     const { link: link2 } = props.content;
-    if (!link2)
-      return '';
+    if (!link2) return '';
     return isLinkHttp(link2) ? link2 : `https://${link2}`;
   });
   const { replyId, edit } = commentBoxState;
@@ -39,11 +38,11 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
         <div class="overflow-hidden">
           <Show
             when={link()}
-            fallback={(
+            fallback={
               <span class="me-2 inline-block text-sm text-sDarkGrey font-bold decoration-none">
                 {props.content.nick}
               </span>
-            )}
+            }
           >
             <a
               class="me-2 inline-block text-sm text-sDarkGrey font-bold decoration-none"
@@ -93,7 +92,7 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
         </Show>
         <Show when={props.content.children}>
           <Index each={props.content.children()}>
-            {item => <CommentCard content={item()} rootId={props.rootId} />}
+            {(item) => <CommentCard content={item()} rootId={props.rootId} />}
           </Index>
         </Show>
       </div>

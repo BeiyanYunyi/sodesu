@@ -12,23 +12,21 @@ const userInfoState = createRoot(() => {
     deserialize: (data) => {
       try {
         return JSON.parse(data);
-      }
-      catch (e) {
+      } catch (e) {
         return null;
       }
     },
-    serialize: data => JSON.stringify(data),
+    serialize: (data) => JSON.stringify(data),
   });
   const isLogin = createMemo(() => Boolean(userInfo()?.token));
   const isAdmin = createMemo(() => Boolean(userInfo()?.type === 'administrator'));
 
   const onMessageReceive = ({ data }: { data: { type: 'profile'; data: UserInfo } }): void => {
-    if (!data || data.type !== 'profile')
-      return;
-    setUserInfo(usrInfo => ({ ...usrInfo, ...data.data }));
+    if (!data || data.type !== 'profile') return;
+    setUserInfo((usrInfo) => ({ ...usrInfo, ...data.data }));
     [localStorage, sessionStorage]
-      .filter(store => store.getItem('WALINE_USER'))
-      .forEach(store => store.setItem('WALINE_USER', JSON.stringify(userInfo)));
+      .filter((store) => store.getItem('WALINE_USER'))
+      .forEach((store) => store.setItem('WALINE_USER', JSON.stringify(userInfo)));
   };
 
   onMount(() => {

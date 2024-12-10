@@ -103,18 +103,14 @@ export function getConfig({
     login,
     copyright,
     search:
-    search === false
-      ? false
-      : typeof search === 'object'
-        ? search
-        : getDefaultSearchOptions(lang),
+      search === false
+        ? false
+        : typeof search === 'object'
+          ? search
+          : getDefaultSearchOptions(lang),
     recaptchaV3Key,
     turnstileKey,
-    reaction: Array.isArray(reaction)
-      ? reaction
-      : reaction === true
-        ? DEFAULT_REACTION
-        : [],
+    reaction: Array.isArray(reaction) ? reaction : reaction === true ? DEFAULT_REACTION : [],
     commentSorting,
     ...more,
   };

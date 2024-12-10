@@ -12,7 +12,8 @@ export default antfu({
           order: ['template', 'script', 'style'],
         },
       ],
+      'vue/html-self-closing': 0,
     },
   },
-  stylistic: { semi: true },
+  stylistic: false,
 });

@@ -46,13 +46,12 @@ const App: Component = () => {
         <div class="flex-shrink flex-grow text-xl text-sColor font-bold">
           <Show when={count()}>
             <span>{count()}</span>
-          </Show>
-          {' '}
+          </Show>{' '}
           {locale().comment}
         </div>
         <ul class="m-0 list-none p-0">
           <For each={sortingMethods}>
-            {item => (
+            {(item) => (
               <li class="ms-3 inline-block">
                 <button
                   class="cursor-pointer border-none bg-transparent pe-0 ps-0 text-[0.75rem] hover:text-sActive"
@@ -75,13 +74,13 @@ const App: Component = () => {
       </div>
       <div>
         <Index each={data()}>
-          {item => <CommentCard content={item()} rootId={item().objectId} />}
+          {(item) => <CommentCard content={item()} rootId={item().objectId} />}
         </Index>
       </div>
       <div class="text-center">
         <Show
           when={status() !== 'error'}
-          fallback={(
+          fallback={
             <CommonButton
               onClick={(e) => {
                 e.preventDefault();
@@ -90,7 +89,7 @@ const App: Component = () => {
             >
               {locale().refresh}
             </CommonButton>
-          )}
+          }
         >
           <Switch>
             <Match when={status() === 'loading'}>
@@ -115,14 +114,11 @@ const App: Component = () => {
         </Show>
       </div>
       <div class="py-1 text-end text-sLightGrey text-info">
-        Powered by
-        {' '}
+        Powered by{' '}
         <a href="https://github.com/BeiyanYunyi/sodesu" target="_blank" rel="noopener noreferrer">
           Sodesu
-        </a>
-        {' '}
-        v
-        {version}
+        </a>{' '}
+        v{version}
       </div>
     </div>
   );

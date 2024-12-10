@@ -19,13 +19,10 @@ export function dateFormat(date: Date): string {
 }
 
 export function getTimeAgo(date: Date | string, now: Date, locale: WalineDateLocale): string {
-  if (!date)
-    return '';
+  if (!date) return '';
 
-  const time
-    = typeof date === 'string'
-      ? new Date(date.includes(' ') ? date.replace(/-/g, '/') : date)
-      : date;
+  const time =
+    typeof date === 'string' ? new Date(date.includes(' ') ? date.replace(/-/g, '/') : date) : date;
 
   const timePassed = now.getTime() - time.getTime();
 
@@ -60,11 +57,9 @@ export function getTimeAgo(date: Date | string, now: Date, locale: WalineDateLoc
     return `${hours} ${locale.hours}`;
   }
 
-  if (days < 0)
-    return locale.now;
+  if (days < 0) return locale.now;
 
-  if (days < 8)
-    return `${days} ${locale.days}`;
+  if (days < 8) return `${days} ${locale.days}`;
 
   return dateFormat(time);
 }

@@ -51,14 +51,12 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
             ref={commentBoxState.editorRef}
             value={content()}
             placeholder={(() => {
-              if (replyUser())
-                return `@${replyUser()}`;
+              if (replyUser()) return `@${replyUser()}`;
               return locale().placeholder;
             })()}
             onKeyDown={(e) => {
               const { key } = e;
-              if ((e.ctrlKey || e.metaKey) && key === 'Enter')
-                submitComment();
+              if ((e.ctrlKey || e.metaKey) && key === 'Enter') submitComment();
             }}
           />
           <Show when={showPreview()}>

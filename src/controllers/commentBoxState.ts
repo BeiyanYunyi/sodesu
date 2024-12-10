@@ -21,8 +21,7 @@ const commentBoxState = createRoot(() => {
   const [previewText, { mutate: setPreviewText }] = createResource(
     previewSignal,
     async (preSign: { content: string; showPreview: boolean }) => {
-      if (!preSign.showPreview)
-        return '';
+      if (!preSign.showPreview) return '';
       return config().renderPreview(preSign.content);
     },
   );
@@ -37,17 +36,14 @@ const commentBoxState = createRoot(() => {
       if (wordCount() < limit2[0] && limit2[0] !== 0) {
         setWordLimit(limit2[0]);
         setIsWordCountLegal(false);
-      }
-      else if (wordCount() > limit2[1]) {
+      } else if (wordCount() > limit2[1]) {
         setWordLimit(limit2[1]);
         setIsWordCountLegal(false);
-      }
-      else {
+      } else {
         setWordLimit(limit2[1]);
         setIsWordCountLegal(true);
       }
-    }
-    else {
+    } else {
       setWordLimit(0);
       setIsWordCountLegal(true);
     }
@@ -134,10 +130,8 @@ export function submitComment() {
     comment.nick = userInfo()!.display_name;
     comment.mail = userInfo()!.email;
     comment.link = userInfo()!.url;
-  }
-  else {
-    if (login === 'force')
-      return null;
+  } else {
+    if (login === 'force') return null;
 
     // check nick
     if (requiredMeta.includes('nick') && !comment.nick) {
@@ -148,8 +142,8 @@ export function submitComment() {
 
     // check mail
     if (
-      (requiredMeta.includes('mail') && !comment.mail)
-      || (comment.mail && !/^\w(?:[\w.\-]*\w)?@(?:\w(?:[\w-]*\w)?\.)*\w+$/.exec(comment.mail))
+      (requiredMeta.includes('mail') && !comment.mail) ||
+      (comment.mail && !/^\w(?:[\w.\-]*\w)?@(?:\w(?:[\w-]*\w)?\.)*\w+$/.exec(comment.mail))
     ) {
       inputRefs.mail?.focus();
 
@@ -163,8 +157,7 @@ export function submitComment() {
       return null;
     }
 
-    if (!comment.nick)
-      comment.nick = locale().anonymous;
+    if (!comment.nick) comment.nick = locale().anonymous;
   }
   if (!isWordCountLegal()) {
     return alert(
@@ -185,28 +178,22 @@ export function submitComment() {
   return (edit() ? updateComment({ objectId: edit()!.objectId, ...options }) : addComment(options))
     .then((res) => {
       setIsSubmitting(false);
-      if (res.errmsg)
-        return alert(res.errmsg);
+      if (res.errmsg) return alert(res.errmsg);
       const resComment = res.data!;
       if (edit()) {
-        const target = data().find(item => item.objectId === edit()!.objectId);
-        if (!target)
-          return null;
+        const target = data().find((item) => item.objectId === edit()!.objectId);
+        if (!target) return null;
         target.setComment(resComment.comment);
-        if (resComment.orig)
-          target.setOrig(resComment.orig);
+        if (resComment.orig) target.setOrig(resComment.orig);
         setEdit(null);
         clearReplyState();
-      }
-      else if ('rid' in resComment) {
-        const target = data().find(item => item.objectId === resComment.rid);
-        if (!target)
-          return null;
-        target.setChildren(prev => [...prev, makeDataReactive(resComment)]);
+      } else if ('rid' in resComment) {
+        const target = data().find((item) => item.objectId === resComment.rid);
+        if (!target) return null;
+        target.setChildren((prev) => [...prev, makeDataReactive(resComment)]);
         clearReplyState();
-      }
-      else {
-        setData(dat => [makeDataReactive(resComment), ...dat]);
+      } else {
+        setData((dat) => [makeDataReactive(resComment), ...dat]);
       }
       setContent('');
       setPreviewText('');

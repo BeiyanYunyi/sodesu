@@ -12,8 +12,8 @@ import { DeleteIcon, EditIcon, LikeIcon, ReplyIcon } from './Icons';
 
 const CommentCardActions: Component<{ comment: ReactiveComment; rootId: string }> = (props) => {
   const { locale, config } = configProvider;
-  const { replyId, setReplyId, setReplyUser, setRootId, setContent, setEdit, edit }
-    = commentBoxState;
+  const { replyId, setReplyId, setReplyUser, setRootId, setContent, setEdit, edit } =
+    commentBoxState;
   const { likes } = likeState;
   const liked = createMemo(() => likes()?.includes(props.comment.objectId) || false);
   const isReplyingCurrent = createMemo(() => replyId() === props.comment.objectId);
@@ -33,8 +33,7 @@ const CommentCardActions: Component<{ comment: ReactiveComment; rootId: string }
             if (editingThis()) {
               setEdit(null);
               setContent('');
-            }
-            else {
+            } else {
               setEdit(props.comment);
               setContent(props.comment.orig() || '');
             }
@@ -49,8 +48,7 @@ const CommentCardActions: Component<{ comment: ReactiveComment; rootId: string }
           class="me-2 inline-flex cursor-pointer items-center border-none bg-transparent text-sColor sds-btn"
           onClick={async (e) => {
             e.preventDefault();
-            if (!confirm('Are you sure you want to delete this comment?'))
-              return;
+            if (!confirm('Are you sure you want to delete this comment?')) return;
             const { serverURL, lang } = config();
             await deleteComment({
               serverURL,
@@ -85,8 +83,7 @@ const CommentCardActions: Component<{ comment: ReactiveComment; rootId: string }
             e.preventDefault();
             if (isReplyingCurrent()) {
               clearReplyState();
-            }
-            else {
+            } else {
               setReplyId(props.comment.objectId);
               setReplyUser(props.comment.nick);
               setRootId(props.rootId);

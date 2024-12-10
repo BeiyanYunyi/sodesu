@@ -8,7 +8,7 @@ import type {
 const AVAILABLE_META: WalineMeta[] = ['nick', 'mail', 'link'];
 
 export function getMeta(meta: WalineMeta[]): WalineMeta[] {
-  return meta.filter(item => AVAILABLE_META.includes(item));
+  return meta.filter((item) => AVAILABLE_META.includes(item));
 }
 
 export const DEFAULT_EMOJI: WalineEmojiPresets[] = ['//unpkg.com/@waline/emojis@1.1.0/weibo'];
@@ -26,8 +26,7 @@ export const DEFAULT_REACTION = [
 
 export function defaultUploadImage(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
-    if (file.size > 128 * 1000)
-      return reject(new Error('File too large! File size limit 128KB'));
+    if (file.size > 128 * 1000) return reject(new Error('File too large! File size limit 128KB'));
 
     const reader = new FileReader();
 
@@ -74,9 +73,9 @@ export function getDefaultSearchOptions(lang: string): WalineSearchOptions {
         ...params,
       }).toString()}`,
     )
-      .then(resp => <Promise<GifResult>>resp.json())
+      .then((resp) => <Promise<GifResult>>resp.json())
       .then(({ data }) =>
-        data.map(gif => ({
+        data.map((gif) => ({
           title: gif.title,
           src: gif.images.downsized_medium.url,
         })),

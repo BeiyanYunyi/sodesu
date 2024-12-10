@@ -12,7 +12,7 @@ function presetSodesu(): Preset {
         {
           'border-radius': 'var(--sds-avatar-radius)',
           'box-shadow': 'var(--sds-box-shadow)',
-          'width': 'var(--sds-avatar-real-size)',
+          width: 'var(--sds-avatar-real-size)',
         },
       ],
       ['text-badge', { 'font-size': 'var(--sds-badge-font-size)' }],

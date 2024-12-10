@@ -97,7 +97,7 @@ export function makeDataReactive(data: WalineComment): ReactiveComment {
 }
 
 export function makeDatasReactive(datas: WalineComment[]) {
-  return datas.map(data => makeDataReactive(data));
+  return datas.map((data) => makeDataReactive(data));
 }
 
 const commentListState = createRoot(() => {
@@ -146,7 +146,7 @@ export function getCommentData(page: number) {
     .then((res) => {
       setStatus('success');
       setCount(res.count);
-      setData(data => data.concat(...makeDatasReactive(res.data)));
+      setData((data) => data.concat(...makeDatasReactive(res.data)));
       setPage(page);
       setTotalPages(res.totalPages);
     })
@@ -173,9 +173,9 @@ export function refresh() {
 
 export function deleteComment(id: string) {
   const { setData } = commentListState;
-  setData(data =>
+  setData((data) =>
     data.filter((item) => {
-      item.setChildren(children => children.filter(child => child.objectId !== id));
+      item.setChildren((children) => children.filter((child) => child.objectId !== id));
       return item.objectId !== id;
     }),
   );

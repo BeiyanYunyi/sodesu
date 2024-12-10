@@ -10,21 +10,21 @@ import zhTW from './zh-TW.js';
 export type Locales = Record<string, WalineLocale>;
 
 export const DEFAULT_LOCALES: Locales = {
-  'zh': zhCN,
+  zh: zhCN,
   'zh-cn': zhCN,
   'zh-CN': zhCN,
   'zh-tw': zhTW,
   'zh-TW': zhTW,
-  'en': en,
+  en: en,
   'en-US': en,
   'en-us': en,
-  'jp': jp,
-  'ja': jp,
+  jp: jp,
+  ja: jp,
   'jp-jp': jp,
   'jp-JP': jp,
   'pt-br': ptBR,
   'pt-BR': ptBR,
-  'ru': ru,
+  ru: ru,
   'ru-ru': ru,
   'ru-RU': ru,
 };

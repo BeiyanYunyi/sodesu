@@ -13,12 +13,11 @@ const likeState = createRoot(() => {
     deserialize: (data) => {
       try {
         return JSON.parse(data);
-      }
-      catch (e) {
+      } catch (e) {
         return [];
       }
     },
-    serialize: data => JSON.stringify(data),
+    serialize: (data) => JSON.stringify(data),
   });
   return { likes, setLikes };
 });
@@ -36,19 +35,17 @@ export async function handleLike(comment: ReactiveComment): Promise<void> {
     comment: { like: !hasLiked },
   });
   if (hasLiked) {
-    setLikes(ls => ls!.filter(id => id !== objectId));
-  }
-  else {
+    setLikes((ls) => ls!.filter((id) => id !== objectId));
+  } else {
     setLikes((ls) => {
-      if (!ls)
-        return [objectId];
+      if (!ls) return [objectId];
       if (ls.length > 50) {
         ls.shift();
       }
       return ls.concat(objectId);
     });
   }
-  comment.setLike(like => (like || 0) + (hasLiked ? -1 : 1));
+  comment.setLike((like) => (like || 0) + (hasLiked ? -1 : 1));
 }
 
 export default likeState;

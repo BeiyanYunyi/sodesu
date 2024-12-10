@@ -1,6 +1,6 @@
 <template>
   <div class="vp-doc">
-    <hr>
+    <hr />
     <blockquote>
       友情提示：评论区仅作评论展示，如有问题咨询请去
       <a href="https://github.com/BeiyanYunyi/sodesu/discussions" target="_blank">
@@ -16,7 +16,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import '../../../dist/sodesu.css';
+import '../../../dist/sodesu-comment.css';
 
 onMounted(async () => {
   const [Sodesu, remarkRenderer] = await Promise.all([

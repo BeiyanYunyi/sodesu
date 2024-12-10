@@ -1,8 +1,7 @@
 export function decodePath(path: string): string {
   try {
     path = decodeURI(path);
-  }
-  catch (err) {
+  } catch (err) {
     // ignore error
   }
 

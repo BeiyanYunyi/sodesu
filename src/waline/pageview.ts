@@ -85,23 +85,23 @@ export function pageviewCount({
   const fetch = (elements: HTMLElement[]): Promise<void> =>
     getPageview({
       serverURL: getServerURL(serverURL),
-      paths: elements.map(element => getQuery(element) || path),
+      paths: elements.map((element) => getQuery(element) || path),
       lang,
       signal: controller.signal,
     })
-      .then(counts => renderVisitorCount(counts, elements))
+      .then((counts) => renderVisitorCount(counts, elements))
       .catch(errorHandler);
 
   // we should update pageviews
   if (update) {
-    const normalElements = elements.filter(element => !filter(element));
+    const normalElements = elements.filter((element) => !filter(element));
     const elementsNeedstoBeFetched = elements.filter(filter);
 
     void updatePageview({
       serverURL: getServerURL(serverURL),
       path,
       lang,
-    }).then(counts => renderVisitorCount(counts, normalElements));
+    }).then((counts) => renderVisitorCount(counts, normalElements));
 
     // if we should fetch count of other pages
     if (elementsNeedstoBeFetched.length) {

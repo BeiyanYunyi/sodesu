@@ -55,7 +55,7 @@ export function commentCount({
   if (elements.length) {
     void fetchCommentCount({
       serverURL: getServerURL(serverURL),
-      paths: Array.from(elements).map(element => decodePath(getQuery(element) || path)),
+      paths: Array.from(elements).map((element) => decodePath(getQuery(element) || path)),
       lang,
       signal: controller.signal,
     })

@@ -32,7 +32,7 @@ import Sodesu from 'sodesu-comment';
 Sodesu.init({
   el: '#comment-container',
   // ...
-  renderPreview: async text => myProcessor(text), // 需要返回 Promise
+  renderPreview: async (text) => myProcessor(text), // 需要返回 Promise
 });
 ```
 

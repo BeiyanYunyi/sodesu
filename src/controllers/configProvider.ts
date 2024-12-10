@@ -13,24 +13,21 @@ const configProvider = createRoot(() => {
   const config = createMemo<SodesuConfig>(() => ({
     ...getConfig(props()),
     commentClassName: commentClassName(),
-    renderPreview: props().renderPreview || (async text => starkdown(text)),
+    renderPreview: props().renderPreview || (async (text) => starkdown(text)),
   }));
   const locale = createMemo(() => config().locale);
   const [pageView, setPageView] = createSignal<SodesuInitOptions['pageview']>(undefined);
-  const [mountCommentCount, setMountCommentCount]
-    = createSignal<SodesuInitOptions['comment']>(undefined);
+  const [mountCommentCount, setMountCommentCount] =
+    createSignal<SodesuInitOptions['comment']>(undefined);
   const init = ({
     el = '#sodesu',
     path = window.location.pathname,
     ...initProps
   }: SodesuInitOptions) => {
     const root = el ? getRoot(el) : null;
-    if (el && !root)
-      throw new Error(`Option 'el' do not match any domElement!`);
-    if (!root)
-      throw new Error('Cannot get root!');
-    if (!initProps.serverURL)
-      throw new Error('Option \'serverURL\' is missing!');
+    if (el && !root) throw new Error(`Option 'el' do not match any domElement!`);
+    if (!root) throw new Error('Cannot get root!');
+    if (!initProps.serverURL) throw new Error("Option 'serverURL' is missing!");
     setProps({ ...initProps, path });
     setCommentClassName(initProps.commentClassName || '');
     setPageView(initProps.pageview);
@@ -38,9 +35,8 @@ const configProvider = createRoot(() => {
     return root;
   };
   const update = (opts: Partial<Omit<SodesuInitOptions, 'el'>>) => {
-    setProps(p => ({ ...p, ...opts }));
-    if (opts.commentClassName)
-      setCommentClassName(opts.commentClassName);
+    setProps((p) => ({ ...p, ...opts }));
+    if (opts.commentClassName) setCommentClassName(opts.commentClassName);
   };
   const mountPageView = () => {
     if (pageView()) {

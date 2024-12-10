@@ -13,10 +13,10 @@ const UserMeta: Component = () => {
           return (
             <div class="flex flex-grow items-center">
               <label for={`wl-${kind}`} class="px-2 py-3 text-sColor">
-                {locale()[kind]
-                + (config().requiredMeta.includes(kind) || !config().requiredMeta.length
-                  ? ''
-                  : `(${locale().optional})`)}
+                {locale()[kind] +
+                  (config().requiredMeta.includes(kind) || !config().requiredMeta.length
+                    ? ''
+                    : `(${locale().optional})`)}
               </label>
               <input
                 id={`wl-${kind}`}
