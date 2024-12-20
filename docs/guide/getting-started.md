@@ -1,5 +1,9 @@
 # 快速开始
 
+<script setup lang='ts'>
+import { version } from 'sodesu-comment/package.json';
+</script>
+
 首先这只是一个评论系统前端，所以在开始之前，你需要按照 [Waline 的教程](https://waline.js.org/guide/get-started/)部署好 Waline 后端（服务端）。
 
 ## 引入 Sodesu 前端（客户端）
@@ -10,16 +14,19 @@
 
 如果在构建过程中没有类似 Rollup 和 Webpack 那样的打包器，而你只能接触到 HTML 或者页面模板，那就直接修改它们吧。
 
-```html
+```html-vue
 <head>
   <!-- ... -->
-  <link rel="stylesheet" href="https://unpkg.com/sodesu-comment/dist/sodesu.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/sodesu-comment@{{version}}/dist/sodesu-comment.css"
+  />
   <!-- ... -->
 </head>
 <body>
   <!-- ... -->
   <div id="sodesu"></div>
-  <script src="https://unpkg.com/sodesu-comment/dist/sodesu.aio.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sodesu-comment@{{version}}/dist/sodesu.aio.umd.js"></script>
   <script>
     Sodesu.init({
       el: '#sodesu',
@@ -68,7 +75,7 @@ Sodesu.init({
 无论是哪一种方式，都没有引入样式。所以你可以参考 CDN 引入时的办法，在 html 中引入它。但如果你的项目足够工程化，那么你可以直接在你的页面中引入样式：
 
 ```js
-import 'sodesu-comment/sodesu.css';
+import 'sodesu-comment/sodesu-comment.css';
 ```
 
 或者，如果你的项目已经在使用 UnoCSS，那么你可以将它配置一下：
