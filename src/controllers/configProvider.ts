@@ -57,10 +57,6 @@ const configProvider = createRoot(() => {
       });
     }
   };
-  onMount(() => {
-    mountPageView();
-    mountComment();
-  });
   createEffect(() => {
     mountPageView();
   });

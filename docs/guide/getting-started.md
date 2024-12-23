@@ -48,9 +48,9 @@ pnpm add sodesu-comment
 
 如果你的项目中已经存在 Solid.js，那么你可以引入不含 Solid.js 的 Sodesu，这可以让你的 JS 体积小十几 kB。
 
-```js
-import Sodesu from 'sodesu';
-Sodesu.init({
+```ts
+import { init } from 'sodesu-comment';
+init({
   el: '#sodesu',
   serverURL: 'https://your-domain.vercel.app',
 });
@@ -64,9 +64,9 @@ pnpm add solid-js
 
 当然，你也可以选择引入已经包含了 Solid.js 的 Sodesu：
 
-```js
-import Sodesu from 'sodesu/aio';
-Sodesu.init({
+```ts
+import { init } from 'sodesu-comment/aio';
+init({
   el: '#sodesu',
   serverURL: 'https://your-domain.vercel.app',
 });
@@ -74,13 +74,13 @@ Sodesu.init({
 
 无论是哪一种方式，都没有引入样式。所以你可以参考 CDN 引入时的办法，在 html 中引入它。但如果你的项目足够工程化，那么你可以直接在你的页面中引入样式：
 
-```js
+```ts
 import 'sodesu-comment/sodesu-comment.css';
 ```
 
 或者，如果你的项目已经在使用 UnoCSS，那么你可以将它配置一下：
 
-```js
+```ts
 import presetSodesu from 'sodesu-comment/preset';
 import safeList from 'sodesu-comment/safeList';
 import { defineConfig, presetWind } from 'unocss';
@@ -95,7 +95,7 @@ export default defineConfig({
 
 如果你用的不是 Astro，那么你或许可以使用类似这样的配置，只要确保 `include` 能覆盖到位于 `node_modules` 里的 `sodesu` 源码就可以了：
 
-```js
+```ts
 import presetSodesu from 'sodesu-comment/preset';
 import { defineConfig, presetWind } from 'unocss';
 
@@ -107,12 +107,33 @@ export default defineConfig({
 
 ## 单页应用支持
 
+`init` 函数会返回一个对象，你可以将其视作 Sodesu 的实例。其中包含两个方法，分别是 `update` 和 `destroy`。
+
 通过如下方式来对 Sodesu 的配置项进行更新：
 
-```js
-Sodesu.update({
-  /* Options */
+```ts{7-10}
+import { init } from 'sodesu-comment/aio';
+const sodesu = init({
+  el: '#sodesu',
+  serverURL: 'https://your-domain.vercel.app',
 });
+
+sodesu.update({
+  path: '/new-path',
+  /* any other options here */
+});
+```
+
+通过如下方式来销毁 Sodesu 实例：
+
+```ts{7}
+import { init } from 'sodesu-comment/aio';
+const sodesu = init({
+  el: '#sodesu',
+  serverURL: 'https://your-domain.vercel.app',
+});
+
+sodesu.destroy();
 ```
 
 ## 效果预览

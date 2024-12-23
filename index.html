@@ -15,10 +15,10 @@
     2：<span class="waline-pageview-count" data-path="/guide/features/i18n.html"></span>
     <div id="root"></div>
     <script type="module">
-      import Sodesu from '/src/index.tsx';
+      import { init } from '/src/index.tsx';
       import remarkRenderer from '/src/utils/remarkRenderer.ts';
       import 'virtual:uno.css';
-      Sodesu.init({
+      init({
         el: '#root',
         serverURL: 'https://walinejs.comment.lithub.cc',
         dark: 'auto',

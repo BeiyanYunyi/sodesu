@@ -14,16 +14,22 @@
   </div>
 </template>
 
-<script setup>
-import { onMounted } from 'vue';
+<script setup lang="ts">
+import { useRoute } from 'vitepress';
+import { onMounted, ref, watch } from 'vue';
+
 import '../../../dist/sodesu-comment.css';
+
+const route = useRoute();
+
+const sodesu = ref<ReturnType<(typeof import('../../../src/index'))['init']> | null>(null);
 
 onMounted(async () => {
   const [Sodesu, remarkRenderer] = await Promise.all([
     import('../../../dist/sodesu.aio.mjs'),
     import('../../../src/utils/remarkRenderer'),
   ]);
-  Sodesu.default.init({
+  sodesu.value = Sodesu.init({
     el: '#sodesu-comment',
     serverURL: 'https://walinejs.comment.lithub.cc',
     dark: 'html.dark',
@@ -31,6 +37,14 @@ onMounted(async () => {
     renderPreview: remarkRenderer.default,
   });
 });
+
+watch(
+  () => route.path,
+  async () => {
+    sodesu.value?.update({ path: route.path });
+  },
+  { immediate: true },
+);
 </script>
 
 <style scoped>

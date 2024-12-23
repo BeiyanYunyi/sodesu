@@ -27,7 +27,6 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
     <div id={props.content.objectId} class="flex p-2 pe-0 sds-comment">
       <div aria-hidden class="relative me-3 flex-shrink-0">
         <Show when={props.content.avatar}>
-          {/* 不加空格会被编译成 class=sds-avatar，怪 */}
           <img class="sds-avatar" src={props.content.avatar} alt={props.content.nick} />
           <Show when={props.content.type}>
             <VerifiedIcon />
