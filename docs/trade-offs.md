@@ -31,6 +31,16 @@ Waline 后端使用 Prism 将 markdown 中的代码块进行高亮处理，而 S
 
 我极少管理我博客内的评论，并且 Waline 后端也可以进行管理，因此它的优先级也不高。
 
+## 有所不同的特性
+
+### 关闭页脚版权信息
+
+Sodesu 会在评论区右下角显示一行类似这样的版权信息：
+
+<p class="py-1 text-sLightGrey text-info">Powered by Sodesu v1.1.4-alpha.514</p>
+
+考虑到版权信息可能影响观感，自 Sodesu v0.4.0 起，你可以在配置中使用 `copyright: false` 以禁用上述信息的显示，但此元素仍会出现在 HTML 中，只是被加上了 `display: none;` 属性。并且当你选择禁用时，Sodesu 的版本号和 GitHub 链接也会被输出在控制台。这是因为 Sodesu 使用了 AGPL-3.0 协议，这要求它的源码随服务（换言之，网页）一同分发。
+
 ## 不会实现 / 无法实现的特性
 
 ### 样式修改
@@ -70,11 +80,3 @@ Waline 后端使用 Prism 将 markdown 中的代码块进行高亮处理，而 S
   --sds-box-shadow: none;
 }
 ```
-
-### 关闭页脚版权信息
-
-Sodesu 会在评论区右下角显示一行类似这样的版权信息：
-
-<p class="py-1 text-sLightGrey text-info">Powered by Sodesu v1.1.4-alpha.514</p>
-
-与 Waline 的页脚版权信息可以开关不同，Sodesu 的页脚版权信息是强制开启的。这是因为 Sodesu 使用了 AGPL-3.0 协议，这要求它的源码随服务（换言之，网页）一同分发。而如果把这个任务交给博客主，那么他们将需要经过比较复杂的配置才能做到这一点，因此 Sodesu 的页脚版权信息将强制开启，以确保源码（以链接的形式）与服务一并分发。
