@@ -36,6 +36,12 @@ const App: Component = () => {
     },
     { serverURL: config().serverURL, path: config().path },
   );
+  if (!config().copyright) {
+    // eslint-disable-next-line no-console
+    console.log(
+      `Comment system powered by Sodesu v${version}, source code: https://github.com/BeiyanYunyi/sodesu`,
+    );
+  }
   return (
     <div class="sds-root font-sans">
       <Portal mount={document.head}>
@@ -113,7 +119,7 @@ const App: Component = () => {
           </Switch>
         </Show>
       </div>
-      <div class="py-1 text-end text-sLightGrey text-info">
+      <div class={`py-1 text-end text-sLightGrey text-info ${config().copyright ? '' : 'hidden'}`}>
         Powered by{' '}
         <a href="https://github.com/BeiyanYunyi/sodesu" target="_blank" rel="noopener noreferrer">
           Sodesu

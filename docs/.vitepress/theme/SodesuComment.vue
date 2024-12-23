@@ -34,6 +34,7 @@ onMounted(async () => {
     serverURL: 'https://walinejs.comment.lithub.cc',
     dark: 'html.dark',
     commentClassName: 'vp-doc',
+    copyright: false,
     renderPreview: remarkRenderer.default,
   });
 });
