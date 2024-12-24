@@ -91,6 +91,7 @@
     "@rollup/plugin-typescript": "^12.1.1",
     "@solid-primitives/date": "^2.0.24",
     "@solid-primitives/storage": "^4.2.1",
+    "@stackblitz/sdk": "^1.11.0",
     "@traptitech/markdown-it-katex": "^3.6.0",
     "@types/babel__core": "^7.20.5",
     "@types/node": "^22.10.1",

@@ -2,6 +2,7 @@
 
 <script setup lang='ts'>
 import { version } from 'sodesu-comment/package.json';
+import ReactExample from '../.vitepress/theme/ReactExample.vue';
 </script>
 
 首先这只是一个评论系统前端，所以在开始之前，你需要按照 [Waline 的教程](https://waline.js.org/guide/get-started/)部署好 Waline 后端（服务端）。
@@ -135,6 +136,23 @@ const sodesu = init({
 
 sodesu.destroy();
 ```
+
+### React 示例
+
+::: tip Write for React 19
+这段代码是针对 React 19 编写的。在更低的版本中，你可能需要进行一些调整。
+
+在这段代码中，我使用了 React 19 的新 API `use`，并且使用了 React 19 为 `ref callback` 定义的新的清理副作用的方式（18 以前不能通过返回一个函数的方式来做到清除，需要判断 el 是否为 null，为 null 则执行清除，未来这个特性会被标记为 deprecated）。
+:::
+
+如下示例包含两个特性，你可以自行修改以达到自己想要的效果：
+
+- 动态引入 Sodesu 的所有资源
+- 使用 `ref callback` 来初始化 Sodesu，并处理副作用
+
+示例需要 Chromium-based 浏览器，你也可以直接访问 [StackBlitz](https://stackblitz.com/edit/sodesu-react-example?file=src%2Fcomponents%2FComments.tsx) 来查看。
+
+<ReactExample />
 
 ## 效果预览
 
