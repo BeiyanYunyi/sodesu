@@ -21,7 +21,7 @@
       "import": "./dist/sodesu.solid.js",
       "default": "./dist/sodesu.solid.js"
     },
-    "./sodesu.css": "./dist/sodesu.css",
+    "./sodesu-comment.css": "./dist/sodesu-comment.css",
     "./aio": {
       "types": "./dist/index.d.ts",
       "import": "./dist/sodesu.aio.mjs",
@@ -49,8 +49,8 @@
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
-  "main": "./dist/sodesu.solid.mjs",
-  "module": "./dist/sodesu.solid.mjs",
+  "main": "./dist/sodesu.solid.js",
+  "module": "./dist/sodesu.solid.js",
   "types": "./dist/sodesu.d.ts",
   "typesVersions": {
     "*": {
@@ -71,7 +71,6 @@
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs"
   },
-  "browser": "./dist/sodesu.solid.mjs",
   "peerDependencies": {
     "solid-js": "^1.9.3"
   },
