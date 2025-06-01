@@ -1,6 +1,7 @@
+import type { Component } from 'solid-js';
 import type { ReactiveComment } from '../controllers/commentListState';
 import { createDateNow } from '@solid-primitives/date';
-import { type Component, createMemo, Index, Show } from 'solid-js';
+import { createMemo, Index, Show } from 'solid-js';
 import commentBoxState from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
 import { getTimeAgo } from '../waline/utils/date';
@@ -10,7 +11,7 @@ import CommentCardActions from './CommentCardActions';
 import CommentMeta from './CommentMeta';
 import { VerifiedIcon } from './Icons';
 
-const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (props) => {
+const CommentCard: Component<{ content: ReactiveComment; rootId: number }> = (props) => {
   const link = createMemo(() => {
     const { link: link2 } = props.content;
     if (!link2) return '';
@@ -24,7 +25,7 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
   const { locale, commentClassName } = configProvider;
   const time = createMemo(() => getTimeAgo(new Date(props.content.time), now(), locale()));
   return (
-    <div id={props.content.objectId} class="flex p-2 pe-0 sds-comment">
+    <div id={props.content.objectId.toString()} class="flex p-2 pe-0 sds-comment">
       <div aria-hidden class="relative me-3 flex-shrink-0">
         <Show when={props.content.avatar}>
           <img class="sds-avatar" src={props.content.avatar} alt={props.content.nick} />

@@ -95,6 +95,8 @@ export interface WalineProps {
    * - `'ru'`
    * - `'ru-ru'`
    * - `'ru-RU'`
+   * - `'fr-FR'`
+   * - `'fr'`
    *
    * Display language for waline
    *
@@ -116,6 +118,8 @@ export interface WalineProps {
    * - `'ru'`
    * - `'ru-ru'`
    * - `'ru-RU'`
+   * - `'fr-FR'`
+   * - `'fr'`
    *
    * @default navigator.language
    */
@@ -153,57 +157,6 @@ export interface WalineProps {
   dark?: string | boolean;
 
   /**
-   * 设置表情包
-   *
-   * Set Emojis
-   *
-   * @default ['//unpkg.com/@waline/emojis@1.1.0/weibo']
-   */
-  emoji?: (WalineEmojiInfo | WalineEmojiPresets)[] | boolean;
-
-  /**
-   * 设置搜索功能
-   *
-   * Customize Search feature
-   *
-   * @default true
-   */
-  search?: WalineSearchOptions | boolean;
-
-  /**
-   * 代码高亮
-   *
-   * Code highlighting
-   *
-   * @default true
-   */
-
-  highlighter?: WalineHighlighter | boolean;
-
-  /**
-   * 自定义图片上传方法，方便更好的存储图片
-   *
-   * 方法执行时会将图片对象传入。
-   *
-   * Custom image upload callback to manage picture by yourself.
-   *
-   * We will pass a picture file object when execute it.
-   *
-   * @default true
-   */
-
-  imageUploader?: WalineImageUploader | boolean;
-
-  /**
-   * 自定义数学公式处理方法，用于预览。
-   *
-   * Custom math formula parse callback for preview.
-   *
-   * @default true
-   */
-  texRenderer?: WalineTeXRenderer | boolean;
-
-  /**
    *
    * 登录模式状态，可选值:
    *
@@ -222,30 +175,80 @@ export interface WalineProps {
   login?: WalineLoginStatus;
 
   /**
-   * 是否在页脚展示版权信息
+   * 是否在页脚隐藏版权信息
    *
    * 为了支持 Waline，我们强烈建议你开启它
    *
-   * Whether show copyright in footer
+   * Whether hide copyright in footer
    *
    * We strongly recommended you to keep it on to support waline
    *
-   * @default true
    */
-  copyright?: boolean;
+  noCopyright?: boolean;
 
   /**
+   * recaptcha v3 客户端 key
+   *
    * recaptcha v3 client key
    */
   recaptchaV3Key?: string;
 
   /**
+   * turnstile 客户端 key
+   *
    * turnstile client key
    */
   turnstileKey?: string;
 
   /**
-   * reaction
+   * 文章反应
+   *
+   * Article reaction
+   *
+   * @default false
    */
   reaction?: string[] | boolean;
+
+  /**
+   * 设置表情包
+   *
+   * Set Emojis
+   *
+   * @default ['//unpkg.com/@waline/emojis@1.1.0/weibo']
+   */
+  emoji?: (WalineEmojiInfo | WalineEmojiPresets)[];
+
+  /**
+   * 设置搜索功能
+   *
+   * Customize Search feature
+   */
+  search?: WalineSearchOptions;
+
+  /**
+   * 代码块高亮器
+   *
+   * Code fence highlighter
+   */
+
+  highlighter?: WalineHighlighter;
+
+  /**
+   * 自定义图片上传方法，方便更好的存储图片
+   *
+   * 方法执行时会将图片对象传入。
+   *
+   * Custom image upload callback to manage picture by yourself.
+   *
+   * We will pass a picture file object when execute it.
+   */
+
+  imageUploader?: WalineImageUploader;
+
+  /**
+   * 自定义数学公式处理方法，用于预览。
+   *
+   * Custom math formula parse callback for preview.
+   */
+  texRenderer?: WalineTeXRenderer;
 }

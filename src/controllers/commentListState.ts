@@ -1,7 +1,8 @@
 import type { WalineComment, WalineCommentStatus } from '@waline/api';
 import type { WalineCommentSorting } from '@waline/client';
+import type { Accessor, Setter } from 'solid-js';
 import { getComment } from '@waline/api';
-import { type Accessor, createRoot, createSignal, type Setter } from 'solid-js';
+import { createRoot, createSignal } from 'solid-js';
 import configProvider from './configProvider';
 
 import userInfoState from './userInfoState';
@@ -32,11 +33,11 @@ interface ReactiveCommentData {
   /**
    * Parent comment id
    */
-  pid?: string;
+  pid?: number;
   /**
    * Root comment id
    */
-  rid?: string;
+  rid?: number;
   /**
    * User id being at
    */
@@ -61,7 +62,7 @@ export interface ReactiveComment extends Exclude<ReactiveCommentData, 'ua'> {
    * User type
    */
   type?: 'administrator' | 'guest' | `verify:${string}`;
-  objectId: string;
+  objectId: number;
   /**
    * Time ISOString when the comment is created
    */
@@ -179,7 +180,7 @@ export function refresh() {
   getCommentData(1);
 }
 
-export function deleteComment(id: string) {
+export function deleteComment(id: number) {
   const { setData } = commentListState;
   setData((data) =>
     data.filter((item) => {

@@ -11,7 +11,9 @@
       <button v-if="needRefresh" type="button" class="pwa-refresh" @click="updateServiceWorker?.()">
         Reload
       </button>
-      <button type="button" class="pwa-cancel" @click="close">Close</button>
+      <button type="button" class="pwa-cancel" @click="close">
+        Close
+      </button>
     </div>
   </template>
 </template>

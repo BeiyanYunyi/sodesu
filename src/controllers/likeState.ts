@@ -31,7 +31,7 @@ export async function handleLike(comment: ReactiveComment): Promise<void> {
     serverURL: config().serverURL,
     lang: config().lang,
     objectId,
-    token: userInfoState.userInfo()?.token!,
+    token: userInfoState.userInfo()!.token,
     comment: { like: !hasLiked },
   });
   if (hasLiked) {

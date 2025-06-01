@@ -1,16 +1,15 @@
+import type { Component } from 'solid-js';
+import type { ReactiveComment } from '../controllers/commentListState';
 import { deleteComment } from '@waline/api';
-import { type Component, createMemo, Show } from 'solid-js';
+import { createMemo, Show } from 'solid-js';
 import commentBoxState, { clearReplyState } from '../controllers/commentBoxState';
-import {
-  deleteComment as deleteCommentFront,
-  type ReactiveComment,
-} from '../controllers/commentListState';
+import { deleteComment as deleteCommentFront } from '../controllers/commentListState';
 import configProvider from '../controllers/configProvider';
 import likeState, { handleLike } from '../controllers/likeState';
 import userInfoState from '../controllers/userInfoState';
 import { DeleteIcon, EditIcon, LikeIcon, ReplyIcon } from './Icons';
 
-const CommentCardActions: Component<{ comment: ReactiveComment; rootId: string }> = (props) => {
+const CommentCardActions: Component<{ comment: ReactiveComment; rootId: number }> = (props) => {
   const { locale, config } = configProvider;
   const { replyId, setReplyId, setReplyUser, setRootId, setContent, setEdit, edit } =
     commentBoxState;

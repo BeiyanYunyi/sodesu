@@ -3,7 +3,6 @@
 </template>
 <script setup lang="ts">
 import type { VM } from '@stackblitz/sdk';
-import type { VNodeRef } from 'vue';
 import sdk from '@stackblitz/sdk';
 import { onMounted, onUnmounted, ref } from 'vue';
 

@@ -50,7 +50,7 @@ const COLORS = [
 ];
 const cache: Record<string, string> = {};
 
-export function defaultHighlighter(input: string): string {
+export const defaultHighlighter = (input: string): string => {
   let index = 0;
 
   return input.replace(REGEXP, (_match, word: string, comment: string) => {
@@ -59,9 +59,8 @@ export function defaultHighlighter(input: string): string {
 
     let color: string;
 
-    if (cache[word]) {
-      color = cache[word];
-    } else {
+    if (cache[word]) color = cache[word];
+    else {
       color = COLORS[index];
       cache[word] = color;
     }
@@ -72,4 +71,4 @@ export function defaultHighlighter(input: string): string {
 
     return out;
   });
-}
+};
