@@ -83,9 +83,14 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: string }> = (pr
         <div
           class="sds-content my-3 text-sm text-sColor break-word"
           classList={{ [commentClassName()]: true }}
-          /* eslint-disable-next-line solid/no-innerhtml */
-          innerHTML={props.content.comment()}
-        />
+        >
+          <Show when={'reply_user' in props.content && props.content.reply_user}>
+            <a href={`#${props.content.pid}`}>@{props.content.reply_user!.nick}</a>
+            <span>: </span>
+          </Show>
+          {/* eslint-disable-next-line solid/no-innerhtml */}
+          <div innerHTML={props.content.comment()} />
+        </div>
         <Show when={showCommentBox()}>
           <CommentBox />
         </Show>

@@ -45,6 +45,14 @@ interface ReactiveCommentData {
    * Recaptcha Token
    */
   recaptchaV3?: string;
+  /**
+   * Reply user information
+   */
+  reply_user?: {
+    nick: string;
+    link: string;
+    avatar: string;
+  };
 }
 
 export interface ReactiveComment extends Exclude<ReactiveCommentData, 'ua'> {
