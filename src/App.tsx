@@ -1,13 +1,5 @@
-import {
-  type Component,
-  createEffect,
-  createMemo,
-  For,
-  Index,
-  Match,
-  Show,
-  Switch,
-} from 'solid-js';
+import type { Component } from 'solid-js';
+import { createEffect, createMemo, For, Index, Match, Show, Switch } from 'solid-js';
 import { Portal } from 'solid-js/web';
 import { version } from '../package.json';
 import CommentBox from './components/CommentBox';
@@ -36,7 +28,7 @@ const App: Component = () => {
     },
     { serverURL: config().serverURL, path: config().path },
   );
-  if (!config().copyright) {
+  if (config().noCopyright) {
     // eslint-disable-next-line no-console
     console.log(
       `Comment system powered by Sodesu v${version}, source code: https://github.com/BeiyanYunyi/sodesu`,
@@ -119,7 +111,9 @@ const App: Component = () => {
           </Switch>
         </Show>
       </div>
-      <div class={`py-1 text-end text-sLightGrey text-info ${config().copyright ? '' : 'hidden'}`}>
+      <div
+        class={`py-1 text-end text-sLightGrey text-info ${config().noCopyright ? 'hidden' : ''}`}
+      >
         Powered by{' '}
         <a href="https://github.com/BeiyanYunyi/sodesu" target="_blank" rel="noopener noreferrer">
           Sodesu

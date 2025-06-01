@@ -1,3 +1,5 @@
+import type { IGif } from '@giphy/js-types';
+
 import type {
   WalineEmojiPresets,
   WalineMeta,
@@ -7,13 +9,12 @@ import type {
 
 const AVAILABLE_META: WalineMeta[] = ['nick', 'mail', 'link'];
 
-export function getMeta(meta: WalineMeta[]): WalineMeta[] {
-  return meta.filter((item) => AVAILABLE_META.includes(item));
-}
+export const getMeta = (meta: WalineMeta[]): WalineMeta[] =>
+  meta.filter((item) => AVAILABLE_META.includes(item));
 
-export const DEFAULT_EMOJI: WalineEmojiPresets[] = ['//unpkg.com/@waline/emojis@1.1.0/weibo'];
-
-export const DEFAULT_LANG = 'en-US';
+export const DEFAULT_EMOJI: WalineEmojiPresets[] = [
+  '//unpkg.com/@waline/emojis@1.1.0/weibo',
+];
 
 export const DEFAULT_REACTION = [
   '//unpkg.com/@waline/emojis/tieba/tieba_agree.png',
@@ -24,27 +25,26 @@ export const DEFAULT_REACTION = [
   '//unpkg.com/@waline/emojis/tieba/tieba_sleep.png',
 ];
 
-export function defaultUploadImage(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    if (file.size > 128 * 1000) return reject(new Error('File too large! File size limit 128KB'));
+export const defaultUploadImage = (file: File): Promise<string> =>
+  new Promise((resolve, reject) => {
+    if (file.size > 128 * 1000)
+      return reject(new Error('File too large! File size limit 128KB'));
 
     const reader = new FileReader();
 
     reader.readAsDataURL(file);
-    reader.onload = (): void => resolve(reader.result?.toString() || '');
+    reader.onload = (): void => resolve(reader.result as string);
     reader.onerror = reject;
   });
-}
 
-export function defaultTeXRenderer(blockMode: boolean): string {
-  return blockMode === true
+export const defaultTeXRenderer = (blockMode: boolean): string =>
+  blockMode
     ? '<p class="wl-tex">TeX is not available in preview</p>'
     : '<span class="wl-tex">TeX is not available in preview</span>';
-}
 
-export function getDefaultSearchOptions(lang: string): WalineSearchOptions {
+export const getDefaultSearchOptions = (lang: string): WalineSearchOptions => {
   interface GifResult {
-    data: any[];
+    data: IGif[];
     meta: {
       msg: string;
       // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -73,7 +73,7 @@ export function getDefaultSearchOptions(lang: string): WalineSearchOptions {
         ...params,
       }).toString()}`,
     )
-      .then((resp) => <Promise<GifResult>>resp.json())
+      .then((resp) => resp.json() as Promise<GifResult>)
       .then(({ data }) =>
         data.map((gif) => ({
           title: gif.title,
@@ -88,4 +88,4 @@ export function getDefaultSearchOptions(lang: string): WalineSearchOptions {
     more: (word: string, offset = 0): Promise<WalineSearchResult> =>
       fetchGiphy('search', { q: word, offset: offset.toString() }),
   };
-}
+};

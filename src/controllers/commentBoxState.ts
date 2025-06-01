@@ -1,14 +1,16 @@
-import { addComment, updateComment, type WalineCommentData } from '@waline/api';
+import type { WalineCommentData } from '@waline/api';
+import type { ReactiveComment } from './commentListState';
+import { addComment, updateComment } from '@waline/api';
 import { createEffect, createMemo, createResource, createRoot, createSignal } from 'solid-js';
 import { getWordNumber } from '../waline/utils/wordCount';
-import commentListState, { makeDataReactive, type ReactiveComment } from './commentListState';
+import commentListState, { makeDataReactive } from './commentListState';
 import configProvider from './configProvider';
 import userInfoState from './userInfoState';
 
 const commentBoxState = createRoot(() => {
   const [edit, setEdit] = createSignal<ReactiveComment | null>(null);
-  const [rootId, setRootId] = createSignal<string | undefined>();
-  const [replyId, setReplyId] = createSignal<string | undefined>();
+  const [rootId, setRootId] = createSignal<number | undefined>();
+  const [replyId, setReplyId] = createSignal<number | undefined>();
   const [replyUser, setReplyUser] = createSignal<string | undefined>();
   const [content, setContent] = createSignal('');
   const [wordCount, setWordCount] = createSignal(0);

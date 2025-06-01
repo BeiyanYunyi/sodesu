@@ -52,8 +52,7 @@ const localeKeys = [
   'reactionTitle',
 ];
 
-export function generateLocale(locale: string[]): WalineLocale {
-  return Object.fromEntries(
+export const generateLocale = (locale: string[]): WalineLocale =>
+  Object.fromEntries(
     locale.map((item, index) => [localeKeys[index], item]),
   ) as unknown as WalineLocale;
-}

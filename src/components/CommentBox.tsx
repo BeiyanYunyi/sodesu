@@ -1,4 +1,5 @@
-import { type Component, createMemo, Show } from 'solid-js';
+import type {Component} from 'solid-js';
+import {  createMemo, Show } from 'solid-js';
 import commentBoxState, { submitComment } from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
 import userInfoState, { openProfile } from '../controllers/userInfoState';

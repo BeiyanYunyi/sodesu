@@ -39,23 +39,21 @@ export interface WalineCommentCountOptions {
   lang?: string;
 }
 
-export { type WalineAbort } from './typings/index.js';
-
-export function commentCount({
+export const commentCount = ({
   serverURL,
   path = window.location.pathname,
   selector = '.waline-comment-count',
   lang = navigator.language,
-}: WalineCommentCountOptions): WalineAbort {
+}: WalineCommentCountOptions): WalineAbort => {
   const controller = new AbortController();
 
   // comment count
   const elements = document.querySelectorAll<HTMLElement>(selector);
 
-  if (elements.length) {
+  if (elements.length)
     void fetchCommentCount({
       serverURL: getServerURL(serverURL),
-      paths: Array.from(elements).map((element) => decodePath(getQuery(element) || path)),
+      paths: Array.from(elements).map((element) => decodePath(getQuery(element) ?? path)),
       lang,
       signal: controller.signal,
     })
@@ -65,7 +63,6 @@ export function commentCount({
         });
       })
       .catch(errorHandler);
-  }
 
   return controller.abort.bind(controller);
-}
+};

@@ -1,10 +1,6 @@
 /// <reference types="user-agent-data-types" />
 
-export async function userAgent(): Promise<string> {
-  if (!navigator) {
-    return '';
-  }
-
+export const userAgent = async (): Promise<string> => {
   const { userAgentData } = navigator;
   let ua = navigator.userAgent;
 
@@ -13,7 +9,9 @@ export async function userAgent(): Promise<string> {
     return ua;
   }
 
-  const { platformVersion } = await userAgentData.getHighEntropyValues(['platformVersion']);
+  const { platformVersion } = await userAgentData.getHighEntropyValues([
+    'platformVersion',
+  ]);
 
   if (!platformVersion) {
     return ua;
@@ -26,4 +24,4 @@ export async function userAgent(): Promise<string> {
   }
 
   return ua;
-}
+};

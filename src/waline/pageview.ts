@@ -1,6 +1,7 @@
+import type { GetArticleCounterResponse } from '@waline/api';
 import type { WalineAbort } from './typings/index.js';
 
-import { type GetArticleCounterResponse, getPageview, updatePageview } from '@waline/api';
+import { getPageview, updatePageview } from '@waline/api';
 import { errorHandler, getQuery, getServerURL } from './utils/index.js';
 
 export interface WalinePageviewCountOptions {
@@ -48,9 +49,10 @@ export interface WalinePageviewCountOptions {
   lang?: string;
 }
 
-export { type WalineAbort } from './typings/index.js';
-
-function renderVisitorCount(counts: GetArticleCounterResponse, countElements: HTMLElement[]): void {
+const renderVisitorCount = (
+  counts: GetArticleCounterResponse,
+  countElements: HTMLElement[],
+): void => {
   countElements.forEach((element, index) => {
     const count = counts[index].time;
 
@@ -60,15 +62,15 @@ function renderVisitorCount(counts: GetArticleCounterResponse, countElements: HT
 
     element.innerText = count.toString();
   });
-}
+};
 
-export function pageviewCount({
+export const pageviewCount = ({
   serverURL,
   path = window.location.pathname,
   selector = '.waline-pageview-count',
   update = true,
   lang = navigator.language,
-}: WalinePageviewCountOptions): WalineAbort {
+}: WalinePageviewCountOptions): WalineAbort => {
   const controller = new AbortController();
 
   const elements = Array.from(
@@ -85,7 +87,7 @@ export function pageviewCount({
   const fetch = (elements: HTMLElement[]): Promise<void> =>
     getPageview({
       serverURL: getServerURL(serverURL),
-      paths: elements.map((element) => getQuery(element) || path),
+      paths: elements.map((element) => getQuery(element) ?? path),
       lang,
       signal: controller.signal,
     })
@@ -114,4 +116,4 @@ export function pageviewCount({
   }
 
   return controller.abort.bind(controller);
-}
+};

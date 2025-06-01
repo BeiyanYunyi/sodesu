@@ -1,3 +1,5 @@
-export function getQuery(element: HTMLElement): string | null {
-  return element.dataset.path || null;
-}
+export const getQuery = (element: HTMLElement): string | null => {
+  const { path } = element.dataset;
+
+  return path?.length ? path : null;
+};
