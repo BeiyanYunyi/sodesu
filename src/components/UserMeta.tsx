@@ -22,7 +22,7 @@ const UserMeta: Component = () => {
               <input
                 id={`wl-${kind}`}
                 type={kind === 'mail' ? 'email' : 'text'}
-                class="flex-grow border-none bg-transparent p-2 text-sColor outline-none transition-colors duration-300 focus:bg-sBgLight"
+                class="flex-grow border-none bg-transparent p-2 text-sColor outline-none transition-colors duration-300 focus:bg-sBgLight focus-visible:outline-none"
                 value={value()}
                 ref={inputRefs[kind]}
                 onInput={(e) => {

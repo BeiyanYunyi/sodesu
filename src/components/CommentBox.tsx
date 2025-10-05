@@ -1,5 +1,5 @@
-import type {Component} from 'solid-js';
-import {  createMemo, Show } from 'solid-js';
+import type { Component } from 'solid-js';
+import { createMemo, Show } from 'solid-js';
 import commentBoxState, { submitComment } from '../controllers/commentBoxState';
 import configProvider from '../controllers/configProvider';
 import userInfoState, { openProfile } from '../controllers/userInfoState';
@@ -45,7 +45,7 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
             <UserMeta />
           </Show>
           <textarea
-            class="mx-2 my-3 min-h-35 resize-y rounded-lg border-none bg-transparent text-sm text-sColor font-sans outline-none transition-colors duration-300 disabled:cursor-not-allowed focus:bg-sBgLight"
+            class="mx-2 my-3 min-h-35 resize-y rounded-lg border-none bg-transparent text-sm text-sColor font-sans outline-none transition-colors duration-300 disabled:cursor-not-allowed focus:bg-sBgLight focus-visible:outline-none"
             onInput={(e) => {
               setContent(e.currentTarget.value);
             }}
@@ -66,7 +66,7 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
                 <hr class="my-[0.825rem] border-sBgLight border-dashed" />
                 <h4>{locale().preview}</h4>
                 <div
-                  class={`my-3 text-sm break-word text-sColor sds-content ${
+                  class={`sds-content my-3 text-sm text-sColor break-word ${
                     config().commentClassName
                   }`}
                   /* eslint-disable-next-line solid/no-innerhtml */
