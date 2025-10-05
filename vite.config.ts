@@ -1,5 +1,6 @@
 import Unocss from 'unocss/vite';
 import { defineConfig } from 'vite';
+// import analyzer from 'vite-bundle-analyzer';
 import Inspect from 'vite-plugin-inspect';
 import solidPlugin from 'vite-plugin-solid';
 
@@ -8,7 +9,7 @@ export default defineConfig({
     Unocss(),
     solidPlugin(),
     Inspect(),
-    // analyzer(),
+    // analyzer()
   ],
   build: {
     target: 'esnext',
