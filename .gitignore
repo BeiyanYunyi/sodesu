@@ -3,3 +3,4 @@ dist
 docs/.vitepress/cache
 dev-dist
 .eslintcache
+.DS_Store

@@ -1,4 +1,4 @@
-import type { WalineInitOptions, WalineProps } from '@waline/client';
+import type { WalineInitOptions, WalineProps } from '../waline/typings';
 import type { WalineConfig } from '../waline/utils/config';
 
 export default interface SodesuInitOptions
