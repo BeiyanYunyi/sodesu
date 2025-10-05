@@ -1,6 +1,6 @@
 import type { WalineComment, WalineCommentStatus } from '@waline/api';
-import type { WalineCommentSorting } from '@waline/client';
 import type { Accessor, Setter } from 'solid-js';
+import type { WalineCommentSorting } from '../waline/typings';
 import { getComment } from '@waline/api';
 import { createRoot, createSignal } from 'solid-js';
 import configProvider from './configProvider';

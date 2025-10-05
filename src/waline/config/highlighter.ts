@@ -24,13 +24,13 @@
  */
 
 const WORD_REGEXP =
-  /[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\uAC00-\uD7AF\u0400-\u04FF]+|\w+/;
+  /[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af\u0400-\u04FF]+|\w+/;
 const LEFT_ANGLE_REGEXP = /</;
-const LINE_COMMENT_REGEXP = /(?:^|\s)\/\/(.+)$/gm;
-const BLOCK_COMMENT_REGEXP = /\/\*([\s\S]*?)\*\//g;
+const LINE_COMMENT_REGEXP = /(?:^|\s)\/\/(.+?)$/gm;
+const BLOCK_COMMENT_REGEXP = /\/\*([\S\s]*?)\*\//gm;
 const REGEXP = new RegExp(
   `(${WORD_REGEXP.source}|${LEFT_ANGLE_REGEXP.source})|((?:${LINE_COMMENT_REGEXP.source})|(?:${BLOCK_COMMENT_REGEXP.source}))`,
-  'gim',
+  'gmi',
 );
 
 const COLORS = [

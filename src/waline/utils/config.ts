@@ -1,14 +1,4 @@
-import type {
-  WalineEmojiInfo,
-  WalineEmojiMaps,
-  WalineEmojiPresets,
-  WalineHighlighter,
-  WalineImageUploader,
-  WalineLocale,
-  WalineProps,
-  WalineSearchOptions,
-  WalineTeXRenderer,
-} from '../typings/index.js';
+import { decodePath, isLinkHttp, removeEndingSplash } from './path.js';
 import {
   DEFAULT_EMOJI,
   DEFAULT_REACTION,
@@ -20,7 +10,17 @@ import {
   getLocale,
   getMeta,
 } from '../config/index.js';
-import { decodePath, isLinkHttp, removeEndingSplash } from './path.js';
+import type {
+  WalineEmojiInfo,
+  WalineEmojiMaps,
+  WalineEmojiPresets,
+  WalineHighlighter,
+  WalineImageUploader,
+  WalineLocale,
+  WalineProps,
+  WalineSearchOptions,
+  WalineTeXRenderer,
+} from '../typings/index.js';
 
 export interface WalineEmojiConfig {
   tabs: Pick<WalineEmojiInfo, 'name' | 'icon' | 'items'>[];
