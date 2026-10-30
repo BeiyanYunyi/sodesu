@@ -77,6 +77,7 @@
     "format:check": "oxfmt --disable-nested-config --check .",
     "check": "svelte-check --tsgo --tsconfig ./tsconfig.json",
     "test": "vitest run",
+    "test:ssr": "node --import tsx scripts/checkSSR.ts",
     "test:build": "node --import tsx scripts/checkBuild.ts && tsc -p tests/tsconfig.consumer.json"
   },
   "peerDependencies": {

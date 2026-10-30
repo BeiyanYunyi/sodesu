@@ -4,7 +4,7 @@ import type SodesuInitOptions from './types/SodesuInitOptions';
 import { getRoot } from './vendor/waline/utils/getRoot';
 import 'virtual:uno.css';
 
-export type { default as SodesuInitOptions } from './types/SodesuInitOptions';
+export type { default as SodesuInitOptions, SodesuInitialData } from './types/SodesuInitOptions';
 export function init({ el = '#sodesu', ...options }: SodesuInitOptions) {
   const target = el ? getRoot(el) : null;
   if (!target) throw new Error("Option 'el' does not match any DOM element!");

@@ -75,3 +75,28 @@ $$
 $$
 
 从一致性的角度出发，我会推荐 `markdown-it`，这是 waline 后端使用的渲染器。你可以参照它的代码，对渲染器进行配置。
+
+## 服务端渲染（SSR）
+
+Sodesu 提供数据预加载能力，可在服务端获取评论，作为初始数据，实现服务端渲染。
+
+```svelte
+<script lang="ts">
+  import Sodesu from 'sodesu-comment/component';
+  import type { SodesuInitialData, SodesuInitOptions } from 'sodesu-comment';
+  import 'sodesu-comment/sodesu-comment.css';
+
+  let { options, initialData }: {
+    options: Omit<SodesuInitOptions, 'el'>;
+    initialData: SodesuInitialData;
+  } = $props();
+</script>
+
+<Sodesu {...options} {initialData} />
+```
+
+`initialData` 包含 `data`（含嵌套回复）、`count` 和 `totalPages`，对应 `@waline/api` 的 `getComment` 返回值。
+
+初始数据采用 **stale-while-revalidate**：服务端先渲染评论，客户端 hydration 后重新请求第一页。后续客户端数据，由客户端请求维护。
+
+浏览器中的 `init({ ..., initialData })` 也支持预载数据，但 `init` 是挂载 API；SSR 页面的 hydration 应交给宿主 Svelte 集成（例如SvelteKit）处理。

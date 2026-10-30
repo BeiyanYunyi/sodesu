@@ -46,11 +46,15 @@
       config.commentSorting,
     ]),
   );
+  let previousRequestKey = untrack(() => requestKey);
   $effect(() => {
-    void requestKey;
+    const key = requestKey;
     untrack(() => {
       model.sorting = config.commentSorting;
-      void app.refresh(true);
+      // Revalidate the initial snapshot without clearing it. Different queries reset the list.
+      if (key === previousRequestKey) void app.load();
+      else void app.refresh(true);
+      previousRequestKey = key;
     });
   });
   const countKey = $derived(
@@ -128,7 +132,7 @@
       />{/each}
   </div>
   <div class="py-[1em] text-center" aria-live="polite">
-    {#if model.status === 'error'}<CommonButton onclick={() => app.load(model.page + 1)}
+    {#if model.status === 'error'}<CommonButton onclick={() => app.retry()}
         >{locale.refresh}</CommonButton
       >
     {:else if model.status === 'loading'}<div

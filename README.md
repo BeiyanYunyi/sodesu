@@ -13,6 +13,7 @@ pnpm install
 pnpm dev
 pnpm build
 pnpm test
+pnpm test:ssr
 pnpm test:build
 pnpm docs:build
 pnpm lint

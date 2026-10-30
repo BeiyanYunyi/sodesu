@@ -56,11 +56,78 @@ afterEach(async () => {
 });
 
 describe('Svelte app lifecycle and interactions', () => {
+  it('retains initial comments while revalidating, then replaces them before pagination', async () => {
+    let finish!: (value: ReturnType<typeof response>) => void;
+    vi.mocked(getComment).mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+    );
+    const initialData = response(42, 2);
+    const { query, instance } = create({ initialData, path: '/seeded' });
+    expect(query.getByText('User 42')).toBeTruthy();
+    expect(getComment).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({ page: 1, path: '/seeded' }),
+    );
+    finish(response(7, 2));
+    await query.findByText('User 7');
+    expect(query.queryByText('User 42')).toBeNull();
+    await fireEvent.click(query.getByRole('button', { name: 'Load More...' }));
+    expect(getComment).toHaveBeenLastCalledWith(expect.objectContaining({ page: 2 }));
+    await query.findByText('User 1');
+    expect(query.getByText('User 7')).toBeTruthy();
+    instance.update({ path: '/next' });
+    await waitFor(() =>
+      expect(getComment).toHaveBeenLastCalledWith(
+        expect.objectContaining({ page: 1, path: '/next' }),
+      ),
+    );
+    expect(query.queryByText('User 7')).toBeNull();
+    expect(initialData.data[0].objectId).toBe(42);
+  });
+  it('retains stale comments on revalidation failure and retries the first page', async () => {
+    vi.mocked(getComment).mockRejectedValueOnce(new Error('Revalidation failed'));
+    const { query } = create({ initialData: response(42, 2) });
+    await query.findByText('Revalidation failed');
+    expect(query.getByText('User 42')).toBeTruthy();
+    await fireEvent.click(query.getByRole('button', { name: /refresh/i }));
+    expect(getComment).toHaveBeenLastCalledWith(expect.objectContaining({ page: 1 }));
+    await query.findByText('User 1');
+    expect(query.queryByText('User 42')).toBeNull();
+  });
+  it('revalidates an empty snapshot and ignores stale responses after navigation', async () => {
+    let finish!: (value: ReturnType<typeof response>) => void;
+    vi.mocked(getComment).mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          finish = resolve;
+        }),
+    );
+    const { query, instance } = create({ initialData: { data: [], count: 0, totalPages: 0 } });
+    expect(getComment).toHaveBeenCalledTimes(1);
+    const signal = vi.mocked(getComment).mock.calls[0][0].signal!;
+    instance.update({ path: '/next' });
+    expect(signal.aborted).toBe(true);
+    await query.findByText('User 1');
+    finish(response(99));
+    await Promise.resolve();
+    flushSync();
+    expect(query.queryByText('User 99')).toBeNull();
+    await fireEvent.click(query.getByRole('button', { name: 'Oldest' }));
+    await waitFor(() =>
+      expect(getComment).toHaveBeenLastCalledWith(
+        expect.objectContaining({ page: 1, sortBy: 'insertedAt_asc' }),
+      ),
+    );
+  });
   it('updates native component props without sharing state', async () => {
     const target = document.createElement('div');
     document.body.append(target);
     const host = mount(NativeHost, { target });
     flushSync();
+    expect(within(target).getByText('Reactive seed')).toBeTruthy();
+    expect(getComment).toHaveBeenCalledWith(expect.objectContaining({ page: 1, path: '/native' }));
     await fireEvent.click(within(target).getByRole('button', { name: 'Navigate' }));
     await waitFor(() =>
       expect(getComment).toHaveBeenLastCalledWith(
@@ -254,7 +321,9 @@ describe('Svelte app lifecycle and interactions', () => {
     expect(forms[1].querySelector('textarea')!.value).toBe('');
     expect(forms[1].querySelector('strong')).toBeNull();
     expect(main.querySelector('textarea')!.value).toBe('**main draft**');
-    await fireEvent.click(within(forms[1].parentElement!).getByRole('button', { name: 'Cancel reply' }));
+    await fireEvent.click(
+      within(forms[1].parentElement!).getByRole('button', { name: 'Cancel reply' }),
+    );
     expect(root.querySelectorAll('textarea')).toHaveLength(1);
     expect(main.querySelector('textarea')!.value).toBe('**main draft**');
   });
@@ -303,7 +372,9 @@ describe('Svelte app lifecycle and interactions', () => {
     const first = root.querySelector('.sds-comment form')!;
     await fireEvent.input(first.querySelector('textarea')!, { target: { value: 'old reply' } });
     await fireEvent.submit(first);
-    await fireEvent.click(within(first.parentElement!).getByRole('button', { name: 'Cancel reply' }));
+    await fireEvent.click(
+      within(first.parentElement!).getByRole('button', { name: 'Cancel reply' }),
+    );
     await fireEvent.click(query.getByRole('button', { name: 'Reply' }));
     const reopened = root.querySelector('.sds-comment form')!;
     await fireEvent.input(reopened.querySelector('textarea')!, { target: { value: 'new draft' } });

@@ -62,12 +62,13 @@ export function createAppState(options: () => Omit<SodesuInitOptions, 'el'>, id:
     noCopyright: options().copyright === false || options().noCopyright === true,
     renderPreview: options().renderPreview ?? (async (text: string) => starkdown(text)),
   });
+  const initialData = options().initialData;
   const state = $state({
-    data: [] as Comment[],
-    count: 0,
-    page: 0,
-    totalPages: 0,
-    status: 'loading' as 'loading' | 'success' | 'error',
+    data: structuredClone($state.snapshot(initialData?.data ?? [])) as Comment[],
+    count: initialData?.count ?? 0,
+    page: initialData ? 1 : 0,
+    totalPages: initialData?.totalPages ?? 0,
+    status: (initialData ? 'success' : 'loading') as 'loading' | 'success' | 'error',
     error: '',
     sorting: options().commentSorting ?? 'latest',
     editorRevision: 0,
@@ -79,6 +80,7 @@ export function createAppState(options: () => Omit<SodesuInitOptions, 'el'>, id:
   });
   let active = true;
   let generation = 0;
+  let requestedPage = 1;
   let request: AbortController | undefined;
   let profile: Window | null = null;
   let loginWindow: Window | null = null;
@@ -86,6 +88,7 @@ export function createAppState(options: () => Omit<SodesuInitOptions, 'el'>, id:
     if (active) state.error = error instanceof Error ? error.message : String(error);
   };
   async function load(page = 1) {
+    requestedPage = page;
     request?.abort();
     const controller = (request = new AbortController());
     const epoch = generation;
@@ -299,6 +302,7 @@ export function createAppState(options: () => Omit<SodesuInitOptions, 'el'>, id:
       return config;
     },
     load,
+    retry: () => load(requestedPage),
     refresh,
     submit,
     like,
