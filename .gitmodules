@@ -1,0 +1,3 @@
+[submodule "waline"]
+	path = waline
+	url = https://github.com/walinejs/waline
