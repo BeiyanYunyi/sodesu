@@ -106,8 +106,8 @@ export const pageviewCount = ({
       path,
       lang,
     }).then((counts) => {
-      renderVisitorCount(counts, normalElements);
-    });
+      if (!controller.signal.aborted) renderVisitorCount(counts, normalElements);
+    }).catch(errorHandler);
 
     // if we should fetch count of other pages
     if (elementsNeedstoBeFetched.length > 0) {

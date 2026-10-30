@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sodesu Svelte 验收</title>
+    <link rel="stylesheet" href="/dist/sodesu-comment.css?preview=svelte-final" />
+    <style>
+      body {
+        margin: 24px auto;
+        padding: 0 16px;
+        max-width: 880px;
+        font-family: system-ui;
+      }
+      section {
+        margin-block: 24px;
+      }
+      #dark {
+        background: #1e1e1e;
+        padding: 12px;
+        border-radius: 12px;
+      }
+      h1 {
+        font-size: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Sodesu · Svelte 5</h1>
+    <p>本地模拟数据：亮色 / 暗色独立实例，支持预览与回复。</p>
+    <section id="light"></section>
+    <section id="dark"></section>
+    <script type="module">
+      import { init } from '/dist/sodesu.aio.mjs?preview=svelte-final';
+      const originalFetch = window.fetch;
+      window.fetch = async (input, options) => {
+        if (!String(input).startsWith('https://fixture.invalid'))
+          return originalFetch(input, options);
+        return new Response(
+          JSON.stringify({
+            errno: 0,
+            data: {
+              count: 2,
+              totalPages: 1,
+              page: 1,
+              pageSize: 10,
+              data: [
+                {
+                  objectId: 1,
+                  nick: 'Svelte 用户',
+                  avatar: '/src/assets/favicon.svg',
+                  time: Date.now() - 60000,
+                  type: 'administrator',
+                  browser: 'Chrome 142',
+                  os: 'macOS',
+                  addr: '本地',
+                  like: 3,
+                  comment:
+                    '<p>这是一条 <strong>Markdown</strong> 评论。</p><blockquote><p>保持 Waline 配色和排版</p></blockquote><pre><code>const app = init(options);</code></pre>',
+                  children: [
+                    {
+                      objectId: 2,
+                      pid: 1,
+                      rid: 1,
+                      nick: '回复用户',
+                      time: Date.now(),
+                      avatar: '/src/assets/favicon.svg',
+                      like: 0,
+                      comment: '<p>嵌套回复在窄屏下也能正确排列。</p>',
+                    },
+                  ],
+                },
+              ],
+            },
+          }),
+          { headers: { 'Content-Type': 'application/json' } },
+        );
+      };
+      init({ el: '#light', serverURL: 'https://fixture.invalid', lang: 'zh-CN', login: 'disable' });
+      init({
+        el: '#dark',
+        serverURL: 'https://fixture.invalid',
+        lang: 'zh-CN',
+        dark: true,
+        login: 'disable',
+      });
+    </script>
+  </body>
+</html>

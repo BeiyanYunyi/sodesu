@@ -1,8 +1,6 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
@@ -13,11 +11,20 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": true
   },
   "ts-node": {
     "esm": true,
     "transpileOnly": true
   },
-  "exclude": ["dist"]
+  "exclude": ["dist", "node_modules", "waline", "docs", "scripts/checkBuild.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.svelte",
+    "vite.config.ts",
+    "svelte.config.ts",
+    "uno.config.ts",
+    "scripts/**/*.ts"
+  ]
 }

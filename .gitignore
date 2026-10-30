@@ -3,3 +3,5 @@ dist
 docs/.vitepress/cache
 dev-dist
 .DS_Store
+
+.svelte-check

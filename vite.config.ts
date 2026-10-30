@@ -1,18 +1,12 @@
 import Unocss from 'unocss/vite';
 import { defineConfig } from 'vite';
-// import analyzer from 'vite-bundle-analyzer';
-import Inspect from 'vite-plugin-inspect';
-import solidPlugin from 'vite-plugin-solid';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 
 export default defineConfig({
-  plugins: [
-    Unocss(),
-    solidPlugin(),
-    Inspect(),
-    // analyzer()
-  ],
+  plugins: [Unocss({ inspector: false }), svelte()],
+  optimizeDeps: { entries: ['index.html'] },
   build: {
-    target: 'esnext',
-    lib: { entry: 'src/index.tsx', name: 'Sodesu' },
+    target: 'es2022',
+    lib: { entry: 'src/index.ts', name: 'Sodesu', cssFileName: 'sodesu-comment' },
   },
 });

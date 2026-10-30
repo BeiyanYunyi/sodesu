@@ -27,6 +27,7 @@
     "dist/**",
     "docs/.vitepress/cache/**",
     "docs/.vitepress/dist/**",
-    "src/vendor/waline/**"
+    "src/vendor/waline/**",
+    ".svelte-check/**"
   ]
 }
