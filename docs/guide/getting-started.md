@@ -47,7 +47,7 @@ pnpm add sodesu-comment
 
 安装好以后，在你的项目中引入并初始化 Sodesu。
 
-如果你的项目中已经存在 Solid.js，那么你可以引入不含 Solid.js 的 Sodesu，这可以让你的 JS 体积小十几 kB。
+如果你的项目中已经存在 Svelte，那么你可以引入不含 Svelte 的 Sodesu，这可以复用应用已有的 Svelte 运行时。
 
 ```ts
 import { init } from 'sodesu-comment';
@@ -57,13 +57,13 @@ init({
 });
 ```
 
-如果你的项目中没有 Solid.js，那么你可以选择安装它，然后回到上一步：
+如果你的项目中没有 Svelte，那么你可以选择安装它，然后回到上一步：
 
 ```bash
-pnpm add solid-js
+pnpm add svelte
 ```
 
-当然，你也可以选择引入已经包含了 Solid.js 的 Sodesu：
+当然，你也可以选择引入已经包含了 Svelte 的 Sodesu：
 
 ```ts
 import { init } from 'sodesu-comment/aio';
@@ -84,10 +84,10 @@ import 'sodesu-comment/sodesu-comment.css';
 ```ts
 import presetSodesu from 'sodesu-comment/preset';
 import safeList from 'sodesu-comment/safeList';
-import { defineConfig, presetWind } from 'unocss';
+import { defineConfig, presetWind3 } from 'unocss';
 
 export default defineConfig({
-  presets: [presetWind(), presetSodesu()],
+  presets: [presetWind3(), presetSodesu()],
   safelist: safeList,
 });
 ```
@@ -98,13 +98,34 @@ export default defineConfig({
 
 ```ts
 import presetSodesu from 'sodesu-comment/preset';
-import { defineConfig, presetWind } from 'unocss';
+import { defineConfig, presetWind3 } from 'unocss';
 
 export default defineConfig({
-  presets: [presetWind(), presetSodesu()],
-  include: ['**/*.jsx', '**/*.tsx', '**/*.vue', '**/*.html', '**/*.astro', /.*sodesu.*/],
+  presets: [presetWind3(), presetSodesu()],
+  include: [
+    '**/*.jsx',
+    '**/*.tsx',
+    '**/*.svelte',
+    '**/*.vue',
+    '**/*.html',
+    '**/*.astro',
+    /.*sodesu.*/,
+  ],
 });
 ```
+
+### Svelte 组件
+
+```svelte
+<script lang="ts">
+  import Sodesu from 'sodesu-comment/component';
+  import 'sodesu-comment/sodesu-comment.css';
+</script>
+
+<Sodesu serverURL="https://your-domain.vercel.app" path="/example" />
+```
+
+组件 props 支持响应式更新。每次挂载都会创建独立的配置、列表和编辑状态；卸载会清理监听器和请求。同一页面可以挂载多个实例。
 
 ## 单页应用支持
 

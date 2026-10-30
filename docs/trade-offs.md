@@ -67,6 +67,8 @@ Sodesu 会在评论区右下角显示一行类似这样的版权信息：
   --sds-disable-bgcolor: #f8f8f8;
   --sds-disable-color: #000;
   --sds-code-bgcolor: #282c34;
+  --sds-warning-color: #915930;
+  --sds-warning-bg-color: rgb(234 179 8 / 14%);
   --sds-bq-color: #f0f0f0;
   --sds-avatar-size: 3.25rem;
   --sds-avatar-radius: 50%;

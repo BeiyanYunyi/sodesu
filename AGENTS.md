@@ -1,6 +1,6 @@
 # Sodesu
 
-Sodesu is a rewrite of the waline comment system using SolidJS and UnoCSS.
+Sodesu is a rewrite of the waline comment system using Svelte and UnoCSS.
 
 ## Directory Structure
 
