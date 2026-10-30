@@ -1,3 +1,4 @@
+import type { Signal } from 'solid-js';
 import type { ReactiveComment } from './commentListState';
 import { makePersisted } from '@solid-primitives/storage';
 import { updateComment } from '@waline/api';
@@ -7,13 +8,13 @@ import userInfoState from './userInfoState';
 
 export type LikeID = number | string;
 const likeState = createRoot(() => {
-  const [likes, setLikes] = makePersisted(createSignal<LikeID[]>([]), {
+  const [likes, setLikes] = makePersisted<LikeID[], Signal<LikeID[]>>(createSignal<LikeID[]>([]), {
     storage: localStorage,
     name: 'WALINE_LIKE',
     deserialize: (data) => {
       try {
         return JSON.parse(data);
-      } catch (e) {
+      } catch {
         return [];
       }
     },

@@ -1,4 +1,5 @@
 import type { UserInfo } from '@waline/api';
+import type { Signal } from 'solid-js';
 import { makePersisted } from '@solid-primitives/storage';
 import { login } from '@waline/api';
 import { createMemo, createRoot, createSignal, onCleanup, onMount } from 'solid-js';
@@ -7,12 +8,12 @@ import { refresh } from './commentListState';
 import configProvider from './configProvider';
 
 const userInfoState = createRoot(() => {
-  const [userInfo, setUserInfo] = makePersisted(createSignal<UserInfo | null>(null), {
+  const [userInfo, setUserInfo] = makePersisted<UserInfo | null, Signal<UserInfo | null>>(createSignal<UserInfo | null>(null), {
     name: 'WALINE_USER',
     deserialize: (data) => {
       try {
         return JSON.parse(data);
-      } catch (e) {
+      } catch {
         return null;
       }
     },
