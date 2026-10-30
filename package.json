@@ -2,7 +2,7 @@
   "name": "sodesu-comment",
   "type": "module",
   "version": "0.5.2",
-  "packageManager": "pnpm@10.18.0+sha512.e804f889f1cecc40d572db084eec3e4881739f8dec69c0ff10d2d1beff9a4e309383ba27b5b750059d7f4c149535b6cd0d2cb1ed3aeb739239a4284a68f40cfa",
+  "packageManager": "pnpm@12.16.1+sha512.091d1dee7927575661b25dab3c2ae31cafc1c54d6b71ed6a6600cf0c1cb10434a447eae14015f1b23e2e6bedeed79df94a932e2164d2832280dce3fb32f656d1",
   "description": "Comment system with SolidJS",
   "license": "AGPL-3.0-or-later",
   "repository": {
@@ -123,17 +123,5 @@
     "vitepress": "1.6.4",
     "vue": "^3.5.22",
     "workbox-window": "^7.3.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "is-core-module": "npm:@nolyfill/is-core-module@^1",
-      "safe-buffer": "npm:@nolyfill/safe-buffer@^1",
-      "string.prototype.matchall": "npm:@nolyfill/string.prototype.matchall@^1"
-    },
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "unrs-resolver",
-      "vue-demi"
-    ]
   }
 }

@@ -1,0 +1,6 @@
+allowBuilds:
+  esbuild: true
+overrides:
+  is-core-module: 'npm:@nolyfill/is-core-module@^1'
+  safe-buffer: 'npm:@nolyfill/safe-buffer@^1'
+  string.prototype.matchall: 'npm:@nolyfill/string.prototype.matchall@^1'
