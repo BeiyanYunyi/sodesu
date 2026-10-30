@@ -1,4 +1,3 @@
-/* eslint-disable solid/reactivity */
 import type { Component } from 'solid-js';
 import type SodesuInitOptions from './types/SodesuInitOptions';
 import App from './App';

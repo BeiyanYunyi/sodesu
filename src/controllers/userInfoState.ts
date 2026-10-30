@@ -8,17 +8,20 @@ import { refresh } from './commentListState';
 import configProvider from './configProvider';
 
 const userInfoState = createRoot(() => {
-  const [userInfo, setUserInfo] = makePersisted<UserInfo | null, Signal<UserInfo | null>>(createSignal<UserInfo | null>(null), {
-    name: 'WALINE_USER',
-    deserialize: (data) => {
-      try {
-        return JSON.parse(data);
-      } catch {
-        return null;
-      }
+  const [userInfo, setUserInfo] = makePersisted<UserInfo | null, Signal<UserInfo | null>>(
+    createSignal<UserInfo | null>(null),
+    {
+      name: 'WALINE_USER',
+      deserialize: (data) => {
+        try {
+          return JSON.parse(data);
+        } catch {
+          return null;
+        }
+      },
+      serialize: (data) => JSON.stringify(data),
     },
-    serialize: (data) => JSON.stringify(data),
-  });
+  );
   const isLogin = createMemo(() => Boolean(userInfo()?.token));
   const isAdmin = createMemo(() => Boolean(userInfo()?.type === 'administrator'));
 
@@ -44,7 +47,7 @@ export async function userLogin() {
   const { setUserInfo } = userInfoState;
   const res = await login({ serverURL: config().serverURL, lang: config().lang });
   // TODO: respect remember option
-  const { remember, ...rest } = res;
+  const { remember: _remember, ...rest } = res;
   setUserInfo({ ...rest });
 }
 

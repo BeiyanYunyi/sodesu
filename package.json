@@ -69,7 +69,11 @@
     "build": "tsc && tsx scripts/vBuild.ts",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "lint": "oxlint -c .oxlintrc.json",
+    "lint:fix": "oxlint -c .oxlintrc.json --fix",
+    "format": "oxfmt --disable-nested-config --write .",
+    "format:check": "oxfmt --disable-nested-config --check ."
   },
   "peerDependencies": {
     "solid-js": "^1.9.3"
@@ -79,7 +83,6 @@
     "@webc.site/math": "^0.1.41"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^5.4.1",
     "@babel/core": "^7.28.4",
     "@babel/preset-typescript": "^7.27.1",
     "@giphy/js-types": "^5.1.0",
@@ -90,16 +93,13 @@
     "@types/babel__core": "^7.20.5",
     "@types/node": "^26.6.6",
     "@unocss/core": "^66.12.0",
-    "@unocss/eslint-plugin": "^66.12.0",
     "@vite-pwa/vitepress": "^1.0.0",
     "cross-env": "^10.1.0",
     "esbuild": "^0.28.2",
-    "eslint": "^9.37.0",
-    "eslint-plugin-format": "^1.0.2",
-    "eslint-plugin-solid": "^0.18.1",
     "katex": "^0.19.1",
     "lightningcss": "^1.33.0",
-    "prettier": "^3.9.10",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
     "rehype-document": "^7.0.3",
     "rehype-format": "^5.0.1",
     "rehype-katex": "^7.0.1",

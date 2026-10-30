@@ -28,7 +28,6 @@ const commentBoxState = createRoot(() => {
     },
   );
   const limit = createMemo(() => config().wordLimit);
-  let editorRef: HTMLTextAreaElement | undefined;
   createEffect(() => {
     setWordCount(getWordNumber(content()));
   });
@@ -66,7 +65,7 @@ const commentBoxState = createRoot(() => {
     wordLimit,
     isSubmitting,
     previewText,
-    editorRef,
+    editorRef: undefined as HTMLTextAreaElement | undefined,
     showPreview,
     setEdit,
     setReplyId,
@@ -145,7 +144,7 @@ export function submitComment() {
     // check mail
     if (
       (requiredMeta.includes('mail') && !comment.mail) ||
-      (comment.mail && !/^\w(?:[\w.\-]*\w)?@(?:\w(?:[\w-]*\w)?\.)*\w+$/.exec(comment.mail))
+      (comment.mail && !/^\w(?:[\w.-]*\w)?@(?:\w(?:[\w-]*\w)?\.)*\w+$/.exec(comment.mail))
     ) {
       inputRefs.mail?.focus();
 

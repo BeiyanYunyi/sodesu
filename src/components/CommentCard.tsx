@@ -89,7 +89,6 @@ const CommentCard: Component<{ content: ReactiveComment; rootId: number }> = (pr
             <a href={`#${props.content.pid}`}>@{props.content.reply_user!.nick}</a>
             <span>: </span>
           </Show>
-          {/* eslint-disable-next-line solid/no-innerhtml */}
           <div innerHTML={props.content.comment()} />
         </div>
         <Show when={showCommentBox()}>

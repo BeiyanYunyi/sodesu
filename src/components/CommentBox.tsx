@@ -69,7 +69,6 @@ const CommentBox: Component<{ isMain?: boolean }> = (props) => {
                   class={`sds-content my-3 text-sm text-sColor break-word ${
                     config().commentClassName
                   }`}
-                  /* eslint-disable-next-line solid/no-innerhtml */
                   innerHTML={previewText()}
                 />
               </div>

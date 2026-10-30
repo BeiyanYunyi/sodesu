@@ -29,7 +29,6 @@ const App: Component = () => {
     { serverURL: config().serverURL, path: config().path },
   );
   if (config().noCopyright) {
-    // eslint-disable-next-line no-console
     console.log(
       `Comment system powered by Sodesu v${version}, source code: https://github.com/BeiyanYunyi/sodesu`,
     );
