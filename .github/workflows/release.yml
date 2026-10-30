@@ -6,7 +6,7 @@ permissions:
 on:
   push:
     tags:
-      - "v*"
+      - 'v*'
 
 jobs:
   release:
@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 26
           cache: pnpm
-          registry-url: "https://registry.npmjs.org"
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install Dependencies
         run: pnpm i --prefer-offline

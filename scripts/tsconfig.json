@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "preserve",
-    "jsxImportSource": "solid-js",
     "module": "NodeNext",
     "moduleResolution": "nodenext",
     "resolveJsonModule": true,

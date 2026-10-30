@@ -2,6 +2,12 @@
 
 本文将介绍 Sodesu 相较于 Waline 官方前端的一些特色功能。
 
+## Svelte
+
+Sodesu 使用 Svelte 编写，区别于 Waline 官方前端使用的 Vue。加上一系列功能精简，减小了 50% 左右的体积。
+
+此前 Sodesu 使用 Solid.js v1，相比 Vue 版可减小 75%，但 Solid.js v2 加入了（对一个评论系统而言）过于臃肿的调度器，构建后大小已和 Vue 不相上下。因此，Sodesu 决定切换到 Svelte。
+
 ## 评论样式
 
 在博客中，我们有时会希望对用户的评论应用一些样式，Sodesu 提供了这个功能。
@@ -17,7 +23,17 @@ Sodesu.init({
 });
 ```
 
-其中的 `commentClassName` 会被应用到每条评论的容器上。
+`commentClassName` 会应用到每条评论和预览的内容容器，替代默认的 `sds-content` 类及其排版样式。未设置或设为空字符串时，使用默认样式。
+
+使用 UnoCSS preset 时，可通过 `content: false` 排除默认内容样式：
+
+```ts
+import presetSodesu from 'sodesu-comment/preset';
+
+presetSodesu({ content: false });
+```
+
+`content` 默认为 `true`。`sodesu-comment.css` 包含默认内容样式；指定 `commentClassName` 后，内容容器不再应用这些样式。
 
 ## 自定义 Markdown 渲染器
 

@@ -1,4 +1,3 @@
-import { decodePath, isLinkHttp, removeEndingSplash } from './path.js';
 import {
   DEFAULT_EMOJI,
   DEFAULT_REACTION,
@@ -21,25 +20,19 @@ import type {
   WalineSearchOptions,
   WalineTeXRenderer,
 } from '../typings/index.js';
+import { decodePath, isLinkHttp, removeEndingSplash } from './path.js';
 
 export interface WalineEmojiConfig {
   tabs: Pick<WalineEmojiInfo, 'name' | 'icon' | 'items'>[];
   map: WalineEmojiMaps;
 }
 
-export interface WalineConfig
-  extends Required<
-    Omit<
-      WalineProps,
-      | 'emoji'
-      | 'imageUploader'
-      | 'highlighter'
-      | 'texRenderer'
-      | 'wordLimit'
-      | 'reaction'
-      | 'search'
-    >
-  > {
+export interface WalineConfig extends Required<
+  Omit<
+    WalineProps,
+    'emoji' | 'imageUploader' | 'highlighter' | 'texRenderer' | 'wordLimit' | 'reaction' | 'search'
+  >
+> {
   locale: WalineLocale;
   wordLimit: [number, number] | false;
   emoji: (WalineEmojiInfo | WalineEmojiPresets)[] | null;
@@ -56,24 +49,19 @@ export const getServerURL = (serverURL: string): string => {
   return isLinkHttp(result) ? result : `https://${result}`;
 };
 
-const getWordLimit = (
-  wordLimit: WalineProps['wordLimit'],
-): [number, number] | false =>
-  Array.isArray(wordLimit) ? wordLimit : wordLimit ? [0, wordLimit] : false;
+const getWordLimit = (wordLimit: WalineProps['wordLimit']): [number, number] | false =>
+  Array.isArray(wordLimit)
+    ? wordLimit
+    : typeof wordLimit === 'number' && wordLimit > 0
+      ? [0, wordLimit]
+      : false;
 
-const fallback = <T = unknown>(
-  value: T | boolean | undefined,
-  fallback: T,
-): T | null =>
-  value == undefined || value === true
-    ? fallback
-    : value === false
-      ? null
-      : value;
+const withFallback = <T = unknown>(value: T | boolean | undefined, fallback: T): T | null =>
+  value == null || value === true ? fallback : value === false ? null : value;
 
 export const getConfig = ({
   serverURL,
-
+  // oxlint-disable-next-line typescript/no-useless-default-assignment
   path = location.pathname,
   lang = typeof navigator === 'undefined' ? 'en-US' : navigator.language,
   locale,
@@ -83,6 +71,7 @@ export const getConfig = ({
   pageSize = 10,
   wordLimit,
   noCopyright = false,
+  noRss = false,
   login = 'enable',
   recaptchaV3Key = '',
   turnstileKey = '',
@@ -110,14 +99,15 @@ export const getConfig = ({
   commentSorting,
   login,
   noCopyright,
+  noRss,
   recaptchaV3Key,
   turnstileKey,
   ...more,
-  // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
+  // oxlint-disable-next-line typescript/strict-boolean-expressions, typescript/prefer-nullish-coalescing
   reaction: reaction === true ? DEFAULT_REACTION : reaction || null,
-  imageUploader: fallback(imageUploader, defaultUploadImage),
-  highlighter: fallback(highlighter, defaultHighlighter),
-  texRenderer: fallback(texRenderer, defaultTeXRenderer),
-  emoji: fallback(emoji, DEFAULT_EMOJI),
-  search: fallback(search, getDefaultSearchOptions(lang)),
+  imageUploader: withFallback(imageUploader, defaultUploadImage),
+  highlighter: withFallback(highlighter, defaultHighlighter),
+  texRenderer: withFallback(texRenderer, defaultTeXRenderer),
+  emoji: withFallback(emoji, DEFAULT_EMOJI),
+  search: withFallback(search, getDefaultSearchOptions(lang)),
 });

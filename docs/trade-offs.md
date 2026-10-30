@@ -11,7 +11,10 @@ Sodesu 与 Waline 官方前端的设计目的并不相同。我写 Sodesu 的初
 Waline 后端使用 Prism 将 markdown 中的代码块进行高亮处理，而 Sodesu 的样式中并未包括 Prism。为了让 Sodesu 正确呈现代码样式（而非一片灰），你需要在前端额外引入 Prism 的样式。经测试，在所有官方主题中，`prism-tomorrow` 主题的效果是最好的。示例引入方式如下：
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css"
+/>
 ```
 
 ::: info
@@ -64,6 +67,8 @@ Sodesu 会在评论区右下角显示一行类似这样的版权信息：
   --sds-disable-bgcolor: #f8f8f8;
   --sds-disable-color: #000;
   --sds-code-bgcolor: #282c34;
+  --sds-warning-color: #915930;
+  --sds-warning-bg-color: rgb(234 179 8 / 14%);
   --sds-bq-color: #f0f0f0;
   --sds-avatar-size: 3.25rem;
   --sds-avatar-radius: 50%;

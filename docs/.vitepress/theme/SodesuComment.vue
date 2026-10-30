@@ -16,11 +16,16 @@
 
 <script setup lang="ts">
 import { useRoute } from 'vitepress';
-import { onMounted, ref, watch } from 'vue';
+import { onMounted, onBeforeUnmount, ref, watch } from 'vue';
 
 import '../../../dist/sodesu-comment.css';
 
 const route = useRoute();
+let disposed = false;
+onBeforeUnmount(() => {
+  disposed = true;
+  void sodesu.value?.destroy();
+});
 
 const sodesu = ref<ReturnType<(typeof import('../../../src/index'))['init']> | null>(null);
 
@@ -29,7 +34,9 @@ onMounted(async () => {
     import('../../../dist/sodesu.aio.mjs'),
     import('../../../src/utils/remarkRenderer'),
   ]);
+  if (disposed) return;
   sodesu.value = Sodesu.init({
+    path: route.path,
     el: '#sodesu-comment',
     serverURL: 'https://walinejs.comment.lithub.cc',
     dark: 'html.dark',

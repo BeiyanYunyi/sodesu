@@ -52,4 +52,8 @@ export default generateLocale([
   'Neueste',
   'Am beliebtesten',
   'Was denken Sie?',
+  'Ihr Kommentar wird überprüft und ist derzeit nur für Sie sichtbar. Nach der Genehmigung wird er öffentlich angezeigt.',
+  'Abonnieren Sie die Kommentare zu diesem Beitrag',
+  'Abonnieren Sie die Kommentare auf dieser Seite',
+  'Abonnieren Sie die Antworten auf Ihre Kommentare',
 ]);

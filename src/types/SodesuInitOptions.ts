@@ -1,22 +1,26 @@
 import type { WalineInitOptions, WalineProps } from '../vendor/waline/typings';
 import type { WalineConfig } from '../vendor/waline/utils/config';
 
-export default interface SodesuInitOptions
-  extends Omit<
-    WalineInitOptions,
-    'emoji' | 'search' | 'highlighter' | 'imageUploader' | 'texRenderer'
-  > {
+export default interface SodesuInitOptions extends Omit<
+  WalineInitOptions,
+  'emoji' | 'search' | 'highlighter' | 'imageUploader' | 'texRenderer'
+> {
+  copyright?: boolean;
   commentClassName?: string;
   renderPreview?: (text: string) => Promise<string>;
 }
 
 export interface SodesuConfig extends WalineConfig {
+  copyright?: boolean;
   commentClassName?: string;
   renderPreview: (text: string) => Promise<string>;
 }
 
-export interface SodesuProps
-  extends Omit<WalineProps, 'emoji' | 'search' | 'highlighter' | 'imageUploader' | 'texRenderer'> {
+export interface SodesuProps extends Omit<
+  WalineProps,
+  'emoji' | 'search' | 'highlighter' | 'imageUploader' | 'texRenderer'
+> {
+  copyright?: boolean;
   commentClassName?: string;
   renderPreview?: (text: string) => Promise<string>;
 }

@@ -25,6 +25,6 @@ onMounted(() =>
 );
 
 onUnmounted(() => {
-  exampleContainer.value && (exampleContainer.value.innerHTML = '');
+  if (exampleContainer.value) exampleContainer.value.innerHTML = '';
 });
 </script>
