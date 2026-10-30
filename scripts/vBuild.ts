@@ -14,7 +14,7 @@ for (const variant of [
     formats: ['es', 'umd'] as const,
     fileName: (format: string) => (format === 'es' ? 'sodesu.aio.mjs' : 'sodesu.aio.umd.cjs'),
   },
-  { entry: 'src/index.ts', formats: ['es'] as const, fileName: () => 'sodesu.svelte.js', external },
+  { entry: 'src/index.ts', formats: ['es'] as const, fileName: () => 'sodesu.mjs', external },
   {
     entry: 'src/ComponentEntry.ts',
     formats: ['es'] as const,

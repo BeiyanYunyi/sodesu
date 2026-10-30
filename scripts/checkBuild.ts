@@ -11,6 +11,7 @@ async function checkExports(value: unknown): Promise<void> {
     await Promise.all(Object.values(value).map(checkExports));
 }
 await checkExports(pkg.exports);
+assert.equal(pkg.exports['.'].import, './dist/sodesu.mjs');
 const require = createRequire(import.meta.url);
 const aio = await import('sodesu-comment/aio');
 assert.equal(typeof aio.init, 'function');

@@ -18,8 +18,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/sodesu.svelte.js",
-      "default": "./dist/sodesu.svelte.js"
+      "import": "./dist/sodesu.mjs",
+      "default": "./dist/sodesu.mjs"
     },
     "./sodesu-comment.css": "./dist/sodesu-comment.css",
     "./aio": {
@@ -50,8 +50,8 @@
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
-  "main": "./dist/sodesu.svelte.js",
-  "module": "./dist/sodesu.svelte.js",
+  "main": "./dist/sodesu.mjs",
+  "module": "./dist/sodesu.mjs",
   "types": "./dist/index.d.ts",
   "typesVersions": {
     "*": {
