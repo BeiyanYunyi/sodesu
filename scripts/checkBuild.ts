@@ -22,13 +22,20 @@ assert.equal(typeof preset, 'function');
 assert.equal(typeof require('sodesu-comment/preset'), 'function');
 const safeList = (await import('sodesu-comment/safeList')).default;
 assert.deepEqual(safeList, require('sodesu-comment/safeList'));
-assert.ok(safeList.includes('sds-panel'));
+assert.ok(safeList.includes('rounded-[0.75em]'));
 const generator = await createGenerator({ presets: [presetWind3(), preset()] });
 const generated = await generator.generate(safeList.join(' '));
-assert.ok(generated.css.includes('.sds-panel'));
+assert.ok(generated.css.includes('border-radius:0.75em'));
+assert.ok(!generated.css.includes('.sds-panel'));
 assert.ok(generated.css.includes('--sds-warning-bg-color'));
+assert.ok(generated.css.includes('.sds-content'));
+const withoutContent = await createGenerator({
+  presets: [presetWind3(), preset({ content: false })],
+});
+assert.ok(!(await withoutContent.generate(safeList.join(' '))).css.includes('.sds-content'));
 const upstream = await readFile('waline/packages/client/src/styles/config.scss', 'utf8');
 const css = await readFile('dist/sodesu-comment.css', 'utf8');
+assert.ok(css.includes('.sds-content'));
 for (const token of new Set(upstream.match(/--waline-[\w-]+/g))) {
   assert.ok(css.includes(token.replace('--waline-', '--sds-')), `Missing upstream token ${token}`);
 }

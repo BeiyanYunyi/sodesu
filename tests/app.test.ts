@@ -79,6 +79,27 @@ describe('Svelte app lifecycle and interactions', () => {
     expect(getComment).toHaveBeenCalledTimes(calls);
     expect(document.head.textContent).toContain('--sds-white:#000');
   });
+  it('replaces default content styling in comments and previews and restores it when cleared', async () => {
+    const { root, instance, query } = create({
+      commentClassName: 'custom-prose custom-content',
+      renderPreview: async () => '<p>Preview content</p>',
+    });
+    await query.findByText('Hello');
+    await fireEvent.input(root.querySelector('textarea')!, { target: { value: 'draft' } });
+    await fireEvent.click(query.getByRole('button', { name: 'Preview' }));
+    await query.findByText('Preview content');
+    const containers = [
+      query.getByText('Hello').parentElement!,
+      query.getByText('Preview content').parentElement!,
+    ];
+    for (const container of containers)
+      expect(container.className).toBe('custom-prose custom-content');
+    expect(root.querySelector('.sds-content')).toBeNull();
+    instance.update({ commentClassName: '' });
+    for (const container of containers) expect(container.className).toBe('sds-content');
+    instance.update({ commentClassName: 'replacement' });
+    for (const container of containers) expect(container.className).toBe('replacement');
+  });
   it('trusts only the login popup and cleans it on destroy', async () => {
     const popup = { close: vi.fn() } as unknown as Window;
     const open = vi.spyOn(window, 'open').mockReturnValue(popup);

@@ -34,11 +34,11 @@
 
 <div
   id={`sds-${app.id}-${rootId}-${comment.objectId}`}
-  class="sds-comment relative flex p-[0.5em] pe-0"
+  class="sds-comment [--sds-avatar-real-size:var(--sds-avatar-size)] [&:where(.sds-comment_*)]:[--sds-avatar-real-size:var(--sds-m-avatar-size)] max-[720px]:[--sds-avatar-real-size:var(--sds-m-avatar-size)] [&:last-child>.sds-comment-card]:bb-none relative flex p-[0.5em] pe-0"
 >
   <div aria-hidden="true" class="relative me-[0.75em] shrink-0">
     {#if comment.avatar}<img
-        class="sds-avatar"
+        class="sds-avatar rounded-[var(--sds-avatar-radius)] shadow-[var(--sds-box-shadow)] w-[var(--sds-avatar-real-size)] h-[var(--sds-avatar-real-size)]"
         src={comment.avatar}
         alt={comment.nick}
       />{#if comment.type}<VerifiedIcon />{/if}{/if}
@@ -63,10 +63,10 @@
       <span class="me-[0.875em] text-[0.75em] text-sInfo"
         >{getTimeAgo(new Date(comment.time || 0), now, locale)}</span
       >
-      <div class="sds-comment-actions float-right inline-flex items-center">
+      <div class="float-right rtl:float-left inline-flex items-center">
         <button
           type="button"
-          class="sds-action w-auto!"
+          class="inline-flex items-center justify-center w-[1.5em] h-[1.5em] m-0.5 p-0 border-none bg-transparent text-sColor text-16px cursor-pointer hover:text-sTheme disabled:cursor-not-allowed w-auto!"
           aria-label={liked ? locale.cancelLike : locale.like}
           title={liked ? locale.cancelLike : locale.like}
           aria-pressed={liked}
@@ -76,7 +76,7 @@
         >
         <button
           type="button"
-          class="sds-action"
+          class="inline-flex items-center justify-center w-[1.5em] h-[1.5em] m-0.5 p-0 border-none bg-transparent text-sColor text-16px cursor-pointer hover:text-sTheme disabled:cursor-not-allowed"
           title={replying ? locale.cancelReply : locale.reply}
           onclick={() => {
             model.replyId = replying ? null : comment.objectId;
@@ -90,7 +90,7 @@
           >{meta}</span
         >{/each}
     </div>
-    <div class={`sds-content ${app.config.commentClassName}`}>
+    <div class={app.config.commentClassName || 'sds-content'}>
       {#if 'reply_user' in comment && comment.reply_user}<a
           href={`#sds-${app.id}-${rootId}-${comment.pid}`}>@{comment.reply_user.nick}</a
         >:

@@ -97,9 +97,9 @@
   });
 </script>
 
-<div class="sds-root font-sans text-sColor" data-sodesu={id}>
+<div class="sds-root text-[length:var(--sds-font-size)] leading-[1.75] text-start font-sans text-sColor" data-sodesu={id}>
   {#key model.editorRevision}<CommentBox />{/key}
-  {#if model.error}<div role="alert" class="sds-warning">{model.error}</div>{/if}
+  {#if model.error}<div role="alert" class="mx-[0.5em] my-[1em] px-[1em] py-[0.5em] border border-dashed border-sWarning rounded-5px bg-sWarningBg text-sWarning text-[0.875em]">{model.error}</div>{/if}
   <div class="flex items-center p-[0.375em]">
     <div class="flex-1 text-[1.25em] font-bold">{model.count || ''} {locale.comment}</div>
     <ul class="m-0 list-none p-0">

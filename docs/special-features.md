@@ -17,7 +17,17 @@ Sodesu.init({
 });
 ```
 
-其中的 `commentClassName` 会被应用到每条评论的容器上。
+`commentClassName` 会应用到每条评论和预览的内容容器，替代默认的 `sds-content` 类及其排版样式。未设置或设为空字符串时，使用默认样式。
+
+使用 UnoCSS preset 时，可通过 `content: false` 排除默认内容样式：
+
+```ts
+import presetSodesu from 'sodesu-comment/preset';
+
+presetSodesu({ content: false });
+```
+
+`content` 默认为 `true`。`sodesu-comment.css` 包含默认内容样式；指定 `commentClassName` 后，内容容器不再应用这些样式。
 
 ## 自定义 Markdown 渲染器
 
