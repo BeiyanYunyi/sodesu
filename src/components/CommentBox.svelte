@@ -2,6 +2,7 @@
   import { onDestroy } from 'svelte';
   import { useApp, type EditorState, type ReplyTarget } from '../state/app.svelte';
   import CommonButton from './CommonButton.svelte';
+  import CloseIcon from './CloseIcon.svelte';
   import LoadingIcon from './LoadingIcon.svelte';
   import MarkdownIcon from './MarkdownIcon.svelte';
   import PreviewIcon from './PreviewIcon.svelte';
@@ -139,13 +140,6 @@
             editor.showPreview = !editor.showPreview;
           }}><PreviewIcon /></button
         >
-        {#if reply}<button
-            type="button"
-            class="inline-flex items-center justify-center w-[1.5em] h-[1.5em] m-0.5 p-0 border-none bg-transparent text-sColor text-16px cursor-pointer hover:text-sTheme disabled:cursor-not-allowed w-auto!"
-            onclick={() => {
-              onclose?.();
-            }}>{locale.cancelReply}</button
-          >{/if}
       </div>
       <div class="flex flex-grow-3 items-center justify-end gap-[0.75em]">
         {#if config.login !== 'disable'}
@@ -162,4 +156,13 @@
       </div>
     </div>
   </form>
+  {#if reply}
+    <button
+      type="button"
+      class="absolute end-[-4px] top-[-4px] p-0 border-none bg-transparent leading-none cursor-pointer"
+      title={locale.cancelReply}
+      aria-label={locale.cancelReply}
+      onclick={() => onclose?.()}><CloseIcon /></button
+    >
+  {/if}
 </div>

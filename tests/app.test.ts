@@ -254,7 +254,7 @@ describe('Svelte app lifecycle and interactions', () => {
     expect(forms[1].querySelector('textarea')!.value).toBe('');
     expect(forms[1].querySelector('strong')).toBeNull();
     expect(main.querySelector('textarea')!.value).toBe('**main draft**');
-    await fireEvent.click(within(forms[1]).getByRole('button', { name: 'Cancel reply' }));
+    await fireEvent.click(within(forms[1].parentElement!).getByRole('button', { name: 'Cancel reply' }));
     expect(root.querySelectorAll('textarea')).toHaveLength(1);
     expect(main.querySelector('textarea')!.value).toBe('**main draft**');
   });
@@ -303,9 +303,7 @@ describe('Svelte app lifecycle and interactions', () => {
     const first = root.querySelector('.sds-comment form')!;
     await fireEvent.input(first.querySelector('textarea')!, { target: { value: 'old reply' } });
     await fireEvent.submit(first);
-    await fireEvent.click(
-      within(first as HTMLElement).getByRole('button', { name: 'Cancel reply' }),
-    );
+    await fireEvent.click(within(first.parentElement!).getByRole('button', { name: 'Cancel reply' }));
     await fireEvent.click(query.getByRole('button', { name: 'Reply' }));
     const reopened = root.querySelector('.sds-comment form')!;
     await fireEvent.input(reopened.querySelector('textarea')!, { target: { value: 'new draft' } });
