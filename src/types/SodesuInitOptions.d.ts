@@ -1,5 +1,5 @@
-import type { WalineInitOptions, WalineProps } from '../waline/typings';
-import type { WalineConfig } from '../waline/utils/config';
+import type { WalineInitOptions, WalineProps } from '../vendor/waline/typings';
+import type { WalineConfig } from '../vendor/waline/utils/config';
 
 export default interface SodesuInitOptions
   extends Omit<

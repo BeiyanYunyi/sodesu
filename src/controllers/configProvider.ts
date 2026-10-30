@@ -2,10 +2,10 @@ import type SodesuInitOptions from '../types/SodesuInitOptions';
 import type { SodesuConfig, SodesuProps } from '../types/SodesuInitOptions';
 import { createEffect, createMemo, createRoot, createSignal } from 'solid-js';
 import { starkdown } from 'starkdown';
-import { commentCount } from '../waline/comment';
-import { pageviewCount } from '../waline/pageview';
-import { getConfig } from '../waline/utils/config';
-import { getRoot } from '../waline/utils/getRoot';
+import { commentCount } from '../vendor/waline/comment';
+import { pageviewCount } from '../vendor/waline/pageview';
+import { getConfig } from '../vendor/waline/utils/config';
+import { getRoot } from '../vendor/waline/utils/getRoot';
 
 const configProvider = createRoot(() => {
   const [props, setProps] = createSignal<SodesuProps>({ serverURL: '', path: '' });

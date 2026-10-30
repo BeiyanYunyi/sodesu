@@ -2,7 +2,7 @@ import type { WalineCommentData } from '@waline/api';
 import type { ReactiveComment } from './commentListState';
 import { addComment, updateComment } from '@waline/api';
 import { createEffect, createMemo, createResource, createRoot, createSignal } from 'solid-js';
-import { getWordNumber } from '../waline/utils/wordCount';
+import { getWordNumber } from '../vendor/waline/utils/wordCount';
 import commentListState, { makeDataReactive } from './commentListState';
 import configProvider from './configProvider';
 import userInfoState from './userInfoState';
