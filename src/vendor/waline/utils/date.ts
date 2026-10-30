@@ -1,11 +1,11 @@
-import { isString } from './type.js';
 import type { WalineDateLocale } from '../typings/index.js';
+import { isString } from './type.js';
 
 const padWithZeros = (vNumber: number, width: number): string => {
   let numAsString = vNumber.toString();
 
   while (numAsString.length < width) {
-    numAsString = '0' + numAsString;
+    numAsString = `0${numAsString}`;
   }
 
   return numAsString;
@@ -19,15 +19,12 @@ export const dateFormat = (date: Date): string => {
   return `${vYear}-${vMonth}-${vDay}`;
 };
 
-export const getTimeAgo = (
-  date: Date | string,
-  now: Date,
-  locale: WalineDateLocale,
-): string => {
+export const getTimeAgo = (date: Date | string, now: Date, locale: WalineDateLocale): string => {
+  // oxlint-disable-next-line typescript/strict-boolean-expressions
   if (!date) return '';
 
   const time = isString(date)
-    ? new Date(date.includes(' ') ? date.replace(/-/g, '/') : date)
+    ? new Date(date.includes(' ') ? date.replaceAll('-', '/') : date)
     : date;
 
   const timePassed = now.getTime() - time.getTime();

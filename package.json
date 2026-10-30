@@ -75,7 +75,8 @@
     "solid-js": "^1.9.3"
   },
   "dependencies": {
-    "@waline/api": "1.1.2"
+    "@waline/api": "1.1.2",
+    "@webc.site/math": "^0.1.41"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",

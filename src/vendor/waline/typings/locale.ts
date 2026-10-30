@@ -21,10 +21,7 @@ export interface WalineReactionLocale {
   reaction8: string;
 }
 
-export interface WalineLocale
-  extends WalineDateLocale,
-    WalineLevelLocale,
-    WalineReactionLocale {
+export interface WalineLocale extends WalineDateLocale, WalineLevelLocale, WalineReactionLocale {
   nick: string;
   mail: string;
   link: string;
@@ -70,4 +67,9 @@ export interface WalineLocale
   uploadImage: string;
   profile: string;
   logout: string;
+  commentUnderReview: string;
+
+  subPostComment: string;
+  subSiteComment: string;
+  subscribeToReplies: string;
 }
