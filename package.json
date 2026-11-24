@@ -1,7 +1,7 @@
 {
   "name": "sodesu-comment",
   "type": "module",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "packageManager": "pnpm@12.23.0",
   "description": "Comment system with Svelte and UnoCSS",
   "license": "AGPL-3.0-or-later",
